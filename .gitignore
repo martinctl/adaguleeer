@@ -1,0 +1,8 @@
+# Data folder
+data/
+
+# Python cache
+__pycache__/
+
+# macOS metadata
+.DS_Store
