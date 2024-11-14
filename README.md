@@ -14,31 +14,49 @@ This project is structured as follows:
 
 ```sh
 ├── .gitignore
-├── (data)                          # Datasets
-│   ├── youniverse
-│   │   ├── filtered
-│   │   │   ├── gaming_channels.tsv
-│   │   │   ├── gaming_comments.parquet    
-│   │   │   ├── gaming_timeseries.parquet    
-│   │   │   └── gaming_videos.parquet
-│   │   └── original
-│   │       ├── df_channels_en.tsv
-│   │       ├── df_timeseries_en.tsv
-│   │       ├── youtube_comments.tsv       
-│   │       └── yt_metadata_en.jsonl
+├── data                                # data sources
+│   ├── (youniverse)
+│   │   ├── (filtered)                  # pre-filtered youniverse files
+│   │   │   ├── (gaming_channels.tsv)
+│   │   │   ├── (gaming_comments.parquet)
+│   │   │   ├── (gaming_timeseries.parquet)
+│   │   │   └── (gaming_videos.parquet)
+│   │   └── (original)                  # original youniverse dataset
+│   │       ├── (df_channels_en.tsv)
+│   │       ├── (df_timeseries_en.tsv)
+│   │       ├── (youtube_comments.tsv)
+│   │       └── (yt_metadata_en.jsonl)
+│   ├── esports_tournaments.csv
 │   ├── games.csv
 │   └── word_alpha.txt      
-├── results.ipynb                   # Main analysis notebook 
-├── prefiltering.ipynb              # Data prefiltering notebook
-├── env.yml                         # Conda environment config file
+├── notebooks                          
+│   ├── results.ipynb                   # main analysis notebook
+│   └── prefiltering.ipynb              # data prefiltering notebook
+├── env.yml                             # conda environment config file
 └── README.md
 ```
 
 ## Run instructions
 
-1. In order to run the code, first download the main dataset [Youniverse](https://zenodo.org/records/4650046). Then download the additional datasets about [e-sports tournaments](https://www.kaggle.com/datasets/hbakker/esports-200-tournaments), [popular video games](https://www.kaggle.com/datasets/matheusfonsecachaves/popular-video-games) and [english words](https://github.com/dwyl/english-words). All the data should be stored in the `\data` folder, following the file structure above.
+In order to run the code, you can follow these steps.
 
-2. Run all the cells in `results.ipynb` notebook. The cells will provide insights on the data, all the explanations related to the preprocessing, as well as the obtained results.
+1. Download the missing YouNiverse dataset files, and include them in the project directory following the file structure above.
+
+| File | Description | Link | Size |
+| --- | --- | --- | --- |
+| `df_channels_en.tsv` | Channels metadata | [YouNiverse](https://zenodo.org/records/4650046) | 6 MB |
+| `df_timeseries_en.tsv` | Channels timeseries | [YouNiverse](https://zenodo.org/records/4650046) | 571 MB |
+| `youtube_comments.tsv` | Comments data | [YouNiverse](https://zenodo.org/records/4650046) | 77.2 GB |
+| `yt_metadata_en.jsonl` | Videos metadata | [YouNiverse](https://zenodo.org/records/4650046) | 13.6 GB |
+
+2.  Install the pre-configured  `conda` environment by running the following command. It will create an environment called `padawan-pm2` in the default `conda` location on your system (usually `~/anaconda3/envs` or `~/miniconda3/envs`).
+ ```sh 
+conda env create -f env.yml
+```
+
+3. Pre-filter the datasets, running `prefiltering.ipynb` notebook. This will generate the filtered datasets that will be used in the analysis. Do not forget to use the `conda` environment you just created.
+
+3. Run all the cells in `results.ipynb` notebook. The cells will provide insights on the data, all our explanations as well as the obtained results.
 
 ## Abstract
 
@@ -47,6 +65,7 @@ We are presented with **Youniverse**, A large scale dataset about **channel** an
 ## Research questions
 
 - What is the **impact** of **real life gaming events** (release of new video game, e-sports tournament...) on the youtube gaming community?
+
 - How is the gaming **community structure** on Youtube? What are some communities that are likely to engage with each other's content?
 
 Both of questions can be fundamental towards Youtube creator's carreer in the gaming field. The first question explores an **external factor**, the dynamic relationship between real-world gaming events and YouTube engagement. By analyzing this connection, we can gauge how external events drive viewership and interaction within the platform, offering insight into **optimal timing** and **content choices** for creators.
@@ -57,47 +76,47 @@ Together, these insights can provide a view of strategies for growth, timing, an
 
 ## Additional datasets
 
-#### [E-sport Tournaments Dataset](https://www.kaggle.com/datasets/hbakker/esports-200-tournaments)
+### [E-sport Tournaments Dataset](https://www.kaggle.com/datasets/hbakker/esports-200-tournaments)
+
 This dataset provides more insights into the esports industry and contains specific information about tournaments with large prize pools. The features that we will be using are:
 
 - `TournamentName`: Short-hand name of the tournament. (or full name if it's short enough)
 - `StartDate`: Date the tournament started.
 - `EndDate`: Date the tournament ended.
 
-This dataset will be used in order to study the impact of big e-sports tournament on the gaming ecosystem on Youtube, and how these real life events drive engagament and views on Youtube. 
+This dataset will be used in order to study the impact of big e-sports tournament on the gaming ecosystem on Youtube, and how these real life events drive engagament and views on Youtube.
 
-#### [Popular Video Games](https://www.kaggle.com/datasets/matheusfonsecachaves/popular-video-games)
-This dataset acts as a comprehensive collection of information about some of the most popular video games released. It serves as a valuable resource for researchers, gamers, and enthusiasts interested in exploring the evolution of the gaming industry over the past decades. The only interesting features are:
+### [Popular Video Games](https://www.kaggle.com/datasets/matheusfonsecachaves/popular-video-games)
+
+This dataset acts as a comprehensive collection of information about some of the most popular video games released. It serves as a valuable resource for researchers, gamers, and enthusiasts interested in exploring the evolution of the gaming industry over the past decades. The features will be using are:
 
 - `Title`: Title of the game
+- `Release_Date`: Release date of the game
 
-This dataset will be used in order to classify the gaming channels according to which game is played in the video.
+This dataset will be used in order to classify the gaming channels according to which game is played in the video, and to analyse the impact of video games releases on YouTube activity.
 
 ## Methods
 
-#### Prefiltering
+### Prefiltering
 
 Given the sheer size of our data we need to reduce it as much as possible before analyzing it.
 
 1. The initial step was to drop all columns that were not relevant to our analysis.  
 
-2. The next step was to isolate all data related to the gaming category, meaning keeping only videos falling under `gaming category` and their corresponding channels as well as the comments posted under gaming videos.
+2. The next step was to isolate all data related to the gaming category, meaning keeping only videos falling under `Gaming` category and their corresponding channels as well as the comments posted under gaming videos.
 
 3. For the video metadata, we want to add a new column containing the name of the videogame that is played in the video. We use a simple algorithm for this purpose: we start by looking if a game name is contained in the title. If it is, we assign the video to this game. If not, apply the same procedure to the tags. If there is no game or several games in the tags, we do not assign the video
 
-#### Analysis 
+### Analysis
 
-1. At this stage of the project we hand picked certain famous video games (like Fortnite), plotted their average generated views over time and then compared these plots with e-sports tounaments of the corresponding video games. This analysis shows that e-sports tounament have a real impact on viewerships in Youtube and offers a lead for a more in depth analysis in Milestone 3 
+1. At this stage of the project we hand picked certain famous video games (like Fortnite), plotted their average generated views over time and then compared these plots with e-sports tounaments of the corresponding video games. This analysis shows that e-sports tounament have a real impact on viewerships in Youtube and offers a lead for a more in depth analysis in Milestone 3.
 
-2. In order to understand the structure of gaming communities in Youtube we decided to create a graph where each node represents a video game and each edge represents how close are these video games in terms of their communities (In other words, to what extent do different videos games' communities overlap). This graph will be created based on the commments data where the edge weights represent the number of users that commented on both video games represented by the nodes. For the time being we chose to create the graph based on 100000 comments as a **proof of concept**.
+2. In order to understand the structure of gaming communities in Youtube we decided to create a graph where each node represents a video game and each edge represents how close are these video games in terms of their communities (In other words, to what extent do different videos games' communities overlap). This graph will be created based on the commments data where the edge weights represent the number of users that commented on both video games represented by the nodes. For the time being we chose to create the graph based on **100k** comments as a **Proof of Concept**.
 
 ## Proposed Timeline
 
-#### Tasks
+### Tasks
 
- - 
+### Organization within the team
 
-## Organization within the team
-
-
-## Questions to TAs
+## Questions to TA
