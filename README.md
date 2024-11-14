@@ -1,5 +1,7 @@
 # CS-401 - Applied Data Analysis - Milestone 2
 
+## The dynamics of Gaming on Youtube
+
 ## Authors
 
 - Jean Perbet | 341418 | <jean.perbet@epfl.ch>
@@ -68,7 +70,7 @@ We are presented with **Youniverse**, A large scale dataset about **channel** an
 
 - How is the gaming **community structure** on Youtube? What are some communities that are likely to engage with each other's content?
 
-Both of questions can be fundamental towards Youtube creator's carreer in the gaming field. The first question explores an **external factor**, the dynamic relationship between real-world gaming events and YouTube engagement. By analyzing this connection, we can gauge how external events drive viewership and interaction within the platform, offering insight into **optimal timing** and **content choices** for creators.
+Both questions can be fundamental towards Youtube creator's carreer in the gaming field. The first question explores an **external factor**, the dynamic relationship between real-world gaming events and YouTube engagement. By analyzing this connection, we can gauge how external events drive viewership and interaction within the platform, offering insight into **optimal timing** and **content choices** for creators.
 
 The second question examines the **structure** of the gaming community on YouTube, identifying **sub-communities** that frequently **engage with each other's content**. This analysis can provide creators with ideas for potential **collaborations, cross-promotions, or targeted content** to **connect** with **specific audience** segments, ultimately fostering a more interconnected and engaged community.
 
@@ -78,7 +80,7 @@ Together, these insights can provide a view of strategies for growth, timing, an
 
 ### [E-sport Tournaments Dataset](https://www.kaggle.com/datasets/hbakker/esports-200-tournaments)
 
-This dataset provides more insights into the esports industry and contains specific information about tournaments with large prize pools. The features that we will be using are:
+This dataset provides more insights into the esports industry and contains specific information about tournaments with large prize pools. The main features that we will be using are:
 
 - `TournamentName`: Short-hand name of the tournament. (or full name if it's short enough)
 - `StartDate`: Date the tournament started.
@@ -92,6 +94,7 @@ This dataset acts as a comprehensive collection of information about some of the
 
 - `Title`: Title of the game
 - `Release_Date`: Release date of the game
+- `Genres`: Genres of the game
 
 This dataset will be used in order to classify the gaming channels according to which game is played in the video, and to analyse the impact of video games releases on YouTube activity.
 
@@ -109,14 +112,17 @@ Given the sheer size of our data we need to reduce it as much as possible before
 
 ### Analysis
 
-1. At this stage of the project we hand picked certain famous video games (like Fortnite), plotted their average generated views over time and then compared these plots with e-sports tounaments of the corresponding video games. This analysis shows that e-sports tounament have a real impact on viewerships in Youtube and offers a lead for a more in depth analysis in Milestone 3.
+1. At this stage of the project we hand picked famous video games, plotted their average generated views over time and then compared these plots with e-sports tounaments of the corresponding video games. This analysis shows that e-sports tounament have a real impact on viewerships in Youtube and offers a lead for a more in depth analysis in Milestone 3.
 
 2. In order to understand the structure of gaming communities in Youtube we decided to create a graph where each node represents a video game and each edge represents how close are these video games in terms of their communities (In other words, to what extent do different videos games' communities overlap). This graph will be created based on the commments data where the edge weights represent the number of users that commented on both video games represented by the nodes. For the time being we chose to create the graph based on **100k** comments as a **Proof of Concept**.
 
-## Proposed Timeline
-
-### Tasks
+### Proposed Timeline
+15.11.2024 Data handling and preprocessing, initial exploratory analyses
+06.12.2024 Tasks Complete implementation
+13.12.2024 Final Analysis, Data Story 
+20.12.2024 Data Story, Report Writing
 
 ### Organization within the team
-
-## Questions to TA
+- Mehdi, Jean & Léopold: Tasks related to the first research question, following point 1 of the analysis
+- Martin & Maxime: Tasks related to the second research question, following point 2 of the analysis
+The task distribution is indicative but reflects the main contributions of each member. Everyone on the team will participate in creating the final visualizations and completing the data story.
