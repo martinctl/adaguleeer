@@ -115,7 +115,7 @@ Given the sheer size of our data we need to reduce it as much as possible before
 
 1. At this stage of the project we hand picked famous video games, plotted their average generated views over time and then compared these plots with e-sports tounaments of the corresponding video games. This analysis shows that e-sports tounament have a real impact on viewerships in Youtube and offers a lead for a more in depth analysis in Milestone 3.
 
-2. In order to understand the structure of gaming communities in Youtube we decided to create a graph where each node represents a video game and each edge represents how close are these video games in terms of their communities (In other words, to what extent do different videos games' communities **overlap**). This graph will be created based on the commments data where the edge weights represent the number of users that commented on both video games represented by the nodes. For the time being we chose to create the graph based on **100M** comments as a **Proof of Concept**.
+2. In order to understand the structure of gaming communities on YouTube we decided to create a graph where each node represents a video game and each edge represents how close are these video games in terms of their communities (In other words, to what extent do different videos games' communities **overlap**). This graph will be created based on the commments data where the edge weights represent the number of users that commented on both video games represented by the nodes. A similar graph representing community proximity between **creators** will also be added. For the time being we chose to create the graph based only on **100M** comments as a **Proof of Concept**.
 
 ### Proposed Timeline
 
