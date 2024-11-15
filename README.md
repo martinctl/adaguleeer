@@ -44,21 +44,22 @@ In order to run the code, you can follow these steps.
 
 1. Download the missing YouNiverse dataset files, and include them in the project directory following the file structure above.
 
-| File | Description | Link | Size |
-| --- | --- | --- | --- |
-| `df_channels_en.tsv` | Channels metadata | [YouNiverse](https://zenodo.org/records/4650046) | 6 MB |
-| `df_timeseries_en.tsv` | Channels timeseries | [YouNiverse](https://zenodo.org/records/4650046) | 571 MB |
-| `youtube_comments.tsv` | Comments data | [YouNiverse](https://zenodo.org/records/4650046) | 77.2 GB |
-| `yt_metadata_en.jsonl` | Videos metadata | [YouNiverse](https://zenodo.org/records/4650046) | 13.6 GB |
+    | File | Description | Link | Size |
+    | --- | --- | --- | --- |
+    | `df_channels_en.tsv` | Channels metadata | [YouNiverse](https://zenodo.org/records/4650046) | 6 MB |
+    | `df_timeseries_en.tsv` | Channels timeseries | [YouNiverse](https://zenodo.org/records/4650046) | 571 MB |
+    | `youtube_comments.tsv` | Comments data | [YouNiverse](https://zenodo.org/records/4650046) | 77.2 GB |
+    | `yt_metadata_en.jsonl` | Videos metadata | [YouNiverse](https://zenodo.org/records/4650046) | 13.6 GB |
 
-2.  Install the pre-configured  `conda` environment by running the following command. It will create an environment called `padawan-pm2` in the default `conda` location on your system (usually `~/anaconda3/envs` or `~/miniconda3/envs`).
- ```sh 
-conda env create -f env.yml
-```
+2. Install the pre-configured  `conda` environment by running the following command. It will create an environment called `padawan-pm2` in the default `conda` location on your system (usually `~/anaconda3/envs` or `~/miniconda3/envs`).
+
+    ```sh
+    conda env create -f env.yml
+    ```
 
 3. Pre-filter the datasets, running `prefiltering.ipynb` notebook. This will generate the filtered datasets that will be used in the analysis. Do not forget to use the `conda` environment you just created.
 
-3. Run all the cells in `results.ipynb` notebook. The cells will provide insights on the data, all our explanations as well as the obtained results.
+4. Run all the cells in `results.ipynb` notebook. The cells will provide insights on the data, all our explanations as well as the obtained results.
 
 ## Abstract
 
@@ -117,12 +118,37 @@ Given the sheer size of our data we need to reduce it as much as possible before
 2. In order to understand the structure of gaming communities in Youtube we decided to create a graph where each node represents a video game and each edge represents how close are these video games in terms of their communities (In other words, to what extent do different videos games' communities overlap). This graph will be created based on the commments data where the edge weights represent the number of users that commented on both video games represented by the nodes. For the time being we chose to create the graph based on **100k** comments as a **Proof of Concept**.
 
 ### Proposed Timeline
-15.11.2024 Data handling and preprocessing, initial exploratory analyses
-06.12.2024 Tasks Complete implementation
-13.12.2024 Final Analysis, Data Story 
-20.12.2024 Data Story, Report Writing
+
+```mermaid
+gantt
+    title Project timeline
+    dateFormat  DD.MM
+    axisFormat %d.%m
+    section Processing
+        Handling comments : 26.11, 8d
+        Assigning videogames : 26.11, 7d
+    section Analysis
+        Games popularity : 03.12, 7d
+        E-sports tournaments impact : 01.12, 12d
+        Games releases impact : 01.12, 12d
+        Gaming communities clustering : 04.12, 12d
+    section Data Story
+        Refining plots : 10.12, 6d
+        Website development : 05.12, 14d
+    section Final Report
+        Writing : 17.12, 3d
+```
 
 ### Organization within the team
-- Mehdi, Jean & Léopold: Tasks related to the first research question, following point 1 of the analysis
-- Martin & Maxime: Tasks related to the second research question, following point 2 of the analysis
-The task distribution is indicative but reflects the main contributions of each member. Everyone on the team will participate in creating the final visualizations and completing the data story.
+
+| Member | Tasks |
+| --- | --- |
+| Jean | Assigning videogames / Games popularity / Website development |
+| Léopold | E-sports tournaments impact / Games releases Impact / Refining plots |
+| Maxime | Handling comments / Gaming communities clustering |
+| Martin | Gaming communities clustering / Website development  |
+| Mehdi | General Analysis / Refining plots |
+
+We decide to split the work between **Léopold**, **Jean** and **Mehdi**, who will primarily work on the **first research question**, and **Martin** and **Maxime**, who will focus on the **second research question**. This distribution is based on the members' preferences and skills, as well as the nature of the tasks.
+
+Of course, everyone will participate in the final visualizations and the completion of the data story.
