@@ -1,6 +1,8 @@
-# CS-401 - Applied Data Analysis - Milestone 2
+# The dynamics of gaming on YouTube : A story about games, events and communities 🎮
 
-## The dynamics of Gaming on Youtube
+## Abstract
+
+We are presented with **YouNiverse**, A large scale dataset about **channel** and **video metadata** from English-speaking **YouTube**. The dataset contains information about channels of different categories, time series of views and subcribers count, metadata of each crawled video as well as comment data accross different videos. Our story will be centered on **gaming content** on YouTube through three major angles. We will first investigate the **games** which generate the **most engagement** on the platform. Then, we'll observe the **influence** of **real-world events** in the gaming industry on the users' activity. Finally, we aim to focus on the **structural dynamics** of different **video game communities**, and the way they interact with each other.
 
 ## Authors
 
@@ -20,9 +22,9 @@ This project is structured as follows:
 │   ├── (youniverse)
 │   │   ├── (filtered)                  # pre-filtered youniverse files
 │   │   │   ├── (gaming_channels.tsv)
-│   │   │   ├── (gaming_comments.parquet)
-│   │   │   ├── (gaming_timeseries.parquet)
-│   │   │   └── (gaming_videos.parquet)
+│   │   │   ├── (gaming_comments.tsv)
+│   │   │   ├── (gaming_timeseries.tsv)
+│   │   │   └── (gaming_videos.tsv)
 │   │   └── (original)                  # original youniverse dataset
 │   │       ├── (df_channels_en.tsv)
 │   │       ├── (df_timeseries_en.tsv)
@@ -34,8 +36,8 @@ This project is structured as follows:
 ├── notebooks                          
 │   ├── results.ipynb                   # main analysis notebook
 │   └── prefiltering.ipynb              # data prefiltering notebook
-├── src       
-│   └── utils.py                        # utility functions    
+├── src                                         
+│   └── utils.py                        # utility functions
 ├── requirements.txt                    # pip requirements file
 └── README.md
 ```
@@ -63,43 +65,33 @@ In order to run the code, you can follow these steps.
 
 4. Run all the cells in `results.ipynb` notebook. The cells will provide insights on the data, all our explanations as well as the obtained results.
 
-## Abstract
-
-We are presented with **YouNiverse**, A large scale dataset about **channel** and **video metadata** from English-speaking **YouTube**. The dataset contains information about channels of different categories, time series of views and subcribers count, metadata of each crawled video as well as comment data accross different videos. Our story will be centered on **gaming content** on Youtube. The main focus is about certain trends and patterns that a channel can pick up in order to grow using gaming videos. We aim to investigate two **major themes**: firstly the influence of real-world events in the gaming industry on YouTube's gaming community, and secondly the structural dynamics of different video game communities, focusing on how viewers interact and engage. Our project will explore these angles to reveal insights into growth tactics and viewer behavior that gaming channels can adopt to enhance their visibility and impact.
-
 ## Research questions
 
-- What is the **impact** of **real life gaming events** (release of new video game, e-sports tournament...) on the youtube gaming community?
+- What are the **most popular games** on YouTube?
 
-- How is the gaming **community structure** on Youtube? What are some communities that are likely to engage with each other's content?
+- What is the **impact** of games releases on channels' activity? How do **e-sports tournaments** affect the viewing metrics of a creator?
 
-Both questions can be fundamental towards Youtube creator's carreer in the gaming field. The first question explores an **external factor**, the dynamic relationship between real-world gaming events and YouTube engagement. By analyzing this connection, we can gauge how external events drive viewership and interaction within the platform, offering insight into **optimal timing** and **content choices** for creators.
+- How is the **gaming community structured** on YouTube? What are some communities that are likely to engage with each other's content?
 
-The second question examines the **structure** of the gaming community on YouTube, identifying **sub-communities** that frequently **engage with each other's content**. This analysis can provide creators with ideas for potential **collaborations, cross-promotions, or targeted content** to **connect** with **specific audience** segments, ultimately fostering a more interconnected and engaged community.
-
-Together, these insights can provide a view of strategies for growth, timing, and community engagement that are vital for a successful content in gaming.
+These questions could enhance our understanding of the gaming community's expectations and help creators adapt their content accordingly. The first question indicates which games are the most relevant for our analysis. The second one explores **external factors**, offering insight into **optimal timing** and **content choices** for creators. The last question highlights possible hidden links and provides creators with ideas for potential **collaborations, cross-promotions, or targeted content** to **connect** with **specific audience** segments.
 
 ## Additional datasets
 
 ### [E-sport Tournaments Dataset](https://www.kaggle.com/datasets/hbakker/esports-200-tournaments)
 
-This dataset provides more insights into the esports industry and contains specific information about tournaments with large prize pools. The main features that we will be using are:
+This dataset provides more insights into the esports industry and contains specific information about tournaments with large prize pools. Here are the features of interest.
 
 - `TournamentName`: Short-hand name of the tournament. (or full name if it's short enough)
 - `StartDate`: Date the tournament started.
 - `EndDate`: Date the tournament ended.
 
-This dataset will be used in order to study the impact of big e-sports tournament on the gaming ecosystem on Youtube, and how these real life events drive engagament and views on Youtube.
-
 ### [Popular Video Games](https://www.kaggle.com/datasets/matheusfonsecachaves/popular-video-games)
 
-This dataset acts as a comprehensive collection of information about some of the most popular video games released. It serves as a valuable resource for researchers, gamers, and enthusiasts interested in exploring the evolution of the gaming industry over the past decades. The features will be using are:
+This dataset is a comprehensive collection of information about most of commercial video games ever released. It serves as a valuable resource for researchers, gamers, and enthusiasts interested in exploring the evolution of the gaming industry over the past decades. The features will be using are:
 
 - `Title`: Title of the game
 - `Release_Date`: Release date of the game
 - `Genres`: Genres of the game
-
-This dataset will be used in order to classify the gaming channels according to which game is played in the video, and to analyse the impact of video games releases on YouTube activity.
 
 ## Methods
 
@@ -107,17 +99,17 @@ This dataset will be used in order to classify the gaming channels according to 
 
 Given the sheer size of our data we need to reduce it as much as possible before analyzing it.
 
-1. The initial step was to drop all columns that were not relevant to our analysis.  
+1. The initial step was to isolate all data related to the gaming category, meaning keeping only videos falling under `Gaming` category, their corresponding channels and timeseries as well as the comments posted under gaming videos.
 
-2. The next step was to isolate all data related to the gaming category, meaning keeping only videos falling under `Gaming` category and their corresponding channels as well as the comments posted under gaming videos.
-
-3. For the video metadata, we want to add a new column containing the name of the videogame that is played in the video. We use a simple algorithm for this purpose: we start by looking if a game name is contained in the title. If it is, we assign the video to this game. If not, apply the same procedure to the tags. If there is no game or several games in the tags, we do not assign the video
+2. The next step was to drop all columns that were not relevant to our analysis.  
 
 ### Analysis
 
-1. At this stage of the project we hand picked famous video games, plotted their average generated views over time and then compared these plots with e-sports tounaments of the corresponding video games. This analysis shows that e-sports tounament have a real impact on viewerships in Youtube and offers a lead for a more in depth analysis in Milestone 3.
+1. For the video metadata, we want to add a new column containing the name of the videogame that is played in the video. After trying a few heuristics, we settled on a pretty simple algorithm, consisting in looking for complete game names in title and/or tags of each video.
 
-2. In order to understand the structure of gaming communities on YouTube we decided to create a graph where each node represents a video game and each edge represents how close are these video games in terms of their communities (In other words, to what extent do different videos games' communities **overlap**). This graph will be created based on the commments data where the edge weights represent the number of users that commented on both video games represented by the nodes. A similar graph representing community proximity between **creators** will also be added. For the time being we chose to create the graph based only on **100M** comments as a **Proof of Concept**.
+2. At this stage of the project, we hand picked famous video games and compared their average performance metrics before and after main e-sports tounaments of the corresponding video games. We plan to extend this analysis to games releases during Milestone 3.
+
+3. In order to understand the structure of gaming communities in YouTube we decided to create a graph where each node represents a channel and each edge represents how close are these channels in terms of their communities (In other words, to what extent do different fanbases **overlap**). We use the commment data, where the edge weights represent the number of users who commented on both channels represented by the nodes. For the time being we chose to create the graph based on **100M** comments out of **8B** as a **Proof of Concept**.
 
 ### Proposed Timeline
 
