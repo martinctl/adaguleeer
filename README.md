@@ -51,13 +51,13 @@ In order to run the code, you can follow these steps.
     | `youtube_comments.tsv` | Comments data | [YouNiverse](https://zenodo.org/records/4650046) | 77.2 GB |
     | `yt_metadata_en.jsonl` | Videos metadata | [YouNiverse](https://zenodo.org/records/4650046) | 13.6 GB |
 
-2. Install the pre-configured  `conda` environment by running the following command. It will create an environment called `padawan-pm2` in the default `conda` location on your system (usually `~/anaconda3/envs` or `~/miniconda3/envs`).
+2. Install the required dependencies using `pip` and the following command. Try to create a virtual environment first using either `conda` or `venv`.
 
     ```sh
-    conda env create -f env.yml
+    pip install -r requirements.txt
     ```
 
-3. Pre-filter the datasets, running `prefiltering.ipynb` notebook. This will generate the filtered datasets that will be used in the analysis. Do not forget to use the `conda` environment you just created.
+3. Pre-filter the datasets, running `prefiltering.ipynb` notebook. This will generate the filtered datasets that will be used in the analysis. Do not forget to use the virtual environment with all dependencies you just downloaded.
 
 4. Run all the cells in `results.ipynb` notebook. The cells will provide insights on the data, all our explanations as well as the obtained results.
 
