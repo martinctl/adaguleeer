@@ -20,9 +20,9 @@ This project is structured as follows:
 │   ├── (youniverse)
 │   │   ├── (filtered)                  # pre-filtered youniverse files
 │   │   │   ├── (gaming_channels.tsv)
-│   │   │   ├── (gaming_comments.parquet)
-│   │   │   ├── (gaming_timeseries.parquet)
-│   │   │   └── (gaming_videos.parquet)
+│   │   │   ├── (gaming_comments.tsv)
+│   │   │   ├── (gaming_timeseries.tsv)
+│   │   │   └── (gaming_videos.tsv)
 │   │   └── (original)                  # original youniverse dataset
 │   │       ├── (df_channels_en.tsv)
 │   │       ├── (df_timeseries_en.tsv)
