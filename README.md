@@ -34,7 +34,9 @@ This project is structured as follows:
 ├── notebooks                          
 │   ├── results.ipynb                   # main analysis notebook
 │   └── prefiltering.ipynb              # data prefiltering notebook
-├── env.yml                             # conda environment config file
+├── src       
+│   └── utils.py                        # utility functions    
+├── requirements.txt                    # pip requirements file
 └── README.md
 ```
 
