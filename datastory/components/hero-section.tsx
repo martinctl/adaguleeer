@@ -1,36 +1,56 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { TwitchIcon } from 'lucide-react';
+import { motion } from "framer-motion";
+import { AnimatedSection } from "./animated-section";
+import gsap from "gsap";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-background py-20 sm:py-32">
-      <div className="section-container relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10"
-          >
-            <TwitchIcon className="h-10 w-10 text-primary" />
-          </motion.div>
-          <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-6xl">
-            YouTube Gaming Trends
-          </h1>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Explore the evolving landscape of gaming content on YouTube through
-            interactive visualizations and real-time data analysis.
-          </p>
-        </motion.div>
+    <section className="relative min-h-screen max-w-full overflow-hidden bg">
+    <AnimatedSection>  
+      <div className="title-container relative z-10 text-center">
+        <h1 className="text-4xl font-bold tracking-tight text-white">
+          Gaming on YouTube: Find the community of your dreams!
+        </h1>
       </div>
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(45%_40%_at_50%_60%,rgba(255,68,84,0.13),transparent)]" />
+
+      <div className="hero-container relative z-10 flex flex-col sm:flex-row items-center justify-center sm:justify-between bg px-8 py-0 lg:px-10">
+
+        <div className="text-left mt-0 sm:mt-0 sm:w-1/2 lg:w-1/2 text-gray-200">
+          <h2 className="text-2xl font-bold tracking-tight text-white mb-6">
+            Welcome young Padawan!
+          </h2>
+
+          <p className="text-lg mb-6 text-muted-foreground">
+            Do you love watching videos with gaming as one of your main interests?
+          </p>
+          <p className="text-lg mb-6 text-muted-foreground">
+            You would like to engage more on what you are passionate about but feel overwhelmed by the sheer amount of diverse content that doesn't always feel right for you?
+          </p>
+          <p className="text-lg mb-10 text-white font-semibold">
+            Relax, you are in the right place. Hop on board, and let's discover helpful insights to guide you forward to the content and community of your dreams.
+          </p>
+          <a href="#trends">
+            <button className="px-6 py-3 text-lg font-bold text-white bg-primary rounded-lg hover:bg-red-900">
+              Start the Adventure
+            </button>
+          </a>
+
+        </div>
+
+        <div className="mt-0 sm:mt-0 sm:w-1/2 lg:w-2/5">
+            <img
+              src="/background_hero_page.svg"
+              alt="Illustration"
+              className="w-full h-auto"
+            />
+        </div>
+      </div>
+
+      <div className="flex justify-center mt-6">
+        
+      </div>
+    </AnimatedSection>
     </section>
   );
 }

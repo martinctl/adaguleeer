@@ -72,7 +72,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
             .attr('font-size', '12px');
 
         // Update positions on each tick
-        simulation.on('tick', () => {
+        /**simulation.on('tick', () => {
             link
                 .attr('x1', d => (d.source as GameNode).x!)
                 .attr('y1', d => (d.source as GameNode).y!)
@@ -81,7 +81,7 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({
 
             node
                 .attr('transform', d => `translate(${d.x},${d.y})`);
-        });
+        }); */
 
         // Drag functions
         function dragstarted(event: d3.D3DragEvent<SVGGElement, GameNode, GameNode>) {
