@@ -80,11 +80,14 @@ export function GameReveal() {
                     >
                         Your browser does not support the video tag.
                     </video>
-                    <div className="absolute inset-0 flex flex-col items-center justify-center space-y-4 text-center text-white">
+                    {/* <div className="absolute inset-0 flex flex-col items-center justify-center space-y-4 text-center text-white">
                         <h3 className="title text-xl font-bold text-animation">{game.title}</h3>
                         <p className="text-animation">Genre: {game.genre}</p>
-                        <p className="text-animation">Rank: {games.length - index}</p>
                         <p className="text-animation">Studio: {game.studio}</p>
+                    </div> */}
+                    <div className="text-animation absolute bottom-4 left-4">
+                        <p className="text-4xl font-pixel">{games.length - index}</p>
+                        <p className="text-2xl font-pixel">{game.title}</p>
                     </div>
                 </div>
             ))}
