@@ -32,20 +32,21 @@ export function GameReveal() {
         if (!container) return;
 
         const cards = container.querySelectorAll('.game-card');
-        cards.forEach((card) => {
+        cards.forEach((card, index) => {
             const textElements = card.querySelectorAll(".text-animation");
             gsap.timeline({
                 scrollTrigger: {
                     trigger: card,
                     start: 'top top',
-                    end: 'bottom top',
+                    end: '+=100%',
                     scrub: true,
                     pin: true,
+                    pinSpacing: index == cards.length - 1 ? true : false,
                 }
             })
             .from(card, { 
                 opacity: 0,
-                duration: 0.3,
+                duration: 0.2,
                 ease: "power2.out",
             })
             .from(textElements, {
