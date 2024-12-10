@@ -4,6 +4,65 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Line } from 'react-chartjs-2';
+import {
+    Chart as ChartJS,
+    LineElement,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    Tooltip,
+    Legend,
+  } from 'chart.js';
+
+  ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
+
+  export function SampleLineChart() {
+    const data = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+      datasets: [
+        {
+          label: 'Game Popularity',
+          data: [30, 45, 28, 80, 56, 70],
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderWidth: 2,
+          pointRadius: 4,
+          tension: 0.4, // Smooth curve
+        },
+      ],
+    };
+  
+    const options = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
+        y: {
+          grid: {
+            color: '#ddd',
+          },
+        },
+      },
+    };
+  
+    return (
+      <div style={{ height: '300px' }}>
+        <Line data={data} options={options} />
+      </div>
+    );
+  }
+
+
 
 interface Game {
     id: number;
@@ -33,7 +92,8 @@ export function GameReveal() {
 
         const cards = container.querySelectorAll('.game-card');
         cards.forEach((card, index) => {
-            const textElements = card.querySelectorAll(".text-animation");
+            const overlay = card.querySelector('.overlay');
+            const textAnimation = card.querySelector('.text-animation');
             gsap.timeline({
                 scrollTrigger: {
                     trigger: card,
@@ -42,25 +102,35 @@ export function GameReveal() {
                     scrub: true,
                     pin: true,
                     pinSpacing: index == cards.length - 1 ? true : false,
+                    markers: true,
                 }
             })
             .from(card, { 
                 opacity: 0,
-                duration: 0.2,
-                ease: "power2.out",
+                duration: 0.1,
             })
-            .from(textElements, {
+            .from(textAnimation, {
                     opacity: 0,
                     y: 30,
-                    stagger: 0.1,
-                    duration: 0.5,
-                    ease: "power2.out",
-                },"-=0.3"
+                    duration: 0.1,
+                }, ">-10%"
+            )
+            .to(textAnimation, {
+                    opacity: 0,
+                    y: -30,
+                    duration: 0.1,
+                }, "+=60%"
+            )
+            .from(overlay, {
+                    opacity: 0,
+                    duration: 0.1,
+                }, "+=40%"
             )
             .to(card, { 
-                opacity: 0,
-                duration: 0.2,
-            });
+                    opacity: 0, 
+                    duration: 0.1      
+                }, "+=95%"
+            );
         });
 
         return () => {
@@ -80,14 +150,14 @@ export function GameReveal() {
                     >
                         Your browser does not support the video tag.
                     </video>
-                    {/* <div className="absolute inset-0 flex flex-col items-center justify-center space-y-4 text-center text-white">
-                        <h3 className="title text-xl font-bold text-animation">{game.title}</h3>
-                        <p className="text-animation">Genre: {game.genre}</p>
-                        <p className="text-animation">Studio: {game.studio}</p>
-                    </div> */}
                     <div className="text-animation absolute bottom-4 left-4">
                         <p className="text-4xl font-pixel">{games.length - index}</p>
                         <p className="text-2xl font-pixel">{game.title}</p>
+                    </div>
+                    <div className="overlay absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+                        <p className="text-2xl font-pixel text-white">{game.genre}</p>
+                        <p className="text-2xl font-pixel text-white">{game.studio}</p>
+                        <SampleLineChart />
                     </div>
                 </div>
             ))}
