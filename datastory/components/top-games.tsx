@@ -4,64 +4,7 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Line } from 'react-chartjs-2';
-import {
-    Chart as ChartJS,
-    LineElement,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    Tooltip,
-    Legend,
-  } from 'chart.js';
-
-  ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
-
-  export function SampleLineChart() {
-    const data = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-      datasets: [
-        {
-          label: 'Game Popularity',
-          data: [30, 45, 28, 80, 56, 70],
-          borderColor: 'rgba(75, 192, 192, 1)',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderWidth: 2,
-          pointRadius: 4,
-          tension: 0.4, // Smooth curve
-        },
-      ],
-    };
-  
-    const options = {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-      },
-      scales: {
-        x: {
-          grid: {
-            display: false,
-          },
-        },
-        y: {
-          grid: {
-            color: '#ddd',
-          },
-        },
-      },
-    };
-  
-    return (
-      <div style={{ height: '300px' }}>
-        <Line data={data} options={options} />
-      </div>
-    );
-  }
-
+import { GameStatistics } from './game-statistics';
 
 
 interface Game {
@@ -81,7 +24,7 @@ const games: Game[] = [
     { id: 6, title: 'Minecraft', genre: 'Sandbox', studio: 'Mojang', backgroundClip: '/videos/minecraft.mp4' },
 ];
 
-export function GameReveal() {
+export function TopGames() {
     gsap.registerPlugin(useGSAP, ScrollTrigger);
 
     const containerRef = useRef<HTMLDivElement>(null);
@@ -102,7 +45,7 @@ export function GameReveal() {
                     scrub: true,
                     pin: true,
                     pinSpacing: index == cards.length - 1 ? true : false,
-                    markers: true,
+
                 }
             })
             .from(card, { 
@@ -113,7 +56,7 @@ export function GameReveal() {
                     opacity: 0,
                     y: 30,
                     duration: 0.1,
-                }, ">-10%"
+                }, "<"
             )
             .to(textAnimation, {
                     opacity: 0,
@@ -124,7 +67,7 @@ export function GameReveal() {
             .from(overlay, {
                     opacity: 0,
                     duration: 0.1,
-                }, "+=40%"
+                }, "+=10%"
             )
             .to(card, { 
                     opacity: 0, 
@@ -150,14 +93,12 @@ export function GameReveal() {
                     >
                         Your browser does not support the video tag.
                     </video>
-                    <div className="text-animation absolute bottom-4 left-4">
-                        <p className="text-4xl font-pixel">{games.length - index}</p>
+                    <div className="text-animation absolute inset-0 flex flex-col items-center justify-center text-center">
+                        <p className="text-4xl font-pixel">#{games.length - index}</p>
                         <p className="text-2xl font-pixel">{game.title}</p>
                     </div>
-                    <div className="overlay absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-                        <p className="text-2xl font-pixel text-white">{game.genre}</p>
-                        <p className="text-2xl font-pixel text-white">{game.studio}</p>
-                        <SampleLineChart />
+                    <div className="overlay absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center p-52">
+                        <GameStatistics />
                     </div>
                 </div>
             ))}
