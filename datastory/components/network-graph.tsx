@@ -7,6 +7,7 @@ const ReactECharts = dynamic(() => import("echarts-for-react"), { ssr: false });
 
 const NetworkGraph = () => {
     const getOption = () => ({
+        darkMode: true,
         title: {
             text: 'Games Network',
             subtext: 'Default layout',
@@ -61,7 +62,7 @@ const NetworkGraph = () => {
 
     return (
         <div>
-            <ReactECharts option={getOption()} style={{ height: "700px", width: "100%" }} />
+            <ReactECharts option={getOption()} style={{ height: "800px", width: "100%" }} />
         </div>
     );
 };
