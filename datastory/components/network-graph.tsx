@@ -9,23 +9,56 @@ import { EChartsInstance } from "echarts-for-react";
 
 const ReactECharts = dynamic(() => import("echarts-for-react"), { ssr: false });
 
+// const MessageContainer = styled.div`
+//   position: fixed;
+//   right: 2rem;
+//   top: 50%;
+//   transform: translateY(-50%);
+//   background: rgba(0, 0, 0, 0.8);
+//   padding: 2rem;
+//   border-radius: 8px;
+//   max-width: 300px;
+//   color: white;
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+//   border-left: 4px solid #4A90E2;
+//   opacity: 0;
+//   pointer-events: none;
+// `;
+
+type Highlight = {
+    nodeIndices: number[];
+    zoom: number;
+    message: string;
+};
+
+const highlights: Highlight[] = [
+    { nodeIndices: [-1], zoom: 1, message: "Here is a network of games linked by how many users made a comment on both games" },
+    { nodeIndices: [1], zoom: 1.5, message: "First we can see that the most important node is Minecraft" },
+    { nodeIndices: [0], zoom: 2, message: "It is connected with Fortnite" },
+    { nodeIndices: [2], zoom: 2, message: "Other important nodes" },
+    { nodeIndices: [37, 35, 36, 45, 48, 49], zoom: 2, message: "And other nodes" },
+    { nodeIndices: [117, 118], zoom: 3, message: "These nodes represent..." },
+];
+
 const NetworkGraph = () => {
     const [roamEnabled, setRoamEnabled] = useState(false);
     const [echartsInstance, setEchartsInstance] = useState<EChartsInstance | null>(null);
     const [data, setData] = useState<any>(networkData);
 
-    const highlights = [
-        { nodeIndex: -1, zoom: 1, message: "Here is a network of games linked by how many users made a comment on both games" },
-        { nodeIndex: 0, zoom: 2, message: "This is the first highlighted node" },
-        { nodeIndex: 1, zoom: 2, message: "Second important node" },
-        { nodeIndex: 2, zoom: 2, message: "Third important node" },
-        { nodeIndex: 117, zoom: 3, message: "Fourth important node" },
-    ];
+    const [currentMessage, setCurrentMessage] = useState(highlights[0].message);
+    const messageRef = useRef(null);
 
     useEffect(() => {
         if (!echartsInstance) return;
 
         gsap.registerPlugin(ScrollTrigger);
+
+        // Animate initial message
+        gsap.to(messageRef.current, {
+            opacity: 1,
+            duration: 1,
+            ease: "power2.out"
+        });
 
         // Handle highlights
         highlights.forEach((highlight, index) => {
@@ -39,11 +72,35 @@ const NetworkGraph = () => {
                     if (echartsInstance) {
                         handleHighlight(echartsInstance, highlight);
                     }
+                    // Animate message change 
+                    gsap.to(messageRef.current, {
+                        opacity: 0,
+                        duration: 0.5,
+                        onComplete: () => {
+                            setCurrentMessage(highlight.message);
+                            gsap.to(messageRef.current, {
+                                opacity: 1,
+                                duration: 0.5
+                            });
+                        }
+                    });
                 },
                 onEnterBack: () => {
                     if (echartsInstance) {
                         handleHighlight(echartsInstance, highlight);
                     }
+                    // Animate message change
+                    gsap.to(messageRef.current, {
+                        opacity: 0,
+                        duration: 0.5,
+                        onComplete: () => {
+                            setCurrentMessage(highlight.message);
+                            gsap.to(messageRef.current, {
+                                opacity: 1,
+                                duration: 0.5
+                            });
+                        }
+                    });
                 }
             });
         });
@@ -52,7 +109,7 @@ const NetworkGraph = () => {
         ScrollTrigger.create({
             trigger: ".network-container-wrapper",
             start: `${highlights.length * (100 / (highlights.length + 1))}% center`, // After last highlight
-            end: "100% bottom",
+            end: "100% center",
             markers: false,
             onEnter: () => {
                 if (echartsInstance) {
@@ -84,9 +141,9 @@ const NetworkGraph = () => {
         };
     }, [echartsInstance]);
 
-    const handleHighlight = (instance: EChartsInstance, highlight: any) => {
+    const handleHighlight = (instance: EChartsInstance, highlight: Highlight) => {
         setRoamEnabled(false);
-        if (highlight.nodeIndex === -1) {
+        if (highlight.nodeIndices[0] === -1) {
             instance.dispatchAction({
                 type: 'downplay',
                 seriesIndex: 0
@@ -98,19 +155,31 @@ const NetworkGraph = () => {
                 }]
             });
         } else {
+            // Compute mean coordinates
+            const meanX = highlight.nodeIndices.reduce((sum: number, idx: number) =>
+                sum + networkData.nodes[idx].x, 0) / highlight.nodeIndices.length;
+            const meanY = highlight.nodeIndices.reduce((sum: number, idx: number) =>
+                sum + networkData.nodes[idx].y, 0) / highlight.nodeIndices.length;
+
+            console.log(highlight.nodeIndices, meanX, meanY);
             instance.setOption({
                 series: [{
                     zoom: highlight.zoom,
-                    center: [
-                        networkData.nodes[highlight.nodeIndex].x,
-                        networkData.nodes[highlight.nodeIndex].y
-                    ]
+                    center: [meanX, meanY]
                 }]
             });
+
+            // Downplay all nodes first
+            instance.dispatchAction({
+                type: 'downplay',
+                seriesIndex: 0
+            });
+
+            // Highlight each node in the array
             instance.dispatchAction({
                 type: 'highlight',
                 seriesIndex: 0,
-                dataIndex: highlight.nodeIndex
+                dataIndex: highlight.nodeIndices
             });
         }
     };
@@ -127,6 +196,7 @@ const NetworkGraph = () => {
             show: roamEnabled,
         },
         legend: [{
+            show: roamEnabled,
             data: networkData.categories.map(a => a.name.toString()),
             top: 10,
             left: 10,
@@ -188,21 +258,26 @@ const NetworkGraph = () => {
     };
 
     return (
-        <div className="network-container-wrapper relative h-[500vh]">
-            <div className="network-container sticky top-[5rem] h-[calc(100vh-6rem)] flex justify-between gap-4 items-start px-2">
+        <div className="mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8 network-container-wrapper relative h-[800vh]">
+            <div className="network-container sticky top-[5rem] h-[calc(100vh-6rem)] flex flex-col justify-between gap-4 items-center">
+                <div className="flex flex-row gap-4 justify-between w-full items-center">
+                    <div className="flex gap-2 items-center text-md font-semibold italic text-[#fef094] p-3 flex-grow bg-[#171717] border border-[#333] rounded-lg opacity-0" ref={messageRef}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="#ffffff" fill-rule="evenodd" d="M8 2C4.262 2 1 4.57 1 8c0 1.86.98 3.486 2.455 4.566a3.472 3.472 0 0 1-.469 1.26a.75.75 0 0 0 .713 1.14a6.961 6.961 0 0 0 3.06-1.06c.403.062.818.094 1.241.094c3.738 0 7-2.57 7-6s-3.262-6-7-6M5 9a1 1 0 1 0 0-2a1 1 0 0 0 0 2m7-1a1 1 0 1 1-2 0a1 1 0 0 1 2 0M8 9a1 1 0 1 0 0-2a1 1 0 0 0 0 2" clip-rule="evenodd"/></svg>
+                        {currentMessage}
+                    </div>
+                    <div className="network-selectors w-1/4 bg-[#171717] border border-[#333] rounded-lg">
+                        <div className="flex flex-row flex-wrap gap-1 p-1 items-center justify-between">
+                            <button className="network-selector-button hover:bg-[#0A0B0C] hover:text-white text-[#BBB] flex-grow rounded-md p-2">Games</button>
+                            <button className="network-selector-button hover:bg-[#0A0B0C] hover:text-white text-[#BBB] flex-grow rounded-md p-2">Channels</button>
+                        </div>
+                    </div>
+                </div>
                 <div className="network-graph h-full w-full bg-[#171717] border border-[#333] rounded-lg flex-grow">
                     <ReactECharts
                         option={getOption()}
                         style={{ height: '100%', width: '100%' }}
                         onChartReady={onChartReady}
                     />
-                </div>
-                <div className="network-selectors w-1/4 bg-[#171717] border border-[#333] rounded-lg">
-                    <div className="flex flex-row gap-1 p-1 items-center justify-between">
-                        <button className="network-selector-button hover:bg-[#0A0B0C] hover:text-white text-[#BBB] w-1/3 rounded-md p-2">Games</button>
-                        <button className="network-selector-button hover:bg-[#0A0B0C] hover:text-white text-[#BBB] w-1/3 rounded-md p-2">Channels</button>
-                        <button className="network-selector-button hover:bg-[#0A0B0C] hover:text-white text-[#BBB] w-1/3 rounded-md p-2">Genres</button>
-                    </div>
                 </div>
             </div>
         </div>
