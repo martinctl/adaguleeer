@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import networkData from "@/data/games_network.json";
-import networkData2 from "@/data/games_network_good.json";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { EChartsInstance } from "echarts-for-react";
