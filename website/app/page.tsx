@@ -1,5 +1,6 @@
 'use client'
 
+import { Hero } from '@/components/hero'; 
 import { TopGames } from '@/components/top-games';
 import { NetworkGraph } from '@/components/network-graph';
 import { Introduction } from '@/components/introduction';
@@ -33,6 +34,7 @@ export default function Home() {
     return (
         <>
             <Navbar currentSection={currentSection} />
+            <div id="hero"><Hero /></div>
             <div id="intro"><Introduction /></div>
             <div id="word-cloud"><WordCloud /></div>
             <div id="top-games"><TopGames /></div>
