@@ -1,17 +1,19 @@
 'use client';
 
-import { Line } from 'react-chartjs-2';
+import { Line, Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   LineElement,
+  BarElement,
   CategoryScale,
   LinearScale,
   PointElement,
+  Title,
   Tooltip,
   Legend,
 } from 'chart.js';
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
+ChartJS.register(LineElement, BarElement, CategoryScale, LinearScale, PointElement, Title, Tooltip, Legend);
 
 export function GameStatistics() {
   // Placeholder data (replace with real values)
@@ -21,7 +23,7 @@ export function GameStatistics() {
     { label: 'Videos Published', value: 1240 },
     { label: 'Channels', value: 85 },
     { label: 'Subscribers Median', value: 20000},
-    { label: 'Percentage over all gaming videos', value: '20%'},
+    { label: 'Percentage of gaming videos', value: '20%'},
   ];
 
 
@@ -82,22 +84,22 @@ export function GameStatistics() {
       {stats.map((stat, index) => (
         <div
           key={index}
-          className="bg-white p-6 col-span-2 rounded-lg shadow-md flex flex-col items-start"
+          className="bg-zinc-500 bg-opacity-80 p-6 col-span-2 rounded-lg shadow-md flex flex-col items-start"
         >
-          <h3 className="text-lg font-pixel text-gray-500">{stat.label}</h3>
-          <p className="text-2xl font-pixel text-gray-900">{stat.value}</p>
+          <h3 className="text-lg font-pixel text-white-500">{stat.label}</h3>
+          <p className="text-2xl font-pixel text-white-900">{stat.value}</p>
         </div>
       ))}
-      <div className="col-span-3 bg-white p-6 rounded-lg shadow-md">
-        <h3 className="text-lg font-pixel text-gray-500 mb-4">
+      <div className="col-span-3 bg-zinc-700 bg-opacity-90 p-6 rounded-lg shadow-md">
+        <h3 className="text-lg font-pixel text-white">
           Likes/Views Over Time
         </h3>
         <div className="h-72">
           <Line data={likesViewsData} options={chartOptions} />
         </div>
       </div>
-      <div className="col-span-3 bg-white p-6 rounded-lg shadow-md">
-        <h3 className="text-lg font-pixel text-gray-500 mb-4">
+      <div className="col-span-3 bg-zinc-700 bg-opacity-90 p-6 rounded-lg shadow-md">
+        <h3 className="text-lg font-pixel text-white">
           Distribution of Video Length
         </h3>
         <div className="h-72">

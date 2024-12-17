@@ -45,7 +45,10 @@ export function TopGames() {
                     scrub: true,
                     pin: true,
                     pinSpacing: index == cards.length - 1 ? true : false,
-
+                    snap: {
+                        snapTo: 'labelsDirectional',
+                        ease: 'power1.inOut',
+                    }
                 }
             })
             .from(card, { 
@@ -58,6 +61,7 @@ export function TopGames() {
                     duration: 0.1,
                 }, "<"
             )
+            .addLabel('title')
             .to(textAnimation, {
                     opacity: 0,
                     y: -30,
@@ -69,11 +73,12 @@ export function TopGames() {
                     duration: 0.1,
                 }, "+=10%"
             )
+            .addLabel('overlay')
             .to(card, { 
                     opacity: 0, 
                     duration: 0.1      
                 }, "+=95%"
-            );
+            )
         });
 
         return () => {
