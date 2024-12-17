@@ -4,13 +4,14 @@ import { TopGames } from '@/components/top-games';
 import { NetworkGraph } from '@/components/network-graph';
 import { Introduction } from '@/components/introduction';
 import { Navbar } from '@/components/navbar';
+import { WordCloud } from '@/components/word-cloud';
 import { useState, useEffect } from 'react';
 
 export default function Home() {
     const [currentSection, setCurrentSection] = useState('');
 
     const handleScroll = () => {
-        const sections = ['intro', 'top-games', 'network'];
+        const sections = ['intro', 'word-cloud', 'top-games', 'network'];
         sections.forEach((section) => {
             const element = document.getElementById(section);
             if (element) {
@@ -33,6 +34,7 @@ export default function Home() {
         <>
             <Navbar currentSection={currentSection} />
             <div id="intro"><Introduction /></div>
+            <div id="word-cloud"><WordCloud /></div>
             <div id="top-games"><TopGames /></div>
             <div id="network"><NetworkGraph /></div>
         </>

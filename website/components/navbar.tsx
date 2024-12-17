@@ -22,6 +22,14 @@ export function Navbar({ currentSection }: NavbarProps) {
                         Intro
                     </NavigationMenu.Link>
                 </NavigationMenu.Item>
+                <NavigationMenu.Item className={`${currentSection == 'word-cloud' ? "border-b border-slate-100" : ""} px-2 py-1`}>
+                    <NavigationMenu.Link
+                        className="NavigationMenuLink"
+                        href="#word-cloud"
+                    >
+                        Word Cloud
+                    </NavigationMenu.Link>
+                </NavigationMenu.Item>
                 <NavigationMenu.Item className={`${currentSection == 'top-games' ? "border-b border-slate-100" : ""} px-2 py-1`}>
                     <NavigationMenu.Link
                         className="NavigationMenuLink"
