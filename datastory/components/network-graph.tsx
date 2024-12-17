@@ -24,10 +24,9 @@ const highlights: Highlight[] = [
     { nodeIndices: [117, 118], zoom: 3, message: "These nodes represent..." },
 ];
 
-const NetworkGraph = () => {
+export function NetworkGraph () {
     const [roamEnabled, setRoamEnabled] = useState(false);
     const [echartsInstance, setEchartsInstance] = useState<EChartsInstance | null>(null);
-    const [data, setData] = useState<any>(networkData);
 
     const [currentMessage, setCurrentMessage] = useState(highlights[0].message);
     const messageRef = useRef(null);
@@ -269,5 +268,3 @@ const NetworkGraph = () => {
         </div>
     );
 };
-
-export default NetworkGraph;
