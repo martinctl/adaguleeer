@@ -1,49 +1,77 @@
-import { ResponsivePie } from "@nivo/pie";
+import React, { useEffect, useRef } from 'react';
+import * as echarts from 'echarts';
+import { Flex, Box } from '@radix-ui/themes';
 
-// Define the type for a single pie slice
-interface PieData {
-  id: string;
-  label: string;
-  value: number;
-  color: string;
+interface YouTubeCategory{
+    title: string;
+    value: number;
 }
 
-// Define the component's props type
 interface AnimatedPieChartProps {
-  data: PieData[];
+    data: YouTubeCategory[];
 }
 
-const AnimatedPieChart: React.FC<AnimatedPieChartProps> = ({ data }) => (
-  <ResponsivePie
-    data={data}
-    margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-    innerRadius={0.5}
-    padAngle={1.5}
-    cornerRadius={3}
-    activeOuterRadiusOffset={8}
-    colors={{ datum: "data.color" }}
-    borderWidth={1}
-    borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
-    arcLinkLabelsSkipAngle={10}
-    arcLinkLabelsTextColor="#333333"
-    arcLinkLabelsThickness={2}
-    arcLinkLabelsColor={{ from: "color" }}
-    arcLabelsSkipAngle={10}
-    arcLabelsTextColor={{
-      from: "color",
-      modifiers: [["darker", 2]],
-    }}
-    animate={true}
-    motionConfig="gentle"
-  />
-);
+export function AnimatedPieChart({ data }: AnimatedPieChartProps) {
+    const chartRef = useRef<HTMLDivElement>(null);
 
-// Sample data for the pie chart
-const data: PieData[] = [
-  { id: "Gaming", label: "Gaming", value: 55, color: "#FF5733" },
-  { id: "Music", label: "Music", value: 20, color: "#33FF57" },
-  { id: "Education", label: "Education", value: 15, color: "#3357FF" },
-  { id: "Sports", label: "Sports", value: 10, color: "#FF33A6" },
-];
+    useEffect(() => {
+        const chart = chartRef.current;
+        if (!chart) return;
 
-export default AnimatedPieChart;
+        const chartInstance = echarts.init(chartRef.current);
+        const options = {
+            tooltip: {
+                trigger: 'item',
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                textStyle: {
+                    color: '#aaa',
+                },
+                formatter: (params: any) => {
+                    return `<strong>${params.name}</strong> ${params.value}%`;
+                }
+            },
+            series: [
+                {
+                    type: 'pie',
+                    radius: '80%',
+                    center: ['50%', '50%'],
+                    data: data,
+                    roseType: 'radius',
+                    label: {
+                        color: 'rgba(255, 255, 255, 0.5)'
+                    },
+                    labelLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.5)'
+                        },
+                        smooth: 0.2,
+                        length: 5,
+                        length2: 15
+                    },
+                    itemStyle: {
+                        color: '#c23531',
+                        shadowBlur: 50,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    },
+                    animationType: 'scale',
+                    animationEasing: 'elasticOut',
+                    animationDelay: function (idx: number) {
+                        return Math.random() * 200;
+                    }
+                }
+            ]
+        };
+        chartInstance.setOption(options);
+    }, []);
+
+    return (
+        <Flex
+            width="100%"
+            height="100%"
+            justify="center"
+            align="center"
+        >
+            <Box ref={chartRef} className="w-full h-[80vh]"/>
+        </Flex>
+    );
+}

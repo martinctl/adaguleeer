@@ -14,12 +14,9 @@ interface Game {
 }
 
 const games: Game[] = [
-    { id: 1, title: 'Grand Theft Auto V', backgroundClip: '/videos/gta.mp4' },
-    { id: 2, title: 'League of Legends', backgroundClip: '/videos/lol.mp4' },
-    { id: 3, title: 'Roblox', backgroundClip: '/videos/roblox.mp4' },
-    { id: 4, title: 'Call of Duty', backgroundClip: '/videos/cod.mp4' },
-    { id: 5, title: 'Fortnite', backgroundClip: '/videos/fortnite.mp4' },
-    { id: 6, title: 'Minecraft', backgroundClip: '/videos/minecraft.mp4' },
+    { id: 3, title: 'Call of Duty', backgroundClip: '/videos/cod.mp4' },
+    { id: 2, title: 'Fortnite', backgroundClip: '/videos/fortnite.mp4' },
+    { id: 1, title: 'Minecraft', backgroundClip: '/videos/minecraft.mp4' },
 ];
 
 export function TopGames() {
@@ -85,7 +82,7 @@ export function TopGames() {
     }, [games]);
 
     return (
-        <div ref={containerRef} className="">
+        <div ref={containerRef}>
             {games.map((game, index) => (
                 <div key={game.id} className={`relative overflow-hidden h-screen w-full game-card bg-black`}>
                     <video 
