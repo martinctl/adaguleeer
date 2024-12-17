@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { Flex, Box } from '@radix-ui/themes';
 
-interface YouTubeCategory{
+interface YouTubeCategory {
     title: string;
     value: number;
 }
@@ -20,6 +20,14 @@ export function AnimatedPieChart({ data }: AnimatedPieChartProps) {
 
         const chartInstance = echarts.init(chartRef.current);
         const options = {
+            title: {
+                text: 'Distribution of YouTube Categories',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    color: '#ccc'
+                }
+            },
             tooltip: {
                 trigger: 'item',
                 backgroundColor: 'rgba(0, 0, 0, 0.7)',
@@ -45,16 +53,14 @@ export function AnimatedPieChart({ data }: AnimatedPieChartProps) {
                             color: 'rgba(255, 255, 255, 0.5)'
                         },
                         smooth: 0.2,
-                        length: 5,
-                        length2: 15
+                        length: 1,
+                        length2: 10
                     },
                     itemStyle: {
-                        color: '#c23531',
+                        color: '#E54D2E',
                         shadowBlur: 50,
                         shadowColor: 'rgba(0, 0, 0, 0.5)'
                     },
-                    animationType: 'scale',
-                    animationEasing: 'elasticOut',
                     animationDelay: function (idx: number) {
                         return Math.random() * 200;
                     }
@@ -71,7 +77,7 @@ export function AnimatedPieChart({ data }: AnimatedPieChartProps) {
             justify="center"
             align="center"
         >
-            <Box ref={chartRef} className="w-full h-[80vh]"/>
+            <Box ref={chartRef} className="w-full h-[80vh]" />
         </Flex>
     );
 }

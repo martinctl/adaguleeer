@@ -5,10 +5,11 @@ import { RocketIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { AnimatedPieChart } from './animated-pie-chart';
 import categoriesData from "@/data/categories.json";
+import { QuizTab } from './quiz-tab';
 
 export function Introduction() {
     gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -44,6 +45,11 @@ export function Introduction() {
         };
     }, []);
 
+    const [showPieChart, setShowPieChart] = useState(false);
+    const handleQuizSubmit = () => {
+        setShowPieChart(true);
+    };
+
     return (
         <section ref={containerRef} id="container">
             <div className="slide overflow-hidden h-screen">
@@ -72,19 +78,36 @@ export function Introduction() {
                     </Flex>
                 </div>
             </div>
+    
             <div className="slide h-screen flex items-center justify-around">
                 <div className="w-1/3 flex flex-col space-y-5">
                 <h4 className="font-bold text-xl">Your Mission, Explorer</h4>
                 <p>
                     Your journey begins as an Explorer, where we'll guide you through the fascinating world of gaming on 
                     YouTube. We have analysed a comprehensive amount of YouTube metadata involving ~130k channels with more
-                    than 10k subscribers, with videos ranging from 2005 to 2019. As you can see on the right, gaming content
-                    is the most popular during this period, that's why we can't wait to make you dive into this world!
+                    than 10k subscribers, with videos ranging from 2005 to 2019.
                 </p>
+
+                <p>
+                    But you won't be only a passive observer, we'll test your knowledge with simple checkpoints. These short 
+                    quizzes are designed to help you understand the data and the insights we'll provide you. Let's start with
+                    the beginning, shall we? Why did we even choose gaming ?
+                </p>
+    
                 </div>
-                <div className="w-7/12">
+                {!showPieChart && 
+                (<QuizTab 
+                    question="What percentage does gaming represent on YouTube ?"
+                    answers={["50%, 60%, 70%, 80%"]}
+                    correctAnswerIndex={3}
+                    onSubmitAction={handleQuizSubmit}
+                />
+                )}
+                {showPieChart && 
+                (<div className="w-7/12">
                     <AnimatedPieChart data={categoriesData}/>
                 </div>
+            )}
             </div>
             <div className="slide h-screen flex flex-col items-center justify-center">
                 <h4>3-link Rigid Axle Suspension With Coil Spring</h4>
