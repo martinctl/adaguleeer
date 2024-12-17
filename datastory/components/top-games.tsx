@@ -10,18 +10,16 @@ import { GameStatistics } from './game-statistics';
 interface Game {
     id: number;
     title: string;
-    genre: string;
-    studio: string;
     backgroundClip: string;
 }
 
 const games: Game[] = [
-    { id: 1, title: 'Grand Theft Auto V', genre: 'Cars', studio: 'Rockstar', backgroundClip: '/videos/gta.mp4' },
-    { id: 2, title: 'League of Legends', genre: 'Strategy',  studio: 'Riot Games', backgroundClip: '/videos/lol.mp4' },
-    { id: 3, title: 'Roblox', genre: 'Sandbox', studio: 'Roblox Corporation', backgroundClip: '/videos/roblox.mp4' },
-    { id: 4, title: 'Call of Duty', genre: 'RPG', studio: 'Activision', backgroundClip: '/videos/cod.mp4' },
-    { id: 5, title: 'Fortnite', genre: 'Battle Royale', studio: 'Epic Games', backgroundClip: '/videos/fortnite.mp4' },
-    { id: 6, title: 'Minecraft', genre: 'Sandbox', studio: 'Mojang', backgroundClip: '/videos/minecraft.mp4' },
+    { id: 1, title: 'Grand Theft Auto V', backgroundClip: '/videos/gta.mp4' },
+    { id: 2, title: 'League of Legends', backgroundClip: '/videos/lol.mp4' },
+    { id: 3, title: 'Roblox', backgroundClip: '/videos/roblox.mp4' },
+    { id: 4, title: 'Call of Duty', backgroundClip: '/videos/cod.mp4' },
+    { id: 5, title: 'Fortnite', backgroundClip: '/videos/fortnite.mp4' },
+    { id: 6, title: 'Minecraft', backgroundClip: '/videos/minecraft.mp4' },
 ];
 
 export function TopGames() {
@@ -103,7 +101,7 @@ export function TopGames() {
                         <p className="text-2xl font-pixel">{game.title}</p>
                     </div>
                     <div className="overlay absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center p-52">
-                        <GameStatistics />
+                        <GameStatistics gameTitle={game.title} />
                     </div>
                 </div>
             ))}

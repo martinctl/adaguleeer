@@ -1,111 +1,193 @@
 'use client';
 
-import { Line, Bar } from 'react-chartjs-2';
+import { Card, Text, Flex, Grid } from '@radix-ui/themes';
+import ReactEChartsCore from 'echarts-for-react/lib/core';
+import * as echarts from 'echarts/core';
 import {
-  Chart as ChartJS,
-  LineElement,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
+  GridComponent,
+  TooltipComponent,
+  TitleComponent,
+  LegendComponent
+} from 'echarts/components';
+import { LineChart, BarChart } from 'echarts/charts';
+import { UniversalTransition } from 'echarts/features';
+import { CanvasRenderer } from 'echarts/renderers';
+import gameStatsData from '@/data/game_statistics.json';
 
-ChartJS.register(LineElement, BarElement, CategoryScale, LinearScale, PointElement, Title, Tooltip, Legend);
+// Register the required components
+echarts.use([
+  GridComponent,
+  TooltipComponent,
+  TitleComponent,
+  LegendComponent,
+  LineChart,
+  BarChart,
+  CanvasRenderer,
+  UniversalTransition
+]);
 
-export function GameStatistics() {
-  // Placeholder data (replace with real values)
-  const stats = [
-    { label: 'Genre', value: 'Action' },
-    { label: 'Studio', value: 'Epic Games' },
-    { label: 'Videos Published', value: 1240 },
-    { label: 'Channels', value: 85 },
-    { label: 'Subscribers Median', value: 20000},
-    { label: 'Percentage of gaming videos', value: '20%'},
-  ];
+interface GameStatisticsProps {
+  gameTitle: string;
+}
 
+export function GameStatistics({ gameTitle }: GameStatisticsProps) {
+  const gameData = gameStatsData.games[gameTitle as keyof typeof gameStatsData.games];
 
-  // Line chart data for likes/views over time
-  const likesViewsData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-    datasets: [
-      {
-        label: 'Likes/Views Over Time',
-        data: [3000, 4500, 2800, 8000, 5600, 7000],
-        borderColor: 'rgba(75, 192, 192, 1)',
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderWidth: 2,
-        pointRadius: 4,
-        tension: 0.4,
+  const likesViewsOptions = {
+    darkMode: true,
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'cross'
+      }
+    },
+    xAxis: {
+      type: 'category',
+      data: gameData.likesViewsData.months,
+      axisLine: {
+        lineStyle: {
+          color: '#e5e7eb'
+        }
+      }
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: {
+        lineStyle: {
+          color: '#e5e7eb'
+        }
       },
-    ],
+      splitLine: {
+        lineStyle: {
+          color: '#2B2D31'
+        }
+      }
+    },
+    series: [{
+      name: 'Likes/Views',
+      type: 'line',
+      data: gameData.likesViewsData.values,
+      smooth: true,
+      lineStyle: {
+        width: 3,
+        color: '#7289DA'
+      },
+      itemStyle: {
+        color: '#7289DA'
+      },
+      areaStyle: {
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: 'rgba(114, 137, 218, 0.3)'
+          },
+          {
+            offset: 1,
+            color: 'rgba(114, 137, 218, 0.1)'
+          }
+        ])
+      }
+    }]
   };
 
-  // Histogram data for video durations
-  const videoDurationData = {
-    labels: ['0-5 min', '5-10 min', '10-20 min', '20-30 min', '30+ min'],
-    datasets: [
-      {
-        label: 'Video Durations',
-        data: [200, 300, 150, 50, 20],
-        backgroundColor: 'rgba(153, 102, 255, 0.6)',
-        borderColor: 'rgba(153, 102, 255, 1)',
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
+  const videoDurationOptions = {
+    darkMode: true,
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
     },
-    scales: {
-      x: {
-        grid: {
-          display: false,
-        },
-      },
-      y: {
-        grid: {
-          color: '#e5e7eb',
-        },
-      },
+    tooltip: {
+      trigger: 'axis'
     },
+    xAxis: {
+      type: 'category',
+      data: ['0-5 min', '5-10 min', '10-20 min', '20-30 min', '30+ min'],
+      axisLine: {
+        lineStyle: {
+          color: '#e5e7eb'
+        }
+      }
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: {
+        lineStyle: {
+          color: '#e5e7eb'
+        }
+      },
+      splitLine: {
+        lineStyle: {
+          color: '#2B2D31'
+        }
+      }
+    },
+    series: [{
+      name: 'Video Duration Distribution',
+      type: 'bar',
+      data: gameData.videoDurationData.values,
+      itemStyle: {
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: 'rgba(114, 137, 218, 0.8)'
+          },
+          {
+            offset: 1,
+            color: 'rgba(114, 137, 218, 0.3)'
+          }
+        ])
+      }
+    }]
   };
 
   return (
-    <div className="grid grid-cols-6 gap-4 p-6 rounded-lg">
-      {stats.map((stat, index) => (
-        <div
-          key={index}
-          className="bg-zinc-500 bg-opacity-80 p-6 col-span-2 rounded-lg shadow-md flex flex-col items-start"
-        >
-          <h3 className="text-lg font-pixel text-white-500">{stat.label}</h3>
-          <p className="text-2xl font-pixel text-white-900">{stat.value}</p>
-        </div>
+    <Grid columns="6" gap="4" p="6">
+      {gameData.stats.map((stat, index) => (
+        <Card key={index} style={{ gridColumn: 'span 2' }}>
+          <Flex direction="column" gap="2">
+            <Text size="2" weight="bold" className="font-pixel">
+              {stat.label}
+            </Text>
+            <Text size="6" className="font-pixel">
+              {stat.value}
+            </Text>
+          </Flex>
+        </Card>
       ))}
-      <div className="col-span-3 bg-zinc-700 bg-opacity-90 p-6 rounded-lg shadow-md">
-        <h3 className="text-lg font-pixel text-white">
+      
+      <Card style={{ gridColumn: 'span 3' }}>
+        <Text size="2" weight="bold" className="font-pixel mb-4">
           Likes/Views Over Time
-        </h3>
+        </Text>
         <div className="h-72">
-          <Line data={likesViewsData} options={chartOptions} />
+          <ReactEChartsCore
+            echarts={echarts}
+            option={likesViewsOptions}
+            style={{ height: '100%' }}
+          />
         </div>
-      </div>
-      <div className="col-span-3 bg-zinc-700 bg-opacity-90 p-6 rounded-lg shadow-md">
-        <h3 className="text-lg font-pixel text-white">
+      </Card>
+      
+      <Card style={{ gridColumn: 'span 3' }}>
+        <Text size="2" weight="bold" className="font-pixel mb-4">
           Distribution of Video Length
-        </h3>
+        </Text>
         <div className="h-72">
-          <Line data={videoDurationData} options={chartOptions} />
+          <ReactEChartsCore
+            echarts={echarts}
+            option={videoDurationOptions}
+            style={{ height: '100%' }}
+          />
         </div>
-      </div>
-    </div>
+      </Card>
+    </Grid>
   );
 }

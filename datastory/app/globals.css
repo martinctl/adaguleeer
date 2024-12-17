@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --tomato1: var(--tomato-1);
+  --tomato2: var(--tomato-2);
+  --tomato3: var(--tomato-3);
+  --tomato9: var(--tomato-9);
+  --tomato11: var(--tomato-11);
+  --tomato12: var(--tomato-12);
+  
+  --sand1: var(--sand-1);
+  --sand2: var(--sand-2);
+  --sand3: var(--sand-3);
+  --sand9: var(--sand-9);
+  --sand11: var(--sand-11);
+  --sand12: var(--sand-12);
+}
+
 html {
   scroll-behavior: smooth;
 }
