@@ -10,6 +10,7 @@ import { IntroductionSection } from '@/components/introduction-section';
 export default function Home() {
     return (
         <>
+            <div className="w-screen max-w-full"></div>
             <HeroSection />
             <IntroductionSection />
             <TopGames />
