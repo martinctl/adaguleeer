@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import networkData from "@/data/games_network.json";
 import gsap from "gsap";

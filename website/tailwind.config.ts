@@ -8,8 +8,7 @@ const config: Config = {
   ],
   theme: {
     fontFamily: {
-      sans: ['GeistSans', 'sans-serif'],
-      pixel: ['"Press Start 2P"', 'cursive'],
+      sans: ['var(--font-inter)', 'sans-serif'],
     },
     extend: {
       colors: {
