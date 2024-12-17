@@ -1,13 +1,15 @@
 import React, { useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import networkData from "@/data/games_network.json";
+import { ChatBubbleIcon } from "@radix-ui/react-icons";
+import { Callout, SegmentedControl } from "@radix-ui/themes";
+import gamesNetworkData from "@/data/games_network.json";
+import channelsNetworkData from "@/data/channels_network.json";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { EChartsInstance } from "echarts-for-react";
 import { useGSAP } from "@gsap/react";
 
 const ReactECharts = dynamic(() => import("echarts-for-react"), { ssr: false });
-
 
 type Highlight = {
     nodeIndices: number[];
@@ -24,9 +26,12 @@ const highlights: Highlight[] = [
     { nodeIndices: [117, 118], zoom: 3, message: "These nodes represent..." },
 ];
 
+type NetworkType = 'games' | 'channels';
+
 export function NetworkGraph () {
     const [roamEnabled, setRoamEnabled] = useState(false);
     const [echartsInstance, setEchartsInstance] = useState<EChartsInstance | null>(null);
+    const [networkType, setNetworkType] = useState<NetworkType>('games');
 
     const [currentMessage, setCurrentMessage] = useState(highlights[0].message);
     const messageRef = useRef(null);
@@ -37,6 +42,7 @@ export function NetworkGraph () {
         gsap.registerPlugin(ScrollTrigger);
 
         // Animate initial message
+        gsap.set(messageRef.current, { opacity: 0 });
         gsap.to(messageRef.current, {
             opacity: 1,
             duration: 1,
@@ -55,7 +61,7 @@ export function NetworkGraph () {
                     if (echartsInstance) {
                         handleHighlight(echartsInstance, highlight);
                     }
-                    // Animate message change 
+                    // Animate message change without CSS transitions
                     gsap.to(messageRef.current, {
                         opacity: 0,
                         duration: 0.5,
@@ -186,7 +192,7 @@ export function NetworkGraph () {
             show: roamEnabled,
             data: networkData.categories.map(a => a.name.toString()),
             top: 10,
-            left: 10,
+            right: 10,
             textStyle: {
                 color: '#aaa'
             },
@@ -244,28 +250,57 @@ export function NetworkGraph () {
         setEchartsInstance(instance);
     };
 
+    // Get current network data based on selection
+    const networkData = networkType === 'games' ? gamesNetworkData : channelsNetworkData;
+
     return (
         <div className="mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8 network-container-wrapper relative h-[800vh]">
-            <div className="network-container sticky top-[5rem] h-[calc(100vh-6rem)] flex flex-col justify-between gap-4 items-center">
-                <div className="flex flex-row flex-wrap gap-4 justify-between w-full items-center">
-                    <div className="flex gap-2 items-start text-md font-semibold italic text-[#fef094] p-3 flex-grow bg-[#171717] border border-[#333] rounded-lg opacity-0" ref={messageRef}>
-                        <div className="flex-grow max-w-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="#ffffff" fillRule="evenodd" d="M8 2C4.262 2 1 4.57 1 8c0 1.86.98 3.486 2.455 4.566a3.472 3.472 0 0 1-.469 1.26a.75.75 0 0 0 .713 1.14a6.961 6.961 0 0 0 3.06-1.06c.403.062.818.094 1.241.094c3.738 0 7-2.57 7-6s-3.262-6-7-6M5 9a1 1 0 1 0 0-2a1 1 0 0 0 0 2m7-1a1 1 0 1 1-2 0a1 1 0 0 1 2 0M8 9a1 1 0 1 0 0-2a1 1 0 0 0 0 2" clipRule="evenodd"/></svg>
-                        </div>
-                        <div>{currentMessage}</div>
-                    </div>
+            <div className="network-container sticky top-[5rem] h-[calc(100vh-6rem)] flex flex-col gap-4">
+                <div className="w-full">
+                    <Callout.Root 
+                        variant="soft" 
+                        color="gray" 
+                        highContrast 
+                        className="border border-slate-100/10 transition-[height] duration-500 ease-in-out"
+                    >
+                        <Callout.Icon>
+                            <ChatBubbleIcon className="h-5 w-5 text-white" />
+                        </Callout.Icon>
+                        <Callout.Text 
+                            ref={messageRef} 
+                            className="transition-[height] duration-500 ease-in-out"
+                        >
+                            {currentMessage}
+                        </Callout.Text>
+                    </Callout.Root>
                 </div>
-                <div className="relative network-graph h-full w-full ">
+                
+                <div className="relative network-graph flex-1">
                     <ReactECharts
                         option={getOption()}
                         style={{ height: '100%', width: '100%' }}
                         onChartReady={onChartReady}
                     />
-                    <div className="absolute top-1 right-1 drop-shadow-md network-selectors bg-[#171717] border border-[#333] rounded-lg">
-                        <div className="flex flex-row flex-wrap gap-1 p-1 items-center justify-between">
-                            <button className="network-selector-button hover:bg-[#0A0B0C] hover:text-white text-[#BBB] w-28 flex-grow rounded-md p-2">Games</button>
-                            <button className="network-selector-button hover:bg-[#0A0B0C] hover:text-white text-[#BBB] w-28 flex-grow rounded-md p-2">Channels</button>
-                        </div>
+                    <div className="absolute top-1 left-1 drop-shadow-md">
+                        <SegmentedControl.Root 
+                            size="3"
+                            radius="large"
+                            value={networkType}
+                            onValueChange={(value: NetworkType) => setNetworkType(value)}
+                        >
+                            <SegmentedControl.Item 
+                                className="network-selector-button data-[state=active]:bg-[#0A0B0C] data-[state=active]:text-white text-[#BBB] w-28 rounded-md p-2"
+                                value="games"
+                            >
+                                Games
+                            </SegmentedControl.Item>
+                            <SegmentedControl.Item 
+                                className="network-selector-button data-[state=active]:bg-[#0A0B0C] data-[state=active]:text-white text-[#BBB] w-28 rounded-md p-2"
+                                value="channels"
+                            >
+                                Channels
+                            </SegmentedControl.Item>
+                        </SegmentedControl.Root>
                     </div>
                 </div>
             </div>

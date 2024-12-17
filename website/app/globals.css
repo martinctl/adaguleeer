@@ -10,12 +10,12 @@
   --tomato11: var(--tomato-11);
   --tomato12: var(--tomato-12);
   
-  --sand1: var(--sand-1);
-  --sand2: var(--sand-2);
-  --sand3: var(--sand-3);
-  --sand9: var(--sand-9);
-  --sand11: var(--sand-11);
-  --sand12: var(--sand-12);
+  --slate1: var(--slate-1);
+  --slate2: var(--slate-2);
+  --slate3: var(--slate-3);
+  --slate9: var(--slate-9);
+  --slate11: var(--slate-11);
+  --slate12: var(--slate-12);
 }
 
 html {
