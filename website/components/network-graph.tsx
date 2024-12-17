@@ -177,6 +177,10 @@ export function NetworkGraph () {
         },
         tooltip: {
             show: roamEnabled,
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            textStyle: {
+                color: '#bbb',
+            },
         },
         legend: [{
             show: roamEnabled,
