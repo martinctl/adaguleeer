@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import networkData from "@/data/games_network.json";
-import networkData2 from "@/data/games_network_good.json";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { EChartsInstance } from "echarts-for-react";
+import { useGSAP } from "@gsap/react";
 
 const ReactECharts = dynamic(() => import("echarts-for-react"), { ssr: false });
 
@@ -32,7 +32,7 @@ const NetworkGraph = () => {
     const [currentMessage, setCurrentMessage] = useState(highlights[0].message);
     const messageRef = useRef(null);
 
-    useEffect(() => {
+    useGSAP(() => {
         if (!echartsInstance) return;
 
         gsap.registerPlugin(ScrollTrigger);
@@ -247,7 +247,7 @@ const NetworkGraph = () => {
                 <div className="flex flex-row flex-wrap gap-4 justify-between w-full items-center">
                     <div className="flex gap-2 items-start text-md font-semibold italic text-[#fef094] p-3 flex-grow bg-[#171717] border border-[#333] rounded-lg opacity-0" ref={messageRef}>
                         <div className="flex-grow max-w-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="#ffffff" fill-rule="evenodd" d="M8 2C4.262 2 1 4.57 1 8c0 1.86.98 3.486 2.455 4.566a3.472 3.472 0 0 1-.469 1.26a.75.75 0 0 0 .713 1.14a6.961 6.961 0 0 0 3.06-1.06c.403.062.818.094 1.241.094c3.738 0 7-2.57 7-6s-3.262-6-7-6M5 9a1 1 0 1 0 0-2a1 1 0 0 0 0 2m7-1a1 1 0 1 1-2 0a1 1 0 0 1 2 0M8 9a1 1 0 1 0 0-2a1 1 0 0 0 0 2" clip-rule="evenodd"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="#ffffff" fillRule="evenodd" d="M8 2C4.262 2 1 4.57 1 8c0 1.86.98 3.486 2.455 4.566a3.472 3.472 0 0 1-.469 1.26a.75.75 0 0 0 .713 1.14a6.961 6.961 0 0 0 3.06-1.06c.403.062.818.094 1.241.094c3.738 0 7-2.57 7-6s-3.262-6-7-6M5 9a1 1 0 1 0 0-2a1 1 0 0 0 0 2m7-1a1 1 0 1 1-2 0a1 1 0 0 1 2 0M8 9a1 1 0 1 0 0-2a1 1 0 0 0 0 2" clipRule="evenodd"/></svg>
                         </div>
                         <div>{currentMessage}</div>
                     </div>

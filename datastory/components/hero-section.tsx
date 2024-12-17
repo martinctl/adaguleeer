@@ -1,36 +1,41 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { TwitchIcon } from 'lucide-react';
+import { motion } from "framer-motion";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-background py-20 sm:py-32">
-      <div className="section-container relative z-10">
+    <section className="relative overflow-hidden" style={{ height: "calc(100vh - 64px)" }}>
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 -z-10 w-full h-full object-cover"
+      >
+        <source src="/background_hero_page.mp4" type="video/mp4" />
+      </video>
+
+      {/* Centered Content */}
+      <div className="relative flex items-center justify-center h-full text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center"
         >
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10"
-          >
-            <TwitchIcon className="h-10 w-10 text-primary" />
-          </motion.div>
-          <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-6xl">
-            YouTube Gaming Trends
+          <h1 className="mb-5 text-4xl font-bold tracking-tight sm:text-6xl">
+            Gaming on YouTube
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Explore the evolving landscape of gaming content on YouTube through
-            interactive visualizations and real-time data analysis.
-          </p>
+          <h2 className="mb-12 text-3xl font-semibold tracking-tight sm:text-4xl">
+            Find the community of your dreams!
+          </h2>
+          <a href="#introduction">
+            <button className="px-6 py-3 text-lg font-bold text-white bg-primary rounded-lg hover:bg-red-900">
+              Start the adventure
+            </button>
+          </a>
         </motion.div>
       </div>
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(45%_40%_at_50%_60%,rgba(255,68,84,0.13),transparent)]" />
     </section>
   );
 }
