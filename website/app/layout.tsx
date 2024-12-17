@@ -1,6 +1,5 @@
 import { Theme } from '@radix-ui/themes';
 import { themeProps } from './theme-config';
-import { Navbar } from '@/components/navbar';
 import { Inter } from 'next/font/google';
 import '@radix-ui/themes/styles.css';
 import './globals.css';
@@ -22,9 +21,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
-      <body className="min-h-screen bg-background font-sans text-foreground">
+      <body>
         <Theme {...themeProps}>
-          <Navbar />
           <main>{children}</main>
         </Theme>
       </body>

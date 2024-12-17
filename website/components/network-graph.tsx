@@ -251,7 +251,7 @@ export function NetworkGraph () {
                         <div>{currentMessage}</div>
                     </div>
                 </div>
-                <div className="relative network-graph h-full w-full bg-[#171717] border border-[#333] rounded-lg">
+                <div className="relative network-graph h-full w-full ">
                     <ReactECharts
                         option={getOption()}
                         style={{ height: '100%', width: '100%' }}

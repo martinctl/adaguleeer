@@ -1,44 +1,45 @@
 'use client';
 
-import { GamepadIcon } from 'lucide-react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { Button, Flex } from '@radix-ui/themes';
-import * as NavigationMenu from '@radix-ui/react-navigation-menu';
+import * as NavigationMenu from "@radix-ui/react-navigation-menu";
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { GrGamepad } from "react-icons/gr";
+import Link from "next/link";
 
-export function Navbar() {
+interface NavbarProps {
+    currentSection: string;
+}
+
+export function Navbar({ currentSection }: NavbarProps) {
     return (
-        <motion.header
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            className="sticky top-0 z-50 border-b border-secondary bg-background/80 backdrop-blur-sm"
-        >
-            <NavigationMenu.Root>
-                <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-                    <Link href="/" className="flex items-center space-x-2">
-                        <GamepadIcon className="h-8 w-8 text-primary" />
-                        <span className="text-xl font-bold">Gaming Trends</span>
-                    </Link>
-                    <Flex gap="6" align="center">
-                        <NavigationMenu.Item>
-                            <Button variant="ghost" asChild>
-                                <Link href="#trends">Trends</Link>
-                            </Button>
-                        </NavigationMenu.Item>
-                        <NavigationMenu.Item>
-                            <Button variant="ghost" asChild>
-                                <Link href="#categories">Categories</Link>
-                            </Button>
-                        </NavigationMenu.Item>
-                        <NavigationMenu.Item>
-                            <Button variant="ghost" asChild>
-                                <Link href="#network">Network</Link>
-                            </Button>
-                        </NavigationMenu.Item>
-                    </Flex>
-                </nav>
-            </NavigationMenu.Root>
-        </motion.header>
+        <NavigationMenu.Root className="fixed top-2 left-1/2 transform -translate-x-1/2 w-5/6 h-12 0 px-5 z-50 flex justify-between items-center backdrop-blur-3xl border border-amber-100/10 rounded-full bg-slate-700/20 shadow-lg">
+            <GrGamepad/>
+            <NavigationMenu.Sub className="flex justify-center list-none space-x-4">
+                <NavigationMenu.Item className={`${currentSection == 'intro' ? "border-b border-slate-100" : ""} px-2 py-1`}>
+                    <NavigationMenu.Link
+                        className="NavigationMenuLink"
+                        href="#intro"
+                    >
+                        Intro
+                    </NavigationMenu.Link>
+                </NavigationMenu.Item>
+                <NavigationMenu.Item className={`${currentSection == 'top-games' ? "border-b border-slate-100" : ""} px-2 py-1`}>
+                    <NavigationMenu.Link
+                        className="NavigationMenuLink"
+                        href="#top-games"
+                    >
+                        Top Games
+                    </NavigationMenu.Link>
+                </NavigationMenu.Item>
+                <NavigationMenu.Item className={`${currentSection == 'network' ? "border-b border-slate-100" : ""} px-2 py-1`}>
+                    <NavigationMenu.Link
+                        className="NavigationMenuLink"
+                        href="#network"
+                    >
+                        Network
+                    </NavigationMenu.Link>
+                </NavigationMenu.Item>
+            </NavigationMenu.Sub>
+            <Link href="https://github.com/epfl-ada/ada-2024-project-padawan"><GitHubLogoIcon/></Link>
+        </NavigationMenu.Root>
     );
 }

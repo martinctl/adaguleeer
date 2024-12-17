@@ -21,7 +21,6 @@
     "echarts-for-react": "^3.0.2",
     "framer-motion": "^11.0.8",
     "gsap": "^3.12.5",
-    "lucide-react": "^0.468.0",
     "next": "^15.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
