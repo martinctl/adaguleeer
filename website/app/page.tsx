@@ -1,10 +1,11 @@
 'use client'
 
-import { Introduction } from '@/components/introduction';
-import { TopGames } from '@/components/top-games';
-import { NetworkGraph } from '@/components/network-graph';
-import { Navbar } from '@/components/navbar';
-import { WordCloud } from '@/components/word-cloud';
+import { Hero } from '@/components/sections/hero';
+import { Introduction } from '@/components/sections/introduction';
+import { TopGames } from '@/components/sections/top-games';
+import { NetworkGraph } from '@/components/sections/network-graph';
+import { Navbar } from '@/components/subs/navbar';
+import { WordCloud } from '@/components/sections/word-cloud';
 import { useState, useEffect } from 'react';
 import { Section } from '@radix-ui/themes';
 interface Section {
@@ -17,7 +18,6 @@ export default function Home() {
 
     const sections: Section[] = [
         { id: 'intro', label: 'Intro' },
-        { id: 'starting-insights', label: 'Starting Insights' },
         { id: 'word-cloud', label: 'Word Cloud' },
         { id: 'top-games', label: 'Top Games' },
         { id: 'network', label: 'Network' },
@@ -28,8 +28,13 @@ export default function Home() {
             const element = document.getElementById(section.id);
             if (element) {
                 const rect = element.getBoundingClientRect();
-                if (rect.top <= 100 && rect.bottom >= 0) {
+                if (rect.top <= 0 && rect.bottom >= 0) {
                     setCurrentSection(section.id);
+                }
+                else {
+                    if (currentSection === section.id) {
+                        setCurrentSection('');
+                    }
                 }
             }
         });
@@ -45,7 +50,8 @@ export default function Home() {
     return (
         <>
             <Navbar currentSection={currentSection} sections={sections} />
-            <Section id="intro" p="0" ><Introduction /></Section>
+            <Section id="hero" p="0" ><Hero /></Section>
+            <Section id="intro" p="3" ><Introduction /></Section>
             <Section id="word-cloud" size="3" ><WordCloud /></Section>
             <Section id="top-games" size="3" ><TopGames /></Section>
             <Section id="network" size="3" ><NetworkGraph /></Section>

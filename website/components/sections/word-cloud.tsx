@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import wordCloudData from "@/data/word_cloud.json";
@@ -18,10 +16,9 @@ export function WordCloud() {
         'rgb(0, 127, 192)'
     ]
 
-    const maskImage = new Image();
-    maskImage.src = maskImageSrc.src;
-
     useEffect(() => {
+        const maskImage = new Image();
+        maskImage.src = maskImageSrc.src;
         if (typeof window !== 'undefined') {
             import('echarts-wordcloud').then(() => {
                 const chartInstance = echarts.init(chartRef.current);

@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { GameStatistics } from './game-statistics';
+import { GameStatistics } from '../subs/game-statistics';
 
 
 interface Game {

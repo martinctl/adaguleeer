@@ -41,10 +41,10 @@ export function AnimatedPieChart({ data }: AnimatedPieChartProps) {
             series: [
                 {
                     type: 'pie',
-                    radius: '80%',
+                    radius: [50, 250],
                     center: ['50%', '50%'],
                     data: data,
-                    roseType: 'radius',
+                    roseType: "radius",
                     label: {
                         color: 'rgba(255, 255, 255, 0.5)'
                     },
@@ -53,16 +53,18 @@ export function AnimatedPieChart({ data }: AnimatedPieChartProps) {
                             color: 'rgba(255, 255, 255, 0.5)'
                         },
                         smooth: 0.2,
-                        length: 1,
-                        length2: 10
+                        length: 10,
+                        length2: 20
                     },
                     itemStyle: {
+                        borderRadius: 5,
                         color: '#E54D2E',
                         shadowBlur: 50,
                         shadowColor: 'rgba(0, 0, 0, 0.5)'
                     },
+                    animationEasing: 'elasticIn',
                     animationDelay: function (idx: number) {
-                        return Math.random() * 200;
+                        return idx * 200;
                     }
                 }
             ]
