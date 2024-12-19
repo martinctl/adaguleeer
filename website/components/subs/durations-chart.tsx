@@ -4,7 +4,7 @@ import { Flex, Box } from '@radix-ui/themes';
 
 
 interface DurationsChartProps {
-    xAxisData: string[];
+    xAxisData: number[];
     seriesData: number[];
 }
 

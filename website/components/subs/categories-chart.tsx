@@ -3,7 +3,7 @@ import * as echarts from 'echarts';
 import { Flex, Box } from '@radix-ui/themes';
 
 interface YouTubeCategory {
-    title: string;
+    name: string;
     value: number;
 }
 

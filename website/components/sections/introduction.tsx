@@ -9,6 +9,7 @@ import { DurationsChart } from '../subs/durations-chart';
 import categoriesData from "@/data/categories.json";
 import { QuizTab } from '../subs/quiz-tab';
 import durationsData from "@/data/video_durations.json";
+import { ScrollDown } from '../subs/scroll-down';
 
 
 export function Introduction() {
@@ -90,15 +91,18 @@ export function Introduction() {
                     {
                         showChart1 &&
                         (
-                            <p className={quizCompleted1 ? 'animate-fadeIn' : 'animate-fadeOut'}>
-                                The pie chart on your right highlights that gaming constitutes YouTube’s biggest category, accounting for
-                                nearly 19% of all videos posted on the platform. This represents a vast amount of content creators
-                                and viewers brought together by a shared passion, and one more reason to dive more in-depth into it.
-                                You may wonder how we get this information and whether it’s reliable. The data used to accompany you through
-                                this journey comes from a massive dataset called YouNiverse. It includes metadata from English-speaking
-                                YouTube from 2005 to 2019, uploaded by anonymous users. Each YouTube category contains its own world. Let’s
-                                explore the most fascinating one to discover its trends, protagonists, and secrets.
-                            </p>
+                            <div>
+                                <p className={quizCompleted1 ? 'animate-fadeIn' : 'animate-fadeOut'}>
+                                    The pie chart on your right highlights that gaming constitutes YouTube’s biggest category, accounting for
+                                    nearly 19% of all videos posted on the platform. This represents a vast amount of content creators
+                                    and viewers brought together by a shared passion, and one more reason to dive more in-depth into it.
+                                    You may wonder how we get this information and whether it’s reliable. The data used to accompany you through
+                                    this journey comes from a massive dataset called YouNiverse. It includes metadata from English-speaking
+                                    YouTube from 2005 to 2019, uploaded by anonymous users. Each YouTube category contains its own world. Let’s
+                                    explore the most fascinating one to discover its trends, protagonists, and secrets.
+                                </p>
+                                <ScrollDown />
+                            </div>
                         )
                     }
                 </div>
@@ -149,12 +153,15 @@ export function Introduction() {
                     {
                         showText2 &&
                         (
-                            <p className={quizCompleted2 ? 'animate-fadeIn' : 'animate-fadeOut'}>
-                                Indeed, this peak represents the minimum duration for more monetization control. This shows that gaming creators give
-                                importance to having more control over the ads displayed and the revenue generated, which seems pretty logical. this
-                                chart only shows videos under one hour, representing 92.6% of videos, as the tail-skewed distribution shows. Let's go
-                                further down.
-                            </p>
+                            <div>
+                                <p className={quizCompleted2 ? 'animate-fadeIn' : 'animate-fadeOut'}>
+                                    Indeed, this peak represents the minimum duration for more monetization control. This shows that gaming creators give
+                                    importance to having more control over the ads displayed and the revenue generated, which seems pretty logical. this
+                                    chart only shows videos under one hour, representing 92.6% of videos, as the tail-skewed distribution shows. Let's go
+                                    further down.
+                                </p>
+                                <ScrollDown />
+                            </div>
                         )
                     }
                     <DurationsChart xAxisData={xAxisData} seriesData={seriesData} />
