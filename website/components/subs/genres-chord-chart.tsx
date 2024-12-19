@@ -6,7 +6,7 @@ import data from '@/data/genres_data.json';
 export function GenresChordChart() {
     return (
         <div>
-            <div className="w-screen h-screen">
+            <div className="w-full h-screen">
                 <ResponsiveChord
                     data={data.data}
                     keys={data.keys}
@@ -48,8 +48,13 @@ export function GenresChordChart() {
                             ]
                         ]
                     }}
-                    colors={
-                        { scheme: 'tableau10' }
+                    colors={[
+                        '#E54D2E', // YouTube Red
+                        '#D3D3D3', // Light Grey
+                        '#FFFFFF', // White
+                        '#A9A9A9', // Dark Grey
+                        '#F8B7A0', // Light Red
+                    ]
                     }
                     legends={[
                         {
@@ -96,26 +101,25 @@ export function GenresChordChart() {
                 />
             </div>
             <div className="w-full text-center px-32 py-8 text-lg text-gray-300">
-                <p>
-                    Some genres regularly appear together, while others are rarely or never paired. This tells us a lot about 
-                    the potential connections between games and communities. Indeed, if you're passionate about Adventure games, 
-                    you will often find that these games are linked to genres like RPG, Shooter or Platform. Thus, as an
-                    Adventure gamer, you are likely to be part of a broad community that spans multiple genres, offering diverse
-                    experiences and interactions.
+                <p className="text-justify mb-4">
+                    Looking at the chord chart, we can observe that some genres regularly appear together, while others are rarely or never paired.
+                    This tells us about the potential connections between games and communities.
+                    For example, if you're passionate about Adventure games, you will often find that these games are linked to genres like RPG, Platform, or Shooter.
+                    Thus, as an Adventure gamer, you are likely to be part of a broad community that spans multiple genres, offering diverse experiences and interactions.
                 </p>
-                <br />
-                <p>
+                <p className="text-justify mb-4">
                     On the other hand, genres like Sport, Card & Board Games, and MOBA tend to stay within their own circles.
                     These genres are less likely to be paired with others, which means that players of these games may find themselves
                     more isolated, focusing on their specific niche.
+                    MOBA (Multiplayer Online Battle Arena) genre, despite hosting massive games like League of Legends or Dota 2, illustrates an intriguing case.
+                    While these games still attract vast communities, their genre probably limits them compared to more frequent crossovers.
+                    This underscores how genre clustering can restrict a game’s reach.
                 </p>
-                <br />
-                <p>
-                    This chord reveals how your choice of game can shape the kind of community you belong to. Depending on the genre 
-                    you prefer, you may find it easier to connect with other players from diverse backgrounds or, conversely, become
-                    more deeply immersed in a specific community. Feel free to review it further, Explorer, and see which genres 
-                    align with your interests. This will give you an idea of whether you’re ready to expand your horizons or if you 
-                    would rather stay within a closer circle.
+                <p className="text-justify mb-4">
+                    This chord chart reveals how your choice of game can shape the kind of community you belong to.
+                    Depending on the genre you prefer, you may find it easier to connect with other players from diverse backgrounds or, conversely, become more deeply immersed in a specific community.
+                    Feel free to review this chord chart further and see which genres align with your interests.
+                    This will give you an idea of whether you’re ready to expand your horizons or if you would rather stay within a closer circle.
                 </p>
             </div>
         </div>

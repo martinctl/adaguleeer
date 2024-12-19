@@ -81,5 +81,5 @@ export function WordCloud({ data }: WordCloudProps) {
         }
     }, []);
 
-    return <div ref={chartRef} className="w-screen h-screen" />;
+    return <div ref={chartRef} className="w-[99vw] h-screen" />;
 };

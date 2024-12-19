@@ -5,6 +5,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useRef, useState } from "react";
 import { QuizTab } from "../subs/quiz-tab";
+import { ScrollDown } from "../subs/scroll-down";
+import { Button } from "@radix-ui/themes";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 export function Tags() {
 
@@ -19,6 +22,16 @@ export function Tags() {
             }, 1000);
         }, 500);
     };
+
+    const quizRef = useRef<{ resetQuiz: () => void } | null>(null);
+
+    const handleReset = () => {
+        setShowWordCloud(false);
+        setQuizCompleted(false);
+        if (quizRef.current) {
+            quizRef.current.resetQuiz();
+        }
+    }
 
     gsap.registerPlugin(useGSAP, ScrollTrigger);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -40,9 +53,9 @@ export function Tags() {
                 anticipatePin: 1
             }
         })
-            .to(slide, {
-                opacity: 0,
-            });
+        .to(slide, {
+            opacity: 0,
+        });
 
 
         return () => {
@@ -57,19 +70,23 @@ export function Tags() {
                 {
                     !showWordCloud &&
                     (
-                        <div className={`h-screen flex justify-around items-center px-10 ${!quizCompleted ? 'animate-fadeIn' : 'animate-fadeOut'}`}>
-                            <div className="flex flex-col w-7/12 items-center justify-center">
-                                <h1>Tags</h1>
-                                <p>
-                                    Tags are a way to categorize and organize content. They are used to help users find
-                                    content that is relevant to them. Tags can be used to describe the content of a post,
-                                    article, or video. They can also be used to help users find content that is related
-                                    to a specific topic or theme.
+                        <div className={`h-screen flex justify-around items-center px-10 ${quizCompleted ? 'animate-fadeOut' : 'animate-fadeIn'}`}>
+                            <div className="flex flex-col w-5/12 space-y-5 pl-10">
+                                <h4 className="font-bold text-xl">Tags Overview</h4>
+                                <p className="text-justify">                            
+                                    Another point to study the evolution of communities and identify emerging patterns is through tags. 
+                                    Tags are a double-edged sword. 
+                                    They help viewers discover videos on their topics of interest or receive recommendations aligned with their preferences. 
+                                    However, some creators tend to overuse them to attract more views, leading to noisy data. 
+                                    Despite this apparent drawback, tags are essential for assigning every video to a specific game. 
+                                    If a game name is fully contained in a video title or its associated tags, we can link the video to that game, which is crucial for the core of our analysis.                                   
+                                    Let’s have a look at the most used ones.
                                 </p>
                             </div>
-                            <div className="w-5/12 flex flex-col items-center justify-center">
+                            <div className="pr-10">
                             <QuizTab
-                                question="What is the most used tag ?"
+                                ref={quizRef}
+                                question="What do you think is the most frequenly used tag under gaming videos ?"
                                 answers={["funny", "reaction", "pc", "gameplay"]}
                                 correctAnswerIndex={3}
                                 onSubmitAction={handleQuizSubmit}
@@ -78,12 +95,23 @@ export function Tags() {
                         </div>
                     )
                 }
-                {
+                {/* {
                     showWordCloud && <WordCloud data={wordCloudData} />
-                }
-                {/* <div  className={`${showWordCloud ? '' : 'hidden'}`}>
+                } */}
+                <div  className={`${showWordCloud ? '' : 'hidden'} ${quizCompleted ? 'animate-fadeIn' : 'animate-fadeOut'}`}>
                     <WordCloud data={wordCloudData} />
-                </div> */}
+                    <ScrollDown />
+                </div>
+                {
+                        showWordCloud &&
+                        (
+                            <div className="absolute top-10 right-16">
+                                <Button onClick={handleReset} size="3" variant="soft">
+                                    <ReloadIcon />
+                                </Button>
+                            </div>
+                        )
+                }
             </div>
         </section>
     )
