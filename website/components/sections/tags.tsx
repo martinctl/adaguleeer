@@ -6,6 +6,8 @@ import { useGSAP } from '@gsap/react';
 import { useRef, useState } from "react";
 import { QuizTab } from "../subs/quiz-tab";
 import { ScrollDown } from "../subs/scroll-down";
+import { Button } from "@radix-ui/themes";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 export function Tags() {
 
@@ -20,6 +22,16 @@ export function Tags() {
             }, 1000);
         }, 500);
     };
+
+    const quizRef = useRef<{ resetQuiz: () => void } | null>(null);
+
+    const handleReset = () => {
+        setShowWordCloud(false);
+        setQuizCompleted(false);
+        if (quizRef.current) {
+            quizRef.current.resetQuiz();
+        }
+    }
 
     gsap.registerPlugin(useGSAP, ScrollTrigger);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -73,6 +85,7 @@ export function Tags() {
                             </div>
                             <div className="pr-10">
                             <QuizTab
+                                ref={quizRef}
                                 question="What do you think is the most frequenly used tag under gaming videos ?"
                                 answers={["funny", "reaction", "pc", "gameplay"]}
                                 correctAnswerIndex={3}
@@ -89,6 +102,16 @@ export function Tags() {
                     <WordCloud data={wordCloudData} />
                     <ScrollDown />
                 </div>
+                {
+                        showWordCloud &&
+                        (
+                            <div className="absolute top-10 right-16">
+                                <Button onClick={handleReset} size="3" variant="soft">
+                                    <ReloadIcon />
+                                </Button>
+                            </div>
+                        )
+                }
             </div>
         </section>
     )

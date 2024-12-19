@@ -17,12 +17,21 @@ import { ScrollDown } from '../subs/scroll-down';
 export function Introduction() {
 
     const quizRef1 = useRef<{ resetQuiz: () => void } | null>(null);
+    const quizRef2 = useRef<{ resetQuiz: () => void } | null>(null);
 
-    const handleReset = () => {
+    const handleReset1 = () => {
         setQuizCompleted1(false);
         setShowChart1(false);
         if (quizRef1.current) {
             quizRef1.current.resetQuiz();
+        }
+    }
+
+    const handleReset2 = () => {
+        setQuizCompleted2(false);
+        setShowText2(false);
+        if (quizRef2.current) {
+            quizRef2.current.resetQuiz();
         }
     }
 
@@ -147,7 +156,7 @@ export function Introduction() {
                     showChart1 &&
                     (
                         <div className="absolute top-10 right-10">
-                            <Button onClick={handleReset} size="3" variant="soft">
+                            <Button onClick={handleReset1} size="3" variant="soft">
                                 <ReloadIcon />
                             </Button>
                         </div>
@@ -161,6 +170,7 @@ export function Introduction() {
                     (
                         <div className={`w-5/12 flex flex-col items-center justify-center ${quizCompleted2 ? 'animate-fadeOut' : 'animate-fadeIn'}`}>
                             <QuizTab
+                                ref={quizRef2}
                                 question="What does the 10-minute peak represent? ?"
                                 answers={[
                                     "Min. duration for algorithm recommendation",
@@ -219,8 +229,18 @@ export function Introduction() {
                         )
                     }
                     <div className="w-full">
-                    <DurationsChart xAxisData={xAxisData} seriesData={seriesData} />
+                        <DurationsChart xAxisData={xAxisData} seriesData={seriesData} />
                     </div>
+                    {
+                        showText2 &&
+                        (
+                            <div className="absolute top-10 right-16">
+                                <Button onClick={handleReset2} size="3" variant="soft">
+                                    <ReloadIcon />
+                                </Button>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </section>
