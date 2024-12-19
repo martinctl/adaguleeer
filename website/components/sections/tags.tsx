@@ -40,9 +40,9 @@ export function Tags() {
                 anticipatePin: 1
             }
         })
-            .to(slide, {
-                opacity: 0,
-            });
+        .to(slide, {
+            opacity: 0,
+        });
 
 
         return () => {
@@ -57,19 +57,20 @@ export function Tags() {
                 {
                     !showWordCloud &&
                     (
-                        <div className={`h-screen flex justify-around items-center px-10 ${!quizCompleted ? 'animate-fadeIn' : 'animate-fadeOut'}`}>
-                            <div className="flex flex-col w-7/12 items-center justify-center">
-                                <h1>Tags</h1>
+                        <div className={`h-screen flex justify-around items-center ${!quizCompleted ? 'animate-fadeIn' : 'animate-fadeOut'}`}>
+                            <div className="flex flex-col w-5/12 space-y-5 pl-10">
+                                <h4 className="font-bold text-xl">Tags</h4>
                                 <p>
-                                    Tags are a way to categorize and organize content. They are used to help users find
-                                    content that is relevant to them. Tags can be used to describe the content of a post,
-                                    article, or video. They can also be used to help users find content that is related
-                                    to a specific topic or theme.
+                                    One major point to study the evolution of communities and identify emerging patterns is 
+                                    through tags. They are a double-edged swords : they can help viewers find videos on their 
+                                    topics of interest or discover new content by being recommended videos based on their preferences. 
+                                    However, some creators tend to overuse them to attract more views, leading to noisy data. Let’s 
+                                    have a look at the most used ones. But you start to know the drill, right ?
                                 </p>
                             </div>
-                            <div className="w-5/12 flex flex-col items-center justify-center">
+                            <div className="pr-10">
                             <QuizTab
-                                question="What is the most used tag ?"
+                                question="What do you think is the most frequenly used tag under gaming videos ?"
                                 answers={["funny", "reaction", "pc", "gameplay"]}
                                 correctAnswerIndex={3}
                                 onSubmitAction={handleQuizSubmit}

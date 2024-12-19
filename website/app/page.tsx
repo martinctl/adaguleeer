@@ -53,11 +53,10 @@ export default function Home() {
         <>
             <Navbar currentSection={currentSection} sections={sections} />
             <Section id="hero" p="0" ><Hero /></Section>
-            <Section id="intro" p="3" ><Introduction /></Section>
-            <Section id="tags" size="3" ><Tags /></Section>
-            <Section id="top-games" size="3" ><TopGames /></Section>
-            <Section id="genres" size="3" ><Genres /></Section>
-            <Section id="network" size="3" ><NetworkGraph /></Section>
+            <Section id="intro"><Introduction /></Section>
+            <Section id="tags"><Tags /></Section>
+            <Section id="top-games"><TopGames /></Section>
+            <Section id="network"><NetworkGraph /></Section>
         </>
     );
 }
