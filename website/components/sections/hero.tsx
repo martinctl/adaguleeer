@@ -55,7 +55,7 @@ export function Hero() {
                     <Text weight="medium" className="mb-12 font-semibold text-4xl">
                         Find the community of your dreams!
                     </Text>
-                    <Link href="#introduction">
+                    <Link href="#intro">
                         <Button size="4" variant="classic">
                             <RocketIcon />
                             Start the adventure

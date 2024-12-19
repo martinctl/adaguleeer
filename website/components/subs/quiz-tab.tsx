@@ -31,9 +31,7 @@ export function QuizTab({
 
     const handleSubmit = () => {
         setSubmitted(true);
-        setTimeout(() => {
-            onSubmitAction();
-        }, 1000);
+        onSubmitAction();
     };
 
     return (

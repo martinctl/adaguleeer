@@ -5,7 +5,7 @@ import { Introduction } from '@/components/sections/introduction';
 import { TopGames } from '@/components/sections/top-games';
 import { NetworkGraph } from '@/components/sections/network-graph';
 import { Navbar } from '@/components/subs/navbar';
-import { WordCloud } from '@/components/sections/word-cloud';
+import { Tags } from '@/components/sections/tags';
 import { useState, useEffect } from 'react';
 import { Section } from '@radix-ui/themes';
 interface Section {
@@ -18,7 +18,7 @@ export default function Home() {
 
     const sections: Section[] = [
         { id: 'intro', label: 'Intro' },
-        { id: 'word-cloud', label: 'Word Cloud' },
+        { id: 'tags', label: 'Tags' },
         { id: 'top-games', label: 'Top Games' },
         { id: 'network', label: 'Network' },
     ];
@@ -52,7 +52,7 @@ export default function Home() {
             <Navbar currentSection={currentSection} sections={sections} />
             <Section id="hero" p="0" ><Hero /></Section>
             <Section id="intro" p="3" ><Introduction /></Section>
-            <Section id="word-cloud" size="3" ><WordCloud /></Section>
+            <Section id="tags" size="3" ><Tags /></Section>
             <Section id="top-games" size="3" ><TopGames /></Section>
             <Section id="network" size="3" ><NetworkGraph /></Section>
         </>
