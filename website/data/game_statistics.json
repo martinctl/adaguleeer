@@ -1,0 +1,112 @@
+{
+  "games": {
+    "Grand Theft Auto V": {
+      "stats": [
+        { "label": "Genre", "value": "Action" },
+        { "label": "Studio", "value": "Rockstar" },
+        { "label": "Videos Published", "value": 2450 },
+        { "label": "Channels", "value": 156 },
+        { "label": "Subscribers Median", "value": 25000 },
+        { "label": "Percentage of gaming videos", "value": "15%" }
+      ],
+      "likesViewsData": {
+        "months": ["January", "February", "March", "April", "May", "June"],
+        "values": [4500, 5200, 3800, 9000, 7600, 8500]
+      },
+      "videoDurationData": {
+        "durations": ["0-5 min", "5-10 min", "10-20 min", "20-30 min", "30+ min"],
+        "values": [150, 280, 420, 180, 70]
+      }
+    },
+    "League of Legends": {
+      "stats": [
+        { "label": "Genre", "value": "Strategy" },
+        { "label": "Studio", "value": "Riot Games" },
+        { "label": "Videos Published", "value": 3200 },
+        { "label": "Channels", "value": 245 },
+        { "label": "Subscribers Median", "value": 35000 },
+        { "label": "Percentage of gaming videos", "value": "18%" }
+      ],
+      "likesViewsData": {
+        "months": ["January", "February", "March", "April", "May", "June"],
+        "values": [6000, 7500, 5800, 12000, 9600, 11000]
+      },
+      "videoDurationData": {
+        "durations": ["0-5 min", "5-10 min", "10-20 min", "20-30 min", "30+ min"],
+        "values": [200, 450, 380, 220, 150]
+      }
+    },
+    "Roblox": {
+      "stats": [
+        { "label": "Genre", "value": "Sandbox" },
+        { "label": "Studio", "value": "Roblox Corporation" },
+        { "label": "Videos Published", "value": 4800 },
+        { "label": "Channels", "value": 320 },
+        { "label": "Subscribers Median", "value": 45000 },
+        { "label": "Percentage of gaming videos", "value": "22%" }
+      ],
+      "likesViewsData": {
+        "months": ["January", "February", "March", "April", "May", "June"],
+        "values": [8000, 9500, 7800, 15000, 12600, 14000]
+      },
+      "videoDurationData": {
+        "durations": ["0-5 min", "5-10 min", "10-20 min", "20-30 min", "30+ min"],
+        "values": [400, 550, 280, 120, 50]
+      }
+    },
+    "Call of Duty": {
+      "stats": [
+        { "label": "Genre", "value": "FPS" },
+        { "label": "Studio", "value": "Activision" },
+        { "label": "Videos Published", "value": 2800 },
+        { "label": "Channels", "value": 178 },
+        { "label": "Subscribers Median", "value": 28000 },
+        { "label": "Percentage of gaming videos", "value": "16%" }
+      ],
+      "likesViewsData": {
+        "months": ["January", "February", "March", "April", "May", "June"],
+        "values": [5000, 6500, 4800, 10000, 8600, 9500]
+      },
+      "videoDurationData": {
+        "durations": ["0-5 min", "5-10 min", "10-20 min", "20-30 min", "30+ min"],
+        "values": [180, 320, 450, 200, 90]
+      }
+    },
+    "Fortnite": {
+      "stats": [
+        { "label": "Genre", "value": "Battle Royale" },
+        { "label": "Studio", "value": "Epic Games" },
+        { "label": "Videos Published", "value": 5200 },
+        { "label": "Channels", "value": 420 },
+        { "label": "Subscribers Median", "value": 52000 },
+        { "label": "Percentage of gaming videos", "value": "25%" }
+      ],
+      "likesViewsData": {
+        "months": ["January", "February", "March", "April", "May", "June"],
+        "values": [9000, 11500, 8800, 18000, 15600, 17000]
+      },
+      "videoDurationData": {
+        "durations": ["0-5 min", "5-10 min", "10-20 min", "20-30 min", "30+ min"],
+        "values": [450, 600, 320, 150, 80]
+      }
+    },
+    "Minecraft": {
+      "stats": [
+        { "label": "Genre", "value": "Sandbox" },
+        { "label": "Studio", "value": "Mojang" },
+        { "label": "Videos Published", "value": 6100 },
+        { "label": "Channels", "value": 520 },
+        { "label": "Subscribers Median", "value": 58000 },
+        { "label": "Percentage of gaming videos", "value": "28%" }
+      ],
+      "likesViewsData": {
+        "months": ["January", "February", "March", "April", "May", "June"],
+        "values": [10000, 12500, 9800, 20000, 17600, 19000]
+      },
+      "videoDurationData": {
+        "durations": ["0-5 min", "5-10 min", "10-20 min", "20-30 min", "30+ min"],
+        "values": [500, 650, 400, 180, 100]
+      }
+    }
+  }
+} 
