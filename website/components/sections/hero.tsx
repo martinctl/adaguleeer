@@ -27,9 +27,9 @@ export function Hero() {
                 pinSpacing: false
             }
         })
-        .to("#container", { 
-            opacity: 0,    
-        });
+            .to("#container", {
+                opacity: 0,
+            });
 
 
         return () => {
@@ -49,18 +49,25 @@ export function Hero() {
             />
             <div className="relative flex flex-col items-center justify-center h-full text-center">
                 <Flex direction="column" gap="2">
-                    <Text weight="bold" className="mb-5 font-sans text-6xl">
+                    <Text weight="bold" className="mb-2 font-sans text-6xl">
                         Gaming on YouTube
                     </Text>
-                    <Text weight="medium" className="mb-12 font-semibold text-4xl">
+                    <Text weight="medium" className="mb-8 font-semibold text-4xl">
                         Find the community of your dreams!
                     </Text>
-                    <Link href="#intro">
-                        <Button size="4" variant="classic">
-                            <RocketIcon />
-                            Start the adventure
-                        </Button>
-                    </Link>
+                    <Text weight="medium" className="font-semibold text-lg leading-5 max-w-4xl mx-auto text-center">
+                        Do you love watching videos, with gaming as one of your main interests?</Text>
+                    <Text weight="medium" className="font-semibold text-lg">
+                        Would you like to engage more on what you’re passionate about, but feel overwhelmed by the sheer amount of diverse content?</Text>
+                    <Text weight="medium" className="font-semibold text-lg">Relax, you are in the right place. Hop on board, and let’s discover helpful insights to guide you toward the content and community of your dreams!</Text>
+                    <div className="mt-6">
+                        <Link href="#intro">
+                            <Button size="4" variant="classic">
+                                <RocketIcon />
+                                Start the adventure
+                            </Button>
+                        </Link>
+                    </div>
                 </Flex>
                 <ScrollDown />
             </div>

@@ -58,13 +58,16 @@ export function Tags() {
                     !showWordCloud &&
                     (
                         <div className={`h-screen flex justify-around items-center px-10 ${!quizCompleted ? 'animate-fadeIn' : 'animate-fadeOut'}`}>
-                            <div className="flex flex-col w-7/12 items-center justify-center">
-                                <h1>Tags</h1>
-                                <p>
-                                    Tags are a way to categorize and organize content. They are used to help users find
-                                    content that is relevant to them. Tags can be used to describe the content of a post,
-                                    article, or video. They can also be used to help users find content that is related
-                                    to a specific topic or theme.
+                            <div className="flex flex-col w-7/12 items-start justify-center">
+                                <h4 className="font-bold text-xl">Tags Overview</h4>
+                                <p className="text-justify">                            
+                                    Another point to study the evolution of communities and identify emerging patterns is through tags. 
+                                    Tags are a double-edged sword. 
+                                    They help viewers discover videos on their topics of interest or receive recommendations aligned with their preferences. 
+                                    However, some creators tend to overuse them to attract more views, leading to noisy data. 
+                                    Despite this apparent drawback, tags are essential for assigning every video to a specific game. 
+                                    If a game name is fully contained in a video title or its associated tags, we can link the video to that game, which is crucial for the core of our analysis.                                   
+                                    Let’s have a look at the most used ones.
                                 </p>
                             </div>
                             <div className="w-5/12 flex flex-col items-center justify-center">
