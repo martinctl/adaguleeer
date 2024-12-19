@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useRef, useState } from "react";
 import { QuizTab } from "../subs/quiz-tab";
+import { ScrollDown } from "../subs/scroll-down";
 
 export function Tags() {
 
@@ -57,15 +58,17 @@ export function Tags() {
                 {
                     !showWordCloud &&
                     (
-                        <div className={`h-screen flex justify-around items-center ${quizCompleted ? 'animate-fadeOut' : 'animate-fadeIn'}`}>
+                        <div className={`h-screen flex justify-around items-center px-10 ${quizCompleted ? 'animate-fadeOut' : 'animate-fadeIn'}`}>
                             <div className="flex flex-col w-5/12 space-y-5 pl-10">
-                                <h4 className="font-bold text-xl">Tags</h4>
-                                <p>
-                                    One major point to study the evolution of communities and identify emerging patterns is 
-                                    through tags. They are a double-edged swords : they can help viewers find videos on their 
-                                    topics of interest or discover new content by being recommended videos based on their preferences. 
-                                    However, some creators tend to overuse them to attract more views, leading to noisy data. Let’s 
-                                    have a look at the most used ones. But you start to know the drill, right ?
+                                <h4 className="font-bold text-xl">Tags Overview</h4>
+                                <p className="text-justify">                            
+                                    Another point to study the evolution of communities and identify emerging patterns is through tags. 
+                                    Tags are a double-edged sword. 
+                                    They help viewers discover videos on their topics of interest or receive recommendations aligned with their preferences. 
+                                    However, some creators tend to overuse them to attract more views, leading to noisy data. 
+                                    Despite this apparent drawback, tags are essential for assigning every video to a specific game. 
+                                    If a game name is fully contained in a video title or its associated tags, we can link the video to that game, which is crucial for the core of our analysis.                                   
+                                    Let’s have a look at the most used ones.
                                 </p>
                             </div>
                             <div className="pr-10">
@@ -84,6 +87,7 @@ export function Tags() {
                 } */}
                 <div  className={`${showWordCloud ? '' : 'hidden'} ${quizCompleted ? 'animate-fadeIn' : 'animate-fadeOut'}`}>
                     <WordCloud data={wordCloudData} />
+                    <ScrollDown />
                 </div>
             </div>
         </section>

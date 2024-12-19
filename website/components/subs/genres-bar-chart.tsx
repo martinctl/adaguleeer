@@ -54,7 +54,11 @@ export function GenresBarChart() {
                 }
             ],
             grid: {
-                bottom: '20%'
+                left: '5%',
+                right: '5%',
+                top: '5%',
+                bottom: '5%',
+                containLabel: true
             },
             tooltip: {
                 trigger: 'axis',
@@ -74,6 +78,6 @@ export function GenresBarChart() {
     }, []);
 
     return (
-        <div id="genre" className="w-screen h-[20vh]"></div>
+        <div id="genre" className="w-full h-screen"></div>
     );
 };
