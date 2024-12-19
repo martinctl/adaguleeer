@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, forwardRef, useImperativeHandle } from "react";
 import { Card, Text, Button, Flex, Box } from "@radix-ui/themes";
 import {
     CheckCircledIcon,
@@ -14,12 +14,7 @@ interface QuizTabProps {
     onSubmitAction: () => void;
 }
 
-export function QuizTab({
-    question,
-    answers,
-    correctAnswerIndex,
-    onSubmitAction,
-}: QuizTabProps) {
+export const QuizTab = forwardRef((props: QuizTabProps, ref) => {
     const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
     const [submitted, setSubmitted] = useState(false);
 
@@ -29,9 +24,16 @@ export function QuizTab({
         }
     };
 
+    useImperativeHandle(ref, () => ({
+        resetQuiz() {
+            setSelectedAnswer(null);
+            setSubmitted(false);
+        }
+    }));
+
     const handleSubmit = () => {
         setSubmitted(true);
-        onSubmitAction();
+        props.onSubmitAction();
     };
 
     return (
@@ -46,11 +48,11 @@ export function QuizTab({
                     </Flex>
 
                     <Text size="3" color="gray">
-                        {question}
+                        {props.question}
                     </Text>
 
                     <Flex direction="column" gap="2">
-                        {answers.map((answer, index) => (
+                        {props.answers.map((answer, index) => (
                             <Box
                                 key={index}
                                 onClick={() => handleAnswerSelect(index)}
@@ -62,13 +64,13 @@ export function QuizTab({
                                         : "border-slate-100/10"
                                     }
                                             ${submitted &&
-                                        index === correctAnswerIndex
+                                        index === props.correctAnswerIndex
                                         ? "border-green-500 bg-green-500/10"
                                         : ""
                                     }
                                             ${submitted &&
                                         index === selectedAnswer &&
-                                        index !== correctAnswerIndex
+                                        index !== props.correctAnswerIndex
                                         ? "border-red-500 bg-red-500/10"
                                         : ""
                                     }
@@ -80,12 +82,12 @@ export function QuizTab({
                             >
                                 <Flex justify="between" align="center">
                                     <Text>{answer}</Text>
-                                    {submitted && index === correctAnswerIndex && (
+                                    {submitted && index === props.correctAnswerIndex && (
                                         <CheckCircledIcon className="text-green-500" />
                                     )}
                                     {submitted &&
                                         index === selectedAnswer &&
-                                        index !== correctAnswerIndex && (
+                                        index !== props.correctAnswerIndex && (
                                             <CrossCircledIcon className="text-red-500" />
                                         )}
                                 </Flex>
@@ -104,4 +106,4 @@ export function QuizTab({
             </Card>
         </Flex>
     );
-}
+});

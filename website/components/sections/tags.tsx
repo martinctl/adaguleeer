@@ -79,12 +79,12 @@ export function Tags() {
                         </div>
                     )
                 }
-                {
+                {/* {
                     showWordCloud && <WordCloud data={wordCloudData} />
-                }
-                {/* <div  className={`${showWordCloud ? '' : 'hidden'}`}>
+                } */}
+                <div  className={`${showWordCloud ? '' : 'hidden'}`}>
                     <WordCloud data={wordCloudData} />
-                </div> */}
+                </div>
             </div>
         </section>
     )

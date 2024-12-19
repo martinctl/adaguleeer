@@ -4,7 +4,6 @@ import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { GrGamepad } from "react-icons/gr";
 import Link from "next/link";
-import { Familjen_Grotesk } from "next/font/google";
 
 interface Section {
     id: string;

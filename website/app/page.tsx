@@ -5,7 +5,7 @@ import { Introduction } from '@/components/sections/introduction';
 import { TopGames } from '@/components/sections/top-games';
 import { Genres } from '@/components/sections/genres';
 import { NetworkGraph } from '@/components/sections/network-graph';
-import { Navbar } from '@/components/subs/navbar';
+import { Navbar } from '@/components/sections/navbar';
 import { Tags } from '@/components/sections/tags';
 import { useState, useEffect } from 'react';
 import { Section } from '@radix-ui/themes';
@@ -56,6 +56,7 @@ export default function Home() {
             <Section id="intro"><Introduction /></Section>
             <Section id="tags"><Tags /></Section>
             <Section id="top-games"><TopGames /></Section>
+            <Section id="genres"><Genres /></Section>
             <Section id="network"><NetworkGraph /></Section>
         </>
     );

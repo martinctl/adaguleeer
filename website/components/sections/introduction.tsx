@@ -9,9 +9,21 @@ import { DurationsChart } from '../subs/durations-chart';
 import categoriesData from "@/data/categories.json";
 import { QuizTab } from '../subs/quiz-tab';
 import durationsData from "@/data/video_durations.json";
+import { Button } from '@radix-ui/themes';
+import { ReloadIcon } from '@radix-ui/react-icons';
 
 
 export function Introduction() {
+
+    const quizRef1 = useRef<{ resetQuiz: () => void } | null>(null);
+
+    const handleReset = () => {
+        setQuizCompleted1(false);
+        setShowChart1(false);
+        if (quizRef1.current) {
+            quizRef1.current.resetQuiz();
+        }
+    }
 
     const [showChart1, setShowChart1] = useState(false);
     const [quizCompleted1, setQuizCompleted1] = useState(false);
@@ -116,8 +128,24 @@ export function Introduction() {
                     )
                 }
                 {
-                    showChart1 && <div className="w-7/12"><CategoriesChart data={categoriesData} /></div>
+                    showChart1 &&
+                    (
+                        <div className="w-7/12">
+                            <CategoriesChart data={categoriesData} />
+                        </div>
+                    )
                 }
+                {
+                    showChart1 &&
+                    (
+                        <div className="absolute top-10 right-10">
+                            <Button onClick={handleReset} size="3" variant="soft">
+                                <ReloadIcon />
+                            </Button>
+                        </div>
+                    )
+                }
+
             </div>
             <div className="slide flex justify-around items-center px-10 h-screen">
                 <div className="w-5/12 flex flex-col items-center justify-center">
