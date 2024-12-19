@@ -57,7 +57,7 @@ export function Tags() {
                 {
                     !showWordCloud &&
                     (
-                        <div className={`h-screen flex justify-around items-center ${!quizCompleted ? 'animate-fadeIn' : 'animate-fadeOut'}`}>
+                        <div className={`h-screen flex justify-around items-center ${quizCompleted ? 'animate-fadeOut' : 'animate-fadeIn'}`}>
                             <div className="flex flex-col w-5/12 space-y-5 pl-10">
                                 <h4 className="font-bold text-xl">Tags</h4>
                                 <p>
@@ -82,7 +82,7 @@ export function Tags() {
                 {/* {
                     showWordCloud && <WordCloud data={wordCloudData} />
                 } */}
-                <div  className={`${showWordCloud ? '' : 'hidden'}`}>
+                <div  className={`${showWordCloud ? '' : 'hidden'} ${quizCompleted ? 'animate-fadeIn' : 'animate-fadeOut'}`}>
                     <WordCloud data={wordCloudData} />
                 </div>
             </div>

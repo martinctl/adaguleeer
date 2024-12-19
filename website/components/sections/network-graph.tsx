@@ -18,13 +18,15 @@ type Highlight = {
 };
 
 const highlights: Highlight[] = [
-    { nodeIndices: [-1], zoom: 1, message: "Here is a network of games linked by how many users made a comment on both games" },
-    { nodeIndices: [1], zoom: 1.5, message: "First we can see that the most important node is Minecraft Enim mollit qui cupidatat enim consequat in non qui. Id ut laborum sunt incididunt. Consequat ad Lorem dolor ipsum adipisicing elit do irure velit eiusmod magna voluptate. Officia sunt minim veniam adipisicing minim non duis pariatur ipsum. Exercitation eiusmod ut veniam et laboris enim sint esse voluptate aliqua velit dolore consequat. Aute proident do duis officia quis anim magna esse veniam duis. Ut veniam Lorem veniam nostrud velit ut laborum ad sint." },
-    { nodeIndices: [0], zoom: 2, message: "It is connected with Fortnite" },
-    { nodeIndices: [2], zoom: 2, message: "Other important nodes" },
-    { nodeIndices: [37, 35, 36, 45, 48, 49], zoom: 2, message: "And other nodes" },
-    { nodeIndices: [117, 118], zoom: 3, message: "These nodes represent..." },
+    { nodeIndices: [1], zoom: 3, message: "The following graph illustrates the connections between games based on the overlap of their viewers. While games of the same genre may cluster together, popularity is also expected to play a significant role in these interactions. As we can see, Minecraft occupies a central position in the graph, strongly connected to a variety of games, highlighting its universal appeal and cross-genre influence." },
+    { nodeIndices: [0], zoom: 3, message: "Fortnite appears as another highly connected node in the graph, bridging communities across different genres, including competitive shooters, and casual multiplayer games. Its position reflects its popularity and its ability to attract a diverse audience, forming connections with games appealing to competitive and social players alike." },
+    { nodeIndices: [37, 35, 36, 45, 48, 49], zoom: 2.5, message: "Now, let’s zoom out to the FIFA community. It’s kind of doing its own thing, sitting on the edge of the graph. But there’s an interesting twist: FIFA has this strong link to Rocket League." },
+    { nodeIndices: [29, 37, 35, 36, 45, 48, 49], zoom: 2.5, message: "That connection really makes sense, given Rocket League’s mix of sports and competition, which FIFA players can totally relate to." },
+    { nodeIndices: [59], zoom: 3, message: "Here’s a fun cluster to look at! Mario Kart 8 is right in the middle of a group of Nintendo classics. You’ve got other Mario games and some beloved Nintendo exclusives all huddled together. It really captures the loyalty and love that Nintendo fans have for these titles."},
+    { nodeIndices: [117, 118], zoom: 3, message: "Finally, let’s check out the Pokémon games. They’re off in their own little world, completely disconnected from the rest of the graph. And honestly, that fits perfectly—Pokémon has such a dedicated, standalone fanbase that it doesn’t really need to connect with other gaming communities." },
 ];
+
+const lastHighlightMessage = "Now it’s your turn! You can freely explore the graph, zoom in, and move around to discover connections between games. Try finding your favorite game and see which communities it’s linked to—you might be surprised by some of the overlaps and clusters you uncover!";
 
 type NetworkType = 'games' | 'channels';
 
@@ -62,17 +64,19 @@ export function NetworkGraph () {
                         handleHighlight(echartsInstance, highlight);
                     }
                     // Animate message change without CSS transitions
-                    gsap.to(messageRef.current, {
-                        opacity: 0,
-                        duration: 0.5,
-                        onComplete: () => {
-                            setCurrentMessage(highlight.message);
-                            gsap.to(messageRef.current, {
-                                opacity: 1,
-                                duration: 0.5
-                            });
-                        }
-                    });
+                    if (index !== 0) {
+                        gsap.to(messageRef.current, {
+                            opacity: 0,
+                            duration: 0.5,
+                            onComplete: () => {
+                                setCurrentMessage(highlight.message);
+                                gsap.to(messageRef.current, {
+                                    opacity: 1,
+                                    duration: 0.5
+                                });
+                                }
+                        });
+                    }
                 },
                 onEnterBack: () => {
                     if (echartsInstance) {
@@ -107,17 +111,27 @@ export function NetworkGraph () {
                         animationDurationUpdate: 3000,
                         series: [{
                             zoom: 1,
-                            center: [0, 0]
+                            center: [0, -7000]
                         }]
                     });
                     echartsInstance.dispatchAction({
                         type: 'downplay',
                         seriesIndex: 0
                     });
-                    // Wait 1 second before enabling roam
                     setTimeout(() => {
                         setRoamEnabled(true);
-                    }, 3000);
+                        gsap.to(messageRef.current, {
+                            opacity: 0,
+                            duration: 0.5,
+                            onComplete: () => {
+                                setCurrentMessage(lastHighlightMessage);
+                                gsap.to(messageRef.current, {
+                                    opacity: 1,
+                                    duration: 0.5
+                                });
+                            }
+                        });
+                    }, 2000);
                 }
             },
             onLeave: () => {
@@ -150,7 +164,6 @@ export function NetworkGraph () {
             const meanY = highlight.nodeIndices.reduce((sum: number, idx: number) =>
                 sum + networkData.nodes[idx].y, 0) / highlight.nodeIndices.length;
 
-            console.log(highlight.nodeIndices, meanX, meanY);
             instance.setOption({
                 series: [{
                     zoom: highlight.zoom,
@@ -175,12 +188,6 @@ export function NetworkGraph () {
 
     const getOption = () => ({
         darkMode: true,
-        title: {
-            text: 'Games Network',
-            subtext: 'Default layout',
-            top: 'bottom',
-            left: 'right'
-        },
         tooltip: {
             show: roamEnabled,
             backgroundColor: 'rgba(0, 0, 0, 0.7)',
@@ -191,8 +198,9 @@ export function NetworkGraph () {
         legend: [{
             show: roamEnabled,
             data: networkData.categories.map(a => a.name.toString()),
-            top: 10,
-            right: 10,
+            orient: 'vertical',
+            top: 'center',
+            left: 10,
             textStyle: {
                 color: '#aaa'
             },
@@ -239,7 +247,7 @@ export function NetworkGraph () {
                     width: 5,
                 },
                 itemStyle: {
-                    borderColor: '#FFFAD8',
+                    borderColor: '#FFF',
                     borderWidth: 2,
                 },
             }
@@ -248,6 +256,7 @@ export function NetworkGraph () {
 
     const onChartReady = (instance: EChartsInstance) => {
         setEchartsInstance(instance);
+        handleHighlight(instance, highlights[0]);
     };
 
     // Get current network data based on selection
@@ -255,52 +264,49 @@ export function NetworkGraph () {
 
     return (
         <div className="mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8 network-container-wrapper relative h-[800vh]">
-            <div className="network-container sticky top-[5rem] h-[calc(100vh-6rem)] flex flex-col gap-4">
-                <div className="w-full">
-                    <Callout.Root 
-                        variant="soft" 
-                        color="gray" 
-                        highContrast 
-                        className="border border-slate-100/10 transition-[height] duration-500 ease-in-out"
-                    >
-                        <Callout.Icon>
-                            <ChatBubbleIcon className="h-5 w-5 text-white" />
-                        </Callout.Icon>
-                        <Callout.Text 
-                            ref={messageRef} 
-                            className="transition-[height] duration-500 ease-in-out"
-                        >
-                            {currentMessage}
-                        </Callout.Text>
-                    </Callout.Root>
-                </div>
-                
-                <div className="relative network-graph flex-1">
-                    <ReactECharts
-                        option={getOption()}
-                        style={{ height: '100%', width: '100%' }}
-                        onChartReady={onChartReady}
-                    />
-                    <div className="absolute top-1 left-1 drop-shadow-md">
-                        <SegmentedControl.Root 
-                            size="3"
-                            radius="large"
-                            value={networkType}
-                            onValueChange={(value: NetworkType) => setNetworkType(value)}
-                        >
-                            <SegmentedControl.Item 
-                                className="network-selector-button data-[state=active]:bg-[#0A0B0C] data-[state=active]:text-white text-[#BBB] w-28 rounded-md p-2"
-                                value="games"
-                            >
-                                Games
-                            </SegmentedControl.Item>
-                            <SegmentedControl.Item 
-                                className="network-selector-button data-[state=active]:bg-[#0A0B0C] data-[state=active]:text-white text-[#BBB] w-28 rounded-md p-2"
-                                value="channels"
-                            >
-                                Channels
-                            </SegmentedControl.Item>
-                        </SegmentedControl.Root>
+            <div className="network-container sticky top-[5rem] h-[calc(100vh-6rem)] gap-4">
+                <div className="relative w-full h-full">
+                    <div className="absolute z-50 top-0 left-0 w-full">
+                        <div className="flex flex-col gap-4 pointer-events-auto">
+                            <div className="flex items-start gap-2 p-3 backdrop-blur-lg border border-gray-100/10 rounded-xl bg-gray-700/20 shadow-lg">
+                                <ChatBubbleIcon className="flex-shrink-0 mt-1"/>
+                                <div 
+                                    ref={messageRef} 
+                                    className="transition-[height] duration-500 ease-in-out"
+                                >
+                                    {currentMessage}
+                                </div>
+                            </div>
+                            <div className="drop-shadow-md">
+                                <SegmentedControl.Root 
+                                    size="3"
+                                    radius="large"
+                                    value={networkType}
+                                    onValueChange={(value: NetworkType) => setNetworkType(value)}
+                                >
+                                    <SegmentedControl.Item 
+                                        className="network-selector-button data-[state=active]:bg-[#0A0B0C] data-[state=active]:text-white text-[#BBB] w-28 rounded-md p-2"
+                                        value="games"
+                                    >
+                                        Games
+                                    </SegmentedControl.Item>
+                                    <SegmentedControl.Item 
+                                        className="network-selector-button data-[state=active]:bg-[#0A0B0C] data-[state=active]:text-white text-[#BBB] w-28 rounded-md p-2"
+                                        value="channels"
+                                    >
+                                        Channels
+                                    </SegmentedControl.Item>
+                                </SegmentedControl.Root>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div className="absolute w-full h-full network-graph z-0">
+                        <ReactECharts
+                            option={getOption()}
+                            style={{ height: '100%', width: '100%' }}
+                            onChartReady={onChartReady}
+                        />
                     </div>
                 </div>
             </div>
