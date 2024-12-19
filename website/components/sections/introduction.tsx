@@ -133,7 +133,7 @@ export function Introduction() {
                         onSubmitAction={handleQuizSubmit2}
                     />
                 </div>
-                <div className="w-7/12 flex flex-col items-center justify-center space-y-10">
+                <div className="w-7/12 flex flex-col items-center justify-center space-y-10 pr-20">
                     {
                         !showText2 &&
                         (

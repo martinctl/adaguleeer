@@ -3,6 +3,7 @@
 import { Hero } from '@/components/sections/hero';
 import { Introduction } from '@/components/sections/introduction';
 import { TopGames } from '@/components/sections/top-games';
+import { Genres } from '@/components/sections/genres';
 import { NetworkGraph } from '@/components/sections/network-graph';
 import { Navbar } from '@/components/subs/navbar';
 import { Tags } from '@/components/sections/tags';
@@ -20,6 +21,7 @@ export default function Home() {
         { id: 'intro', label: 'Intro' },
         { id: 'tags', label: 'Tags' },
         { id: 'top-games', label: 'Top Games' },
+        { id: 'genres', label: 'Genres' },
         { id: 'network', label: 'Network' },
     ];
 
@@ -54,6 +56,7 @@ export default function Home() {
             <Section id="intro" p="3" ><Introduction /></Section>
             <Section id="tags" size="3" ><Tags /></Section>
             <Section id="top-games" size="3" ><TopGames /></Section>
+            <Section id="genres" size="3" ><Genres /></Section>
             <Section id="network" size="3" ><NetworkGraph /></Section>
         </>
     );

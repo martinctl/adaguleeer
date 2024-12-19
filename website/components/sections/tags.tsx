@@ -40,9 +40,9 @@ export function Tags() {
                 anticipatePin: 1
             }
         })
-        .to(slide, {
-            opacity: 0,
-        });
+            .to(slide, {
+                opacity: 0,
+            });
 
 
         return () => {
@@ -57,20 +57,24 @@ export function Tags() {
                 {
                     !showWordCloud &&
                     (
-                        <div className={`quizz h-screen flex flex-col justify-center items-center ${!quizCompleted ? 'animate-fadeIn' : 'animate-fadeOut'}`}>
-                            <h1>Tags</h1>
-                            <p>
-                                Tags are a way to categorize and organize content. They are used to help users find
-                                content that is relevant to them. Tags can be used to describe the content of a post,
-                                article, or video. They can also be used to help users find content that is related
-                                to a specific topic or theme.
-                            </p>
+                        <div className={`h-screen flex justify-around items-center px-10 ${!quizCompleted ? 'animate-fadeIn' : 'animate-fadeOut'}`}>
+                            <div className="flex flex-col w-7/12 items-center justify-center">
+                                <h1>Tags</h1>
+                                <p>
+                                    Tags are a way to categorize and organize content. They are used to help users find
+                                    content that is relevant to them. Tags can be used to describe the content of a post,
+                                    article, or video. They can also be used to help users find content that is related
+                                    to a specific topic or theme.
+                                </p>
+                            </div>
+                            <div className="w-5/12 flex flex-col items-center justify-center">
                             <QuizTab
                                 question="What is the most used tag ?"
                                 answers={["funny", "reaction", "pc", "gameplay"]}
                                 correctAnswerIndex={3}
                                 onSubmitAction={handleQuizSubmit}
                             />
+                            </div>
                         </div>
                     )
                 }
