@@ -3,6 +3,7 @@ import { themeProps } from './theme-config';
 import { Inter } from 'next/font/google';
 import '@radix-ui/themes/styles.css';
 import './globals.css';
+import { DesktopIcon } from '@radix-ui/react-icons';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -23,7 +24,19 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <body>
         <Theme {...themeProps}>
-          <main>{children}</main>
+          <div className="hidden lg:block">
+            <main>{children}</main>
+          </div>
+          <div className="flex lg:hidden h-screen w-screen items-center justify-center p-8 text-center">
+            <div className="space-y-4">
+              <DesktopIcon className="w-16 h-16 mx-auto mb-6" />
+              <h1 className="text-2xl font-bold">Please Use a Desktop Device</h1>
+              <p>
+                For the best experience of our interactive visualizations, 
+                please view this website on a desktop or laptop computer.
+              </p>
+            </div>
+          </div>
         </Theme>
       </body>
     </html>
