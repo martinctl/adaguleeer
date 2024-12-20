@@ -41,14 +41,14 @@ export function Events() {
             <div className="horizontal flex w-[500vw]">
                 <div className="slide w-screen h-screen flex items-center justify-center space-x-20">
                     <div className="flex flex-col space-y-5 w-1/3">
-                        <h1 className="text-3xl">Impact of real-world events on channels activity</h1>
-                        <p>
+                        <h1 className="font-bold text-xl">Impact of real-world events on channels activity</h1>
+                        <p className="text-justify text-lg">
                             The next part will showcase the relationships between gaming happenings and the activity
                             of related channels. In fact, we explored many games and found some really interesting 
                             patterns, that we showcase in the following plots.
                         </p>
                     </div>
-                    <div className="w-[40vw]">
+                    <div className="w-[40vw] text-lg">
                         <QuizTab 
                             question="Which game license is the most impacted by new game releases ?"
                             answers={["FIFA", "Just Cause", "Battlefield", "NBA2k"]}
