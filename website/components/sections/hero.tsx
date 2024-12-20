@@ -56,10 +56,16 @@ export function Hero() {
                         Find the community of your dreams!
                     </Text>
                     <Text weight="medium" className="font-semibold text-lg leading-5 max-w-4xl mx-auto text-center">
-                        Do you love watching videos, with gaming as one of your main interests?</Text>
-                    <Text weight="medium" className="font-semibold text-lg">
-                        Would you like to engage more on what you’re passionate about, but feel overwhelmed by the sheer amount of diverse content?</Text>
-                    <Text weight="medium" className="font-semibold text-lg">Relax, you are in the right place. Hop on board, and let’s discover helpful insights to guide you toward the content and community of your dreams!</Text>
+                        Do you love watching videos, with gaming as one of your main interests? Would you
+                        like to engage more on what you’re passionate about, but feel overwhelmed by the
+                        sheer amount of diverse content?     
+                    </Text>
+                        
+                    <Text weight="medium" className="font-semibold text-lg leading-5 max-w-4xl mx-auto text-center">
+                        Relax, you are in the right place. Hop on board,
+                        and let’s discover helpful insights to guide you toward the content and community 
+                        of your dreams!
+                    </Text>
                     <div className="mt-6">
                         <Link href="#intro">
                             <Button size="4" variant="classic">
