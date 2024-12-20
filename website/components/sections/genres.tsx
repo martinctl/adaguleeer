@@ -15,9 +15,9 @@ export function Genres() {
         const container = containerRef.current;
         if (!container) return;
 
-        const slide = container.querySelector('.slide');
-
-        gsap.timeline({
+        const slides = container.querySelectorAll('.slide');
+        slides.forEach((slide, _) => {
+            gsap.timeline({
             scrollTrigger: {
                 trigger: slide,
                 start: 'top top',
@@ -27,10 +27,11 @@ export function Genres() {
                 pinSpacing: false,
                 anticipatePin: 1
             }
-        })
+            })
             .to(slide, {
                 opacity: 0,
             });
+        })
 
 
         return () => {
@@ -52,7 +53,9 @@ export function Genres() {
                 <GenresBarChart />
                 </div>
             </div>
-            <GenresChordChart />
+            <div className="slide">
+                <GenresChordChart />
+            </div>
         </section>
     )
 }
