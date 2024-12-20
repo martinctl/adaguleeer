@@ -165,6 +165,7 @@
     },
     "series": [
         {
+            "name": "Super Smash Bros.",
             "type": "line",
             "data": [
                 0.0,
