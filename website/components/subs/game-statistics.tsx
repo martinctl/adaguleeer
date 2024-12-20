@@ -31,122 +31,7 @@ interface GameStatisticsProps {
 }
 
 export function GameStatistics({ gameTitle }: GameStatisticsProps) {
-  const gameData = gameStatsData.games[gameTitle as keyof typeof gameStatsData.games];
-
-  const likesViewsOptions = {
-    darkMode: true,
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'cross'
-      }
-    },
-    xAxis: {
-      type: 'category',
-      data: gameData.likesViewsData.months,
-      axisLine: {
-        lineStyle: {
-          color: '#e5e7eb'
-        }
-      }
-    },
-    yAxis: {
-      type: 'value',
-      axisLine: {
-        lineStyle: {
-          color: '#e5e7eb'
-        }
-      },
-      splitLine: {
-        lineStyle: {
-          color: '#2B2D31'
-        }
-      }
-    },
-    series: [{
-      name: 'Likes/Views',
-      type: 'line',
-      data: gameData.likesViewsData.values,
-      smooth: true,
-      lineStyle: {
-        width: 3,
-        color: '#7289DA'
-      },
-      itemStyle: {
-        color: '#7289DA'
-      },
-      areaStyle: {
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          {
-            offset: 0,
-            color: 'rgba(114, 137, 218, 0.3)'
-          },
-          {
-            offset: 1,
-            color: 'rgba(114, 137, 218, 0.1)'
-          }
-        ])
-      }
-    }]
-  };
-
-  const videoDurationOptions = {
-    darkMode: true,
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    tooltip: {
-      trigger: 'axis'
-    },
-    xAxis: {
-      type: 'category',
-      data: ['0-5 min', '5-10 min', '10-20 min', '20-30 min', '30+ min'],
-      axisLine: {
-        lineStyle: {
-          color: '#e5e7eb'
-        }
-      }
-    },
-    yAxis: {
-      type: 'value',
-      axisLine: {
-        lineStyle: {
-          color: '#e5e7eb'
-        }
-      },
-      splitLine: {
-        lineStyle: {
-          color: '#2B2D31'
-        }
-      }
-    },
-    series: [{
-      name: 'Video Duration Distribution',
-      type: 'bar',
-      data: gameData.videoDurationData.values,
-      itemStyle: {
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          {
-            offset: 0,
-            color: 'rgba(114, 137, 218, 0.8)'
-          },
-          {
-            offset: 1,
-            color: 'rgba(114, 137, 218, 0.3)'
-          }
-        ])
-      }
-    }]
-  };
+  const gameData = gameStatsData.games[gameTitle.toLowerCase() as keyof typeof gameStatsData.games];
 
   return (
     <Grid columns="6" gap="4" p="6">
@@ -162,32 +47,68 @@ export function GameStatistics({ gameTitle }: GameStatisticsProps) {
           </Flex>
         </Card>
       ))}
-      
-      <Card style={{ gridColumn: 'span 3' }}>
-        <Text size="2" weight="bold" className="font-pixel mb-4">
-          Likes/Views Over Time
-        </Text>
-        <div className="h-72">
-          <ReactEChartsCore
-            echarts={echarts}
-            option={likesViewsOptions}
-            style={{ height: '100%' }}
-          />
-        </div>
-      </Card>
-      
-      <Card style={{ gridColumn: 'span 3' }}>
-        <Text size="2" weight="bold" className="font-pixel mb-4">
-          Distribution of Video Length
-        </Text>
-        <div className="h-72">
-          <ReactEChartsCore
-            echarts={echarts}
-            option={videoDurationOptions}
-            style={{ height: '100%' }}
-          />
+
+      <Card style={{ gridColumn: 'span 6', maxWidth: '1000px', padding: '1rem'}}>
+        <div className="space-y-4 text-lg">
+          {gameTitle === 'Call of Duty' && (
+            <>
+              <p className="text-justify">
+                The bronze medal goes to the emblematic Call of Duty (CoD).
+                Each game in this franchise has been a success.
+                Even those considered less impactful still outperform many other games in the industry.
+                More than just a big name, this dynasty has maintained its relevance through countless iterations.
+              </p>
+              <p className="text-justify">
+                What makes Call of Duty unique on YouTube is that this cornerstone of war games acts as a unifier for the broader shooter community. 
+                Whether your main game is Overwatch, Battlefield, or Doom, you have likely seen Call of Duty content in your feed. 
+                The franchise’s regular releases, around one game or extension per year, create engagement peaks across different FPS 
+                (First-Person Shooter) communities, giving a boost to a whole part of YouTube gaming.
+              </p>
+              <p className="text-justify">
+                The dedication rate, defined as the proportion of channels that have the game as their primary focus 
+                (based on the highest number of videos published) compared to all channels that have posted at least one video about the game, is 30%.
+                This leaves a significant portion of creators who play CoD alongside other games.
+                This illustrates the diversity of its audience: even if CoD isn’t the primary game for many creators, 
+                its gravitational pull ensures that almost everyone in the shooter community engages with it at some point.
+              </p>
+            </>
+          )}
+
+          {gameTitle === 'Fortnite' && (
+            <>
+              <p className="text-justify">
+              Taking the silver medal is Fortnite, a game with a different trajectory and influence compared to Call of Duty. 
+              While CoD is a long-standing franchise originating from the early 2000s, Fortnite is a standalone phenomenon. 
+              Released in July 2017, it marked a turning point for gaming on YouTube, revolutionizing how communities form and interact. 
+              Unlike CoD’s steady presence, Fortnite experienced a huge rise that reshaped the platform’s landscape. 
+              At its peak, it seemed like every content creator was uploading Fortnite videos, and every viewer was consuming them.
+
+              </p>
+              <p className="text-justify">
+              This explosive growth clustered a variety of communities around the same game, 
+              creating an unprecedented level of cross-viewers interactions. 
+              This can also be seen with the channel dedication rate of …% , 
+              as a lot of players approached it but still keeping their videos diversified for a lot of them.
+              </p>
+            </>
+          )}
+
+          {gameTitle === 'Minecraft' && (
+            <>
+              <p className="text-justify">
+              As already revealed by the quiz, the most popular video game of all time claims the crown. 
+              Its unmatched versatility appeals to those seeking creativity, exploration, survival, or combat to only name a few. 
+              It's impossible to draw up a profile of the typical Minecraft player or viewer, because they simply don't exist. 
+              It's only natural that this timeless and polyvalent game should come out on top, as it attracts almost everyone to the platform.
+              </p>
+              <p className="text-justify">
+              …% of the channels producing Minecraft content make it their focus...
+              </p>
+            </>
+          )}
         </div>
       </Card>
     </Grid>
   );
 }
+

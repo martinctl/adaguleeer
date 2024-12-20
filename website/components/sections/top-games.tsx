@@ -128,8 +128,8 @@ export function TopGames() {
                         Your browser does not support the video tag.
                     </video>
                     <div className="text-animation absolute inset-0 flex flex-col items-center justify-center text-center">
-                        <p className="text-4xl font-pixel">#{games.length - index}</p>
-                        <p className="text-2xl font-pixel">{game.title}</p>
+                        <p className="text-6xl font-pixel">#{games.length - index}</p>
+                        <p className="text-5xl font-bold font-pixel">{game.title}</p>
                     </div>
                     <div className="overlay absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center py-52">
                         <div className="statistics">

@@ -39,8 +39,8 @@ export function Events() {
     return (
         <section ref={containerRef} className="overflow-hidden">
             <div className="horizontal flex w-[500vw]">
-                <div className="slide w-screen h-screen flex items-center justify-center">
-                    <div className="flex flex-col space-y-5 w-1/2 p-48">
+                <div className="slide w-screen h-screen flex items-center justify-center space-x-20">
+                    <div className="flex flex-col space-y-5 w-1/3">
                         <h1 className="text-3xl">Impact of real-world events on channels activity</h1>
                         <p>
                             The next part will showcase the relationships between gaming happenings and the activity
