@@ -101,10 +101,9 @@ export function Introduction() {
                         !showChart1 &&
                         (
                             <div className={`${quizCompleted1 ? 'animate-fadeOut' : 'animate-fadeIn'} text-lg`}>
-                                <h4 className="font-bold text-xl">Your Mission</h4>
+                                <h4 className="font-bold text-xl mb-4">Your Mission</h4>
                                 <p className="text-justify mb-4 border-r-2 pr-4" style={{ borderColor: '#E54D2E' }}>
-                                    As your journey begins, we'll guide you through gaming on YouTube.
-                                    By the end of this introduction, you should have a better comprehension of gaming content, how it is influenced, and how its contributors shape it.
+                                    By the end of this adventure, you should have a better comprehension of gaming content, how it is influenced, and how its contributors shape it.
                                     You’ll also discover which aspects resonate most with you.
                                 </p>
                                 <p className="text-justify mb-4">
@@ -114,8 +113,7 @@ export function Introduction() {
                                 </p>
                                 <p className="text-justify border-l-2 pl-4" style={{ borderColor: '#E54D2E' }}>
                                     As you probably know, YouTube is the world’s largest video sharing platform.
-                                    It is bursting with content of all kinds, from music videos and cooking tutorials to educational lessons.
-                                    But do you know what part gaming represents in this?
+                                    It is bursting with content of all kinds, but do you know what part gaming represents in this?
                                 </p>
 
                             </div>
@@ -132,9 +130,9 @@ export function Introduction() {
                                 </p>
                                 <p className="text-justify border-r-2 pr-4" style={{ borderColor: '#E54D2E' }}>
                                     You may wonder how we get this information and whether it’s reliable. The data used to accompany you through
-                                    this journey comes from a massive dataset called YouNiverse. It includes metadata from English-speaking
-                                    YouTube from 2005 to 2019, uploaded by anonymous users. Each YouTube category contains its own world. Let’s
-                                    explore the most fascinating one to discover its trends, protagonists, and secrets.
+                                    this journey comes from a massive dataset called YouNiverse. It includes metadata from all English-speaking 
+                                    channels with more than 10k subscribers on YouTube, from 2005 to 2019. Each YouTube category contains its own world. 
+                                    Let’s explore the most fascinating one to discover its protagonists and secrets.
                                 </p>
                                 <ScrollDown />
                             </div>
@@ -203,15 +201,13 @@ export function Introduction() {
                                 We were a bit petty on this one because a 10-minute-long video is also what people like to see best.
                                 While this duration might seem like a sweet spot for viewer attention, there's more to the story: MONEY.
                                 Indeed, gaming may be a passion, but YouTube is still a business.
-                                The platform prioritizes longer videos for two main reasons.
+                                
                             </p>
                             <p className="text-justify mb-4">
-                                First, their business model favours that to keep the viewers engaged for as long as possible, because more eyes on their videos equals more revenue.
-                                The other factor concerns content creators.
-                                Videos lasting 10 min videos unlock additional monetization features, including mid-roll ads, which allows them to place multiple advertisements throughout the video.
-                                Since a lot of creators aim to live off their passion, the prevalence of 10-minute videos reflects their strategic choice to optimize both viewer satisfaction and monetization potential.
+                                Videos lasting at least 10 min unlock additional monetization features, including mid-roll ads, which allows them to place multiple advertisements throughout the video.
+                                Therefore, videos duration does not seem to indicate viewer preferences, but rather creators convenience.
                             </p>
-                            <p className="text-justify mb-4 text-gray-500">
+                            <p clfyossName="text-justify mb-4 text-gray-500">
                                 Note that this chart only displays videos under one hour, representing 92.6% of videos.
                             </p>
                             <ScrollDown />
@@ -231,8 +227,11 @@ export function Introduction() {
                                     More than just watching someone else play, it’s about discovering trends, connecting with communities, and finding content that speaks to you.
                                 </p>
                                 <p>
-                                    Let’s first explore the basic characteristics, starting with the average duration of videos.
-                                    We observe an interesting peak at 10 minutes.
+                                    Gaming occupies a large part of YouTube videos, but what does this represents in terms of video length? 
+                                    To tackle this question, we analyzed the distribution of gaming videos durations.
+                                    We noticed an interesting shape displayed below.
+                                </p>
+                                <p>                                    
                                     Let’s test your intuition on the reason for this with a new question!
                                 </p>
                             </div>
