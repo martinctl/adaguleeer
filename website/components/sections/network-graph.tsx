@@ -203,7 +203,6 @@ export function NetworkGraph () {
         darkMode: true,
         tooltip: {
             show: roamEnabled,
-            trigger: 'item',
             backgroundColor: 'rgba(0, 0, 0, 0.7)',
             textStyle: {
                 color: '#bbb',
@@ -256,7 +255,8 @@ export function NetworkGraph () {
                 max: 20,
             },
             emphasis: {
-                focus: networkType === 'games' ? 'adjacency' : 'none',
+                // focus: networkType === 'games' ? 'adjacency' : 'none',
+                focus: 'adjacency',
                 lineStyle: {
                     width: 5,
                 },
