@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { ChatBubbleIcon } from "@radix-ui/react-icons";
 import { Callout, SegmentedControl } from "@radix-ui/themes";
@@ -15,18 +15,27 @@ type Highlight = {
     nodeIndices: number[];
     zoom: number;
     message: string;
+    graph: NetworkType;
 };
 
 const highlights: Highlight[] = [
-    { nodeIndices: [1], zoom: 3, message: "The following graph illustrates the connections between games based on the overlap of their viewers. While games of the same genre may cluster together, popularity is also expected to play a significant role in these interactions. As we can see, Minecraft occupies a central position in the graph, strongly connected to a variety of games, highlighting its universal appeal and cross-genre influence." },
-    { nodeIndices: [0], zoom: 3, message: "Fortnite appears as another highly connected node in the graph, bridging communities across different genres, including competitive shooters, and casual multiplayer games. Its position reflects its popularity and its ability to attract a diverse audience, forming connections with games appealing to competitive and social players alike." },
-    { nodeIndices: [37, 35, 36, 45, 48, 49], zoom: 2.5, message: "Now, let’s zoom out to the FIFA community. It’s kind of doing its own thing, sitting on the edge of the graph. But there’s an interesting twist: FIFA has this strong link to Rocket League." },
-    { nodeIndices: [29, 37, 35, 36, 45, 48, 49], zoom: 2.5, message: "That connection really makes sense, given Rocket League’s mix of sports and competition, which FIFA players can totally relate to." },
-    { nodeIndices: [59], zoom: 3, message: "Here’s a fun cluster to look at! Mario Kart 8 is right in the middle of a group of Nintendo classics. You’ve got other Mario games and some beloved Nintendo exclusives all huddled together. It really captures the loyalty and love that Nintendo fans have for these titles."},
-    { nodeIndices: [117, 118], zoom: 3, message: "Finally, let’s check out the Pokémon games. They’re off in their own little world, completely disconnected from the rest of the graph. And honestly, that fits perfectly—Pokémon has such a dedicated, standalone fanbase that it doesn’t really need to connect with other gaming communities." },
+    { nodeIndices: [1], zoom: 3, graph: 'games', message: "The following graph illustrates the connections between games based on the overlap of their viewers. While games of the same genre may cluster together, popularity is also expected to play a significant role in these interactions. As we can see, Minecraft occupies a central position in the graph, strongly connected to a variety of games, highlighting its universal appeal and cross-genre influence." },
+    { nodeIndices: [0], zoom: 3, graph: 'games', message: "Fortnite appears as another highly connected node in the graph, bridging communities across different genres, including competitive shooters, and casual multiplayer games. Its position reflects its popularity and its ability to attract a diverse audience, forming connections with games appealing to competitive and social players alike." },
+    { nodeIndices: [37, 35, 36, 45, 48, 49], zoom: 2.5, graph: 'games', message: "Now, let’s zoom out to the FIFA community. It’s kind of doing its own thing, sitting on the edge of the graph. But there’s an interesting twist: FIFA has this strong link to Rocket League." },
+    { nodeIndices: [29, 37, 35, 36, 45, 48, 49], zoom: 2.5, graph: 'games', message: "That connection really makes sense, given Rocket League’s mix of sports and competition, which FIFA players can totally relate to." },
+    { nodeIndices: [59], zoom: 3, graph: 'games', message: "Here’s a fun cluster to look at! Mario Kart 8 is right in the middle of a group of Nintendo classics. You’ve got other Mario games and some beloved Nintendo exclusives all huddled together. It really captures the loyalty and love that Nintendo fans have for these titles."},
+    { nodeIndices: [117, 118], zoom: 3, graph: 'games', message: "Finally, let’s check out the Pokémon games. They’re off in their own little world, completely disconnected from the rest of the graph. And honestly, that fits perfectly—Pokémon has such a dedicated, standalone fanbase that it doesn’t really need to connect with other gaming communities." },
+    { nodeIndices: [-1], zoom: 1, graph: 'games', message: "Here is a global view of the graph. We can now have clearly see how the different communities are connected. Let's now shift our focus to the channels network." },
+    { nodeIndices: [7, 2, 3, 260], zoom: 12, graph: 'channels', message: "Let’s start at the center of it all, where the giants like PewDiePie, Markiplier, Jacksepticeye, and SSSniperWolf dominate. These creators are so massive that they connect to almost every corner of the graph. Whether it’s gaming, reactions, or variety content, they’ve managed to bring together fans from all over the platform." },
+    { nodeIndices: [36, 23, 113], zoom: 10, graph: 'channels', message: "From there, we head over to Ninja, who’s like the front door to the Fortnite community. Back in the game’s heyday, Ninja became the face of Fortnite, and his influence is still obvious here. Right next to him, you’ll find creators like LazarBeam and Tfue, who built their channels on epic plays and hilarious moments from the game." },
+    { nodeIndices: [133, 206, 560], zoom: 10, graph: 'channels', message: "Now, let’s slide into the FaZe community, which bridges Fortnite and other games like Call of Duty and GTA. The FaZe clan and their creators thrive on competitive gaming and that bold, high-energy vibe. It’s like the meeting point for fans who love both skillful gameplay and over-the-top antics." },
+    { nodeIndices: [598, 508], zoom: 16, graph: 'channels', message: "If we move to a quieter corner of the graph, we hit the League of Legends community. This group feels more off on its own, which makes sense given how focused and dedicated League fans are. You’ve got creators like Tyler1, Professor Akali, and the official LoL Esports channel, all catering to one of the most passionate gaming audiences out there." },
+    { nodeIndices: [81, 224, 433], zoom: 4, graph: 'channels', message: "Now, up in the top left, we’ve got creators like KSI and W2S. These channels are still close to the center thanks to their wide appeal, but as you move further out, the FIFA community starts to stand out. It’s no surprise—both KSI and W2S have deep roots in sports gaming, and you can see how their content overlaps with FIFA fans." },
+    { nodeIndices: [0, 35, 465], zoom: 8, graph: 'channels', message: "Of course, we couldn’t miss the Minecraft community. It’s a huge cluster of creators like DanTDM and Grian, who’ve mastered the art of storytelling and creativity in gaming. If you dive deeper, you’ll find Roblox channels and even some spin-offs—games that share Minecraft’s endless creative possibilities." },
+    { nodeIndices: [473], zoom: 16, graph: 'channels', message: "Finally, we have the World of Warcraft creators, hanging out in their own little corner of the graph. This community is completely disconnected from the rest, which honestly makes sense. WoW fans are all about that deep lore and specialized content, so they’ve built a niche that doesn’t rely much on the broader YouTube gaming world." },
 ];
 
-const lastHighlightMessage = "Now it’s your turn! You can freely explore the graph, zoom in, and move around to discover connections between games. Try finding your favorite game and see which communities it’s linked to—you might be surprised by some of the overlaps and clusters you uncover!";
+const lastHighlightMessage = "Ok finally it’s your turn! You can now freely explore the graph, zoom in, and move around to discover connections between games. Try finding your favorite creator or game and see which communities it’s linked to—you might be surprised by some of the overlaps and clusters you uncover!";
 
 type NetworkType = 'games' | 'channels';
 
@@ -111,7 +120,7 @@ export function NetworkGraph () {
                         animationDurationUpdate: 3000,
                         series: [{
                             zoom: 1,
-                            center: [0, -7000]
+                            center: [0, 0]
                         }]
                     });
                     echartsInstance.dispatchAction({
@@ -146,6 +155,9 @@ export function NetworkGraph () {
 
     const handleHighlight = (instance: EChartsInstance, highlight: Highlight) => {
         setRoamEnabled(false);
+        // Set the network data
+        setNetworkType(highlight.graph);
+
         if (highlight.nodeIndices[0] === -1) {
             instance.dispatchAction({
                 type: 'downplay',
@@ -159,6 +171,7 @@ export function NetworkGraph () {
             });
         } else {
             // Compute mean coordinates
+            const networkData = highlight.graph === 'games' ? gamesNetworkData : channelsNetworkData;
             const meanX = highlight.nodeIndices.reduce((sum: number, idx: number) =>
                 sum + networkData.nodes[idx].x, 0) / highlight.nodeIndices.length;
             const meanY = highlight.nodeIndices.reduce((sum: number, idx: number) =>
@@ -190,13 +203,14 @@ export function NetworkGraph () {
         darkMode: true,
         tooltip: {
             show: roamEnabled,
+            trigger: 'item',
             backgroundColor: 'rgba(0, 0, 0, 0.7)',
             textStyle: {
                 color: '#bbb',
             },
         },
         legend: [{
-            show: roamEnabled,
+            show: roamEnabled && networkType === 'games',
             data: networkData.categories.map(a => a.name.toString()),
             orient: 'vertical',
             top: 'center',
@@ -242,7 +256,7 @@ export function NetworkGraph () {
                 max: 20,
             },
             emphasis: {
-                focus: 'adjacency',
+                focus: networkType === 'games' ? 'adjacency' : 'none',
                 lineStyle: {
                     width: 5,
                 },
@@ -250,7 +264,7 @@ export function NetworkGraph () {
                     borderColor: '#FFF',
                     borderWidth: 2,
                 },
-            }
+            },
         }]
     });
 
@@ -263,7 +277,7 @@ export function NetworkGraph () {
     const networkData = networkType === 'games' ? gamesNetworkData : channelsNetworkData;
 
     return (
-        <div className="mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8 network-container-wrapper relative h-[800vh]">
+        <div className="mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8 network-container-wrapper relative h-[1200vh]">
             <div className="network-container sticky top-[5rem] h-[calc(100vh-6rem)] gap-4">
                 <div className="relative w-full h-full">
                     <div className="absolute z-50 top-0 left-0 w-full">
@@ -278,7 +292,8 @@ export function NetworkGraph () {
                                 </div>
                             </div>
                             <div className="drop-shadow-md">
-                                <SegmentedControl.Root 
+                                <SegmentedControl.Root
+                                    disabled={!roamEnabled}
                                     size="3"
                                     radius="large"
                                     value={networkType}

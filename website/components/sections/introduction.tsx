@@ -59,9 +59,9 @@ export function Introduction() {
                     anticipatePin: 1
                 }
             })
-                .to(slide, {
-                    opacity: 0,
-                });
+            .to(slide, {
+                opacity: 0,
+            });
         })
 
 
