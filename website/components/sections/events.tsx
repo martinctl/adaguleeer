@@ -3,11 +3,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useRef, useState } from 'react';
 import { TimeSeries } from '../subs/timeseries';
-import fifaTimeSeriesData from '@/data/fifa_15_to_18.json'
+import fifaTimeSeriesData from '@/data/fifa_14_to_18.json'
 import smashTimeSeriesData from '@/data/subs_smash.json'
 import mkTimeSeriesData from '@/data/subs_mk.json'
+import lolTimeSeriesData from '@/data/views_lol.json'
+import acTimeSeriesData from '@/data/views_ac.json'
 import { QuizTab } from '../subs/quiz-tab';
-import { ScrollDown } from '../subs/scroll-down';
 
 export function Events() {
 
@@ -30,6 +31,22 @@ export function Events() {
             }
         });
 
+        const slide = container.querySelector('.slide')
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: slide,
+                start: 'top top',
+                end: '+=100%',
+                scrub: true,
+                pin: true,
+                pinSpacing: false,
+                anticipatePin: 1
+            }
+        })
+        .to(slide, {
+            opacity: 0,
+        });
+
 
         return () => {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -38,8 +55,8 @@ export function Events() {
 
     return (
         <section ref={containerRef} className="overflow-hidden">
-            <div className="horizontal flex w-[500vw]">
-                <div className="slide w-screen h-screen flex items-center justify-center space-x-20">
+            <div className="horizontal flex w-[900vw]">
+                <div className="w-screen h-screen flex items-center justify-center space-x-20">
                     <div className="flex flex-col space-y-5 w-1/3">
                         <h1 className="text-3xl">Impact of real-world events on channels activity</h1>
                         <p>
@@ -57,16 +74,22 @@ export function Events() {
                         />
                     </div>
                 </div>
-                <div className="slide h-screen w-[300vw] flex justify-center">
+                <div className="h-screen w-[300vw] flex justify-center">
                     <TimeSeries data={fifaTimeSeriesData} />
                 </div>
-                <div className="slide h-screen w-[50vw] flex justify-center">
+                <div className="h-screen w-[50vw] flex justify-center">
                     <TimeSeries data={mkTimeSeriesData} />
                 </div>
-                <div className="slide h-screen w-[50vw] flex justify-center">
+                <div className="h-screen w-[50vw] flex justify-center">
                     <TimeSeries data={smashTimeSeriesData} />
                 </div>
-            </div>
+                <div className="h-screen w-[200vw] flex justify-center">
+                    <TimeSeries data={acTimeSeriesData} />
+                </div>
+                <div className="h-screen w-[200vw] flex justify-center">
+                    <TimeSeries data={lolTimeSeriesData} />
+                </div>
+            </div> 
         </section>
     )
 }
