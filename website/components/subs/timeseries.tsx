@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { Flex, Box } from '@radix-ui/themes';
 import * as echarts from 'echarts';
+import { text } from 'd3';
 
 
 interface TimeSeriesData {
@@ -45,7 +46,10 @@ export function TimeSeries({ data }: TimeSeriesProps) {
             darkmode: false,
             title: {
                 text: eventsData.title.text,
-                left: "center"
+                left: "center",
+                textStyle: {
+                    color: '#ffffff'
+                }
             },
             tooltip: {
                 trigger: 'axis',
@@ -54,7 +58,7 @@ export function TimeSeries({ data }: TimeSeriesProps) {
                 },
                 backgroundColor: 'rgba(0, 0, 0, 0.7)',
                 textStyle: {
-                    color: '#aaa',
+                    color: '#ffffff',
                 },
             },
             xAxis: {
@@ -64,10 +68,14 @@ export function TimeSeries({ data }: TimeSeriesProps) {
                 splitLine: {
                     show: false
                 },
+                axisLabel: {
+                    color: '#ffffff', 
+                },
             },
             yAxis: {
                 type: 'value',
                 axisLabel: {
+                    color: '#ffffff',
                     formatter: function (value: number) {
                         return `${value / 10 ** 6}M`
                     }
@@ -77,6 +85,16 @@ export function TimeSeries({ data }: TimeSeriesProps) {
                 },
                 splitLine: {
                     show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#ffffff'
+                    }
+                },
+                legend: {
+                    textStyle: {
+                        color: '#ffffff'
+                    }
                 }
             },
             series: [
@@ -90,7 +108,7 @@ export function TimeSeries({ data }: TimeSeriesProps) {
                         data: eventsData.series[0].markArea.data,
                         label: {
                             distance: 6,
-                            color: 'grey'
+                            color: '#ffffff'
                         }
                     }
                 },
@@ -107,7 +125,7 @@ export function TimeSeries({ data }: TimeSeriesProps) {
                     data: eventsData.series[i].markArea.data,
                     label: {
                         distance: 6,
-                        color: 'grey'
+                        color: '#ffffff'
                     }
                 }
             });

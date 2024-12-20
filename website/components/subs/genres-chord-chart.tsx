@@ -75,21 +75,21 @@ export function GenresChordChart() {
             </div>
             <div className="w-1/2 p-12 flex flex-col justify-center">
                 <div className="space-y-6 text-lg text-gray-300">
-                    <p className="text-justify text-3xl text-white font-bold mb-4">
+                    <p className="text-justify text-3xl text-white font-bold mb-4 border-b-2 pb-4" style={{ borderColor: '#E54D2E' }}>
                         Genres Chord Chart
                     </p>
                     <p className="text-justify mb-4">
-                    Some genres regularly appear together, while others are rarely or never paired. 
-                    This tells us about the potential connections between games and communities. 
-                    For example, if you're passionate about Adventure games, you will often find that these games are linked to genres like RPG, Platform, or Shooter. 
-                    Thus, as an Adventure gamer, you are likely to be part of a broad community that spans multiple genres, offering diverse experiences and interactions.
+                        Some genres regularly appear together, while others are rarely or never paired.
+                        This tells us about the potential connections between games and communities.
+                        For example, if you're passionate about Adventure games, you will often find that these games are linked to genres like RPG, Platform, or Shooter.
+                        Thus, as an Adventure gamer, you are likely to be part of a broad community that spans multiple genres, offering diverse experiences and interactions.
                     </p>
                     <p className="text-justify mb-4">
-                    On the contrary, genres like Sport or MOBA tend to stay within their own circles. 
-                    They are less likely to be paired with others, which means that players of these games may find themselves more isolated, focusing on their specific niche. 
-                    MOBA (Multiplayer Online Battle Arena) genre, despite hosting massive games like League of Legends or Dota 2, illustrates an intriguing case. 
-                    While these games still attract vast communities, their genre probably limits them compared to more frequent crossovers. 
-                    This underscores how genre clustering can restrict a game’s reach.
+                        On the contrary, genres like Sport or MOBA tend to stay within their own circles.
+                        They are less likely to be paired with others, which means that players of these games may find themselves more isolated, focusing on their specific niche.
+                        MOBA (Multiplayer Online Battle Arena) genre, despite hosting massive games like League of Legends or Dota 2, illustrates an intriguing case.
+                        While these games still attract vast communities, their genre probably limits them compared to more frequent crossovers.
+                        This underscores how genre clustering can restrict a game’s reach.
                     </p>
                 </div>
             </div>
