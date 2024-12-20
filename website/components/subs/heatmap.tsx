@@ -4,14 +4,14 @@ import { Flex, Box } from '@radix-ui/themes';
 
 
 interface HeatmapProps {
-    games: string[]
+    games: string[],
     data: number[][];
 }
 
-export function HeatmapChart({ data }: HeatmapProps) {
+export function HeatmapChart({ games, data }: HeatmapProps) {
     const chartRef = useRef<HTMLDivElement>(null);
 
-    let values: number[][] = data.data.map(function(item: number[]) {
+    let values: (number | string)[][] = data.map(function (item: number[]) {
         return [item[0], item[1], item[2] || '-']
     })
 
@@ -21,38 +21,40 @@ export function HeatmapChart({ data }: HeatmapProps) {
 
         const chartInstance = echarts.init(chartRef.current);
         const options = {
+            darkMode: true,
             tooltip: {
-                darkMode: true,
-                tooltip: {
-                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                    textStyle: {
-                        color: '#bbb',
-                    },
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                textStyle: {
+                    color: '#bbb',
                 },
+                formatter: (params: any) => {
+                    const [bottom, left, value]: string[] = String(params.value).split(",")
+                    return `${games[Number(left)]} => ${games[Number(bottom)]} | ${(Number(value) * 100).toFixed(2)}%`
+                }
             },
             grid: {
-                height: '90%',
+                height: '80%',
                 top: '0%'
             },
             xAxis: {
                 type: 'category',
-                data: data.games,
+                data: games,
                 axisTick: {
                     show: false,
                 },
-                splitArea: {
-                    show: true
-                }
+                axisLabel: {
+                    rotate: 20
+                },
             },
             yAxis: {
                 type: 'category',
-                data: data.games,
+                data: games,
                 axisTick: {
                     show: false,
                 },
                 splitArea: {
                     show: true
-                }
+                },
             },
             visualMap: {
                 min: 0,

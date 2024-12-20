@@ -25,7 +25,6 @@ export default function Home() {
         { id: 'top-games', label: 'Top Games' },
         { id: 'events', label: 'Events' },
         { id: 'genres', label: 'Genres' },
-        { id: 'markov', label: 'Markov' },
         { id: 'network', label: 'Network' },
     ];
 
