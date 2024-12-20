@@ -63,7 +63,7 @@ export default function Home() {
             <Section id="events"><Events /></Section>
             <Section id="genres"><Genres /></Section>
             <Section id="summary"><Summary /></Section>
-            <Section id="network"><NetworkGraph /></Section>
+            <Section id="network" pb="0"><NetworkGraph /></Section>
         </>
     );
 }
