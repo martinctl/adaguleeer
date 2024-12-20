@@ -100,21 +100,31 @@ export function Introduction() {
                     {
                         !showChart1 &&
                         (
-                            <div className={quizCompleted1 ? 'animate-fadeOut' : 'animate-fadeIn'}>
+                            <div className={`${quizCompleted1 ? 'animate-fadeOut' : 'animate-fadeIn'} text-lg`}>
                                 <h4 className="font-bold text-xl">Your Mission</h4>
                                 <p className="text-justify mb-4">
-                                    As your journey begins, we'll guide you through gaming on YouTube. By the end of this introduction, you should have a better comprehension of gaming content, how it is influenced, and how its contributors shape it. You’ll also discover which aspects resonate most with you.
+                                    As your journey begins, we'll guide you through gaming on YouTube.
+                                    By the end of this introduction, you should have a better comprehension of gaming content, how it is influenced, and how its contributors shape it.
+                                    You’ll also discover which aspects resonate most with you.
+                                </p>
+                                <p className="text-justify mb-4">
+                                    But you won’t be only a passive observer, we’ll test your knowledge with simple checkpoints.
+                                    These short quizzes are designed to help you understand the data and the insights we’ll provide you.
+                                    Let’s try with our first quiz on the right!
                                 </p>
                                 <p className="text-justify">
-                                    But you won’t be only a passive observer, we’ll test your knowledge with simple checkpoints. These short quizzes are designed to help you understand the data and the insights we’ll provide you. Let’s try with our first quiz on the right!
+                                    As you probably know, YouTube is the world’s largest video sharing platform. 
+                                    It is bursting with content of all kinds, from music videos and cooking tutorials to educational lessons. 
+                                    But do you know what part gaming represents in this?
                                 </p>
+
                             </div>
                         )
                     }
                     {
                         showChart1 &&
                         (
-                            <div className={quizCompleted1 ? 'animate-fadeIn' : 'animate-fadeOut'}>
+                            <div className={`${quizCompleted1 ? 'animate-fadeIn' : 'animate-fadeOut'} text-lg`}>
                                 <p className="text-justify mb-4">
                                     The pie chart on your right highlights that gaming constitutes YouTube’s biggest category, accounting for
                                     nearly 19% of all videos posted on the platform. This represents a vast amount of content creators
@@ -128,13 +138,14 @@ export function Introduction() {
                                 </p>
                                 <ScrollDown />
                             </div>
+
                         )
                     }
                 </div>
                 {
                     !showChart1 &&
                     (
-                        <div className={quizCompleted1 ? 'animate-fadeOut' : 'animate-fadeIn'}>
+                        <div className={`${quizCompleted1 ? 'animate-fadeOut' : 'animate-fadeIn'} text-lg`}>
                             <QuizTab
                                 question="What percentage does gaming represent on YouTube ?"
                                 answers={["11%", "19%", "26%", "54%"]}
@@ -168,10 +179,10 @@ export function Introduction() {
                 {
                     !showText2 &&
                     (
-                        <div className={`w-5/12 flex flex-col items-center justify-center ${quizCompleted2 ? 'animate-fadeOut' : 'animate-fadeIn'}`}>
+                        <div className={`w-5/12 flex flex-col items-center justify-center text-lg ${quizCompleted2 ? 'animate-fadeOut' : 'animate-fadeIn'}`}>
                             <QuizTab
                                 ref={quizRef2}
-                                question="What does the 10-minute peak represent? ?"
+                                question="What does the 10-minute peak represent? "
                                 answers={[
                                     "Min. duration for algorithm recommendation",
                                     "Best attention span for users",
@@ -187,7 +198,7 @@ export function Introduction() {
                 {
                     showText2 &&
                     (
-                        <div className={`w-5/12 flex flex-col items-center justify-center pl-20 ${quizCompleted2 ? 'animate-fadeIn' : 'animate-fadeOut'}`}>
+                        <div className={`w-5/12 flex flex-col items-center justify-center pl-20 text-lg ${quizCompleted2 ? 'animate-fadeIn' : 'animate-fadeOut'}`}>
                             <p className="text-justify mb-4">
                                 We were a bit petty on this one because a 10-minute-long video is also what people like to see best.
                                 While this duration might seem like a sweet spot for viewer attention, there's more to the story: MONEY.
@@ -213,7 +224,7 @@ export function Introduction() {
                         !showText2 &&
                         (
 
-                            <div className={`${quizCompleted2 ? 'animate-fadeOut' : 'animate-fadeIn'} text-justify pr-20`}>
+                            <div className={`${quizCompleted2 ? 'animate-fadeOut' : 'animate-fadeIn'} text-justify pr-20 text-lg`}>
                                 <h4 className="font-bold text-xl">The Gaming World</h4>
                                 <p>
                                     Here, no more ear-shattering music or boring maths lessons, everything surrounding us is just gaming.
@@ -234,10 +245,12 @@ export function Introduction() {
                     {
                         showText2 &&
                         (
-                            <div className="absolute top-10 right-16">
-                                <Button onClick={handleReset2} size="3" variant="soft">
-                                    <ReloadIcon />
-                                </Button>
+                            <div>
+                                <div className="absolute top-10 right-16">
+                                    <Button onClick={handleReset2} size="3" variant="soft">
+                                        <ReloadIcon />
+                                    </Button>
+                                </div>
                             </div>
                         )
                     }

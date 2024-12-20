@@ -16,7 +16,8 @@ export function GenresBarChart() {
                 axisLabel: {
                     interval: 0,
                     rotate: 45,
-                    color: '#ffffff'
+                    color: '#ffffff',
+                    fontSize: 16
                 },
                 axisTick: {
                     alignWithLabel: true
@@ -30,7 +31,8 @@ export function GenresBarChart() {
             yAxis: {
                 type: 'value',
                 axisLabel: {
-                    color: '#ffffff'
+                    color: '#ffffff',
+                    fontSize: 16
                 },
                 splitLine: {
                     lineStyle: {
@@ -54,10 +56,10 @@ export function GenresBarChart() {
                 }
             ],
             grid: {
-                left: '5%',
-                right: '5%',
-                top: '5%',
-                bottom: '5%',
+                left: '15%',
+                right: '15%',
+                top: '20%',
+                bottom: '20%',
                 containLabel: true
             },
             tooltip: {
@@ -78,6 +80,12 @@ export function GenresBarChart() {
     }, []);
 
     return (
-        <div id="genre" className="w-full h-screen"></div>
+        <div className="relative w-full h-screen">
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 text-white text-3xl font-bold p-4">
+                Genres Counts
+            </div>
+            <div id="genre" className="w-full h-full"></div>
+        </div>
+
     );
 };

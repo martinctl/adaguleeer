@@ -5,12 +5,12 @@ import data from '@/data/genres_data.json';
 
 export function GenresChordChart() {
     return (
-        <div>
+        <div className="relative">
             <div className="w-full h-screen">
                 <ResponsiveChord
                     data={data.data}
                     keys={data.keys}
-                    margin={{ top: 120, right: 300, bottom: 120, left: 100 }}
+                    margin={{ top: 170, right: 300, bottom: 170, left: 100 }}
                     valueFormat=".2f"
                     padAngle={0.006}
                     innerRadiusRatio={0.86}
@@ -44,7 +44,7 @@ export function GenresChordChart() {
                         modifiers: [
                             [
                                 'brighter',
-                                0.8
+                                0.4
                             ]
                         ]
                     }}
@@ -61,7 +61,7 @@ export function GenresChordChart() {
                             anchor: 'right',
                             direction: 'column',
                             justify: false,
-                            translateX: -20,
+                            translateX: 40,
                             translateY: 0,
                             itemWidth: 120,
                             itemHeight: 15,
@@ -99,6 +99,9 @@ export function GenresChordChart() {
                         },
                     }}
                 />
+                <div className="absolute top-24 right-40 text-3xl text-white font-bold">
+                    Genres Chord Chart
+                </div>
             </div>
             <div className="w-full text-center px-32 py-8 text-lg text-gray-300">
                 <p className="text-justify mb-4">
