@@ -10,6 +10,18 @@ interface BarRaceProps {
   height?: number
 }
 
+interface RankedItem {
+  name: string;
+  value: number;
+  rank: number;
+}
+
+interface DataItem {
+  name: string;
+  value: number;
+  rank: number;
+}
+
 export default function BarRace({ data, width = 800, height = 500 }: BarRaceProps) {
   const svgRef = useRef<SVGSVGElement>(null)
 
@@ -52,15 +64,15 @@ export default function BarRace({ data, width = 800, height = 500 }: BarRaceProp
     // Setup names and date values
     const names = new Set(formattedData.map(d => d.name))
     const datevalues = Array.from(d3.rollup(formattedData, ([d]) => d.value, d => +d.date, d => d.name))
-      .map(([date, data]) => [new Date(date), data])
+      .map(([date, data]): [Date, d3.InternMap<string, number>] => [new Date(date), data])
       .sort(([a], [b]) => d3.ascending(a, b))
 
     // Rank function
     const rank = (value: (name: string) => number) => {
-      const data = Array.from(names, name => ({ name, value: value(name) }))
-      data.sort((a, b) => d3.descending(a.value, b.value))
-      for (let i = 0; i < data.length; ++i) data[i].rank = Math.min(n, i)
-      return data
+      const data = Array.from(names, name => ({ name, value: value(name) })) as RankedItem[];
+      data.sort((a, b) => d3.descending(a.value, b.value));
+      for (let i = 0; i < data.length; ++i) data[i].rank = Math.min(n, i);
+      return data;
     }
 
     // Generate keyframes
@@ -92,7 +104,7 @@ export default function BarRace({ data, width = 800, height = 500 }: BarRaceProp
     const x = d3.scalePow()
       .exponent(0.5)
       .range([marginLeft, width - marginRight])
-    const y = d3.scaleBand()
+    const y = d3.scaleBand<number>()
       .domain(d3.range(n + 1))
       .rangeRound([marginTop, marginTop + barSize * (n + 1 + 0.1)])
       .padding(0.1)
@@ -148,30 +160,30 @@ export default function BarRace({ data, width = 800, height = 500 }: BarRaceProp
           })
 
         // Update bars
-        barsG.selectAll('rect')
+        barsG.selectAll<SVGRectElement, DataItem>('rect')
           .data(data.slice(0, n), d => d.name)
           .join(
             enter => enter.append('rect')
               .attr('fill', d => color(d.name))
               .attr('height', y.bandwidth())
               .attr('x', x(0))
-              .attr('y', d => y((prev.get(d) || d).rank))
+              .attr('y', d => y((prev.get(d) || d).rank) ?? 0)
               .attr('width', d => x((prev.get(d) || d).value) - x(0)),
             update => update,
             exit => exit.transition()
               .duration(duration)
               .remove()
-              .attr('y', d => y((next.get(d) || d).rank))
+              .attr('y', d => y((next.get(d) || d).rank) ?? 0)
               .attr('width', d => x((next.get(d) || d).value) - x(0))
           )
           .transition()
           .duration(duration)
           .ease(d3.easeLinear)
-          .attr('y', d => y(d.rank))
+          .attr('y', d => y(d.rank) ?? 0)
           .attr('width', d => x(d.value) - x(0))
 
         // Update labels
-        labelsG.selectAll('text')
+        labelsG.selectAll<SVGTextElement, DataItem>('text')
           .data(data.slice(0, n), d => d.name)
           .join(
             enter => enter.append('text')
