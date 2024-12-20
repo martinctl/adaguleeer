@@ -72,7 +72,7 @@ export function Tags() {
                     (
                         <div className={`h-screen flex justify-around items-center px-10 text-lg ${quizCompleted ? 'animate-fadeOut' : 'animate-fadeIn'}`}>
                             <div className="flex flex-col w-5/12 space-y-5 pl-10">
-                                <h4 className="font-bold text-xl">Tags Overview</h4>
+                                <h4 className="font-bold text-xl border-b-2 pb-4" style={{ borderColor: '#E54D2E' }}>Tags Overview</h4>
                                 <p className="text-justify mb-4">
                                     Another point to study the evolution of communities and identify emerging patterns is through tags.
                                     Tags are a double-edged sword.

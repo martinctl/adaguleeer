@@ -101,8 +101,8 @@ export function TopGames() {
     return (
         <div ref={containerRef}>
             <div className="intro-slide h-screen w-full flex gap-12 px-12 items-center">
-                <div className="flex-1">
-                    <h4 className="font-bold text-xl">Top Games</h4>
+                <div className="flex-1 border-l-2 pl-4" style={{ borderColor: '#E54D2E' }}>
+                    <h4 className="font-bold text-xl mb-4">Top Games</h4>
                     <p className="text-justify text-lg mb-4">
                         How to talk about gaming on YouTube without evocating them?
                     </p>

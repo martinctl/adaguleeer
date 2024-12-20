@@ -58,7 +58,7 @@ export function Events() {
             <div className="horizontal flex w-[800vw]">
                 <div className="w-screen h-screen flex items-center justify-center space-x-20">
                     <div className="flex flex-col space-y-5 w-1/3">
-                        <h1 className="font-bold text-xl">Impact of real-world events on channels activity</h1>
+                        <h1 className="font-bold text-xl border-l-2 pl-4" style={{ borderColor: '#E54D2E' }}>Impact of real-world events on channels activity</h1>
                         <p className="text-justify text-lg">
                             The next part will showcase the relationships between gaming happenings and the activity
                             of related channels. In fact, we explored many games and found some really interesting 
