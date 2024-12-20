@@ -7,6 +7,7 @@ import { Genres } from '@/components/sections/genres';
 import { NetworkGraph } from '@/components/sections/network-graph';
 import { Navbar } from '@/components/sections/navbar';
 import { Tags } from '@/components/sections/tags';
+import { Events } from '@/components/sections/events';
 import { useState, useEffect } from 'react';
 import { Section } from '@radix-ui/themes';
 interface Section {
@@ -21,6 +22,7 @@ export default function Home() {
         { id: 'intro', label: 'Intro' },
         { id: 'tags', label: 'Tags' },
         { id: 'top-games', label: 'Top Games' },
+        { id: 'events', label: 'Events' },
         { id: 'genres', label: 'Genres' },
         { id: 'network', label: 'Network' },
     ];
@@ -56,6 +58,7 @@ export default function Home() {
             <Section id="intro"><Introduction /></Section>
             <Section id="tags"><Tags /></Section>
             <Section id="top-games"><TopGames /></Section>
+            <Section id="events"><Events /></Section>
             <Section id="genres"><Genres /></Section>
             <Section id="network"><NetworkGraph /></Section>
         </>
