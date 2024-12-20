@@ -16,6 +16,7 @@ interface NavbarProps {
 }
 
 export function Navbar({ currentSection, sections }: NavbarProps) {
+    
     return (
         <NavigationMenu.Root className="fixed top-2 left-1/2 transform -translate-x-1/2 w-5/6 h-12 px-5 z-50 flex justify-between items-center backdrop-blur-3xl border border-amber-100/10 rounded-full bg-slate-700/20 shadow-lg">
             <Link href="#hero">
