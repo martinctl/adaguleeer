@@ -1,11 +1,9 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { TimeSeries } from '../subs/timeseries';
 import fifaTimeSeriesData from '@/data/fifa_14_to_18.json'
-import smashTimeSeriesData from '@/data/subs_smash.json'
-import mkTimeSeriesData from '@/data/subs_mk.json'
 import lolTimeSeriesData from '@/data/views_lol.json'
 import acTimeSeriesData from '@/data/views_ac.json'
 import { QuizTab } from '../subs/quiz-tab';
