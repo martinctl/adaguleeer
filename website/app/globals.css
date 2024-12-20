@@ -19,7 +19,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth!important;
+  --scroll-behavior: smooth!important;
 }
 
 .scrollbar-hide::-webkit-scrollbar {

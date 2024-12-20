@@ -81,9 +81,9 @@ export function GenresBarChart() {
 
     return (
         <div className="relative w-full h-screen">
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 text-white text-3xl font-bold p-4">
+            {/* <div className="absolute top-0 left-1/2 transform -translate-x-1/2 text-white text-3xl font-bold p-4">
                 Genres Counts
-            </div>
+            </div> */}
             <div id="genre" className="w-full h-full"></div>
         </div>
 

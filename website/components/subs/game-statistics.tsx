@@ -54,7 +54,7 @@ export function GameStatistics({ gameTitle }: GameStatisticsProps) {
             <>
               <p className="text-justify">
                 Each game of the emblematic franchise has been a success.
-                Even those considered less impactful still outperform many other games in the industry.
+                With a posting rate of more than 5%, 1 out of 20 gaming videos on YouTube shows CoD. 
                 This cornerstone of war games acts as a unifier for the broader shooter community.
                 Whether your main game is Overwatch, Battlefield, or Doom, you have likely seen Call of Duty content in your feed.
               </p>
@@ -76,9 +76,9 @@ export function GameStatistics({ gameTitle }: GameStatisticsProps) {
 
               </p>
               <p className="text-justify">
-                At its peak, it seemed like every content creator was uploading Fortnite videos, so much that it has become the main game for more than half the channels playing it.
+                At its peak, it seemed like every content creator was uploading Fortnite videos, so much that it has become the main game for more than half the channels playing it (56.1%).
                 This explosive growth clustered a variety of communities around the same game, creating an unprecedented level of cross-viewers interactions.
-                This does not totally mean that the game was adopted by everyone, as the likes to dislikes ratio is decent but lower than CoD’s.
+                This does not totally mean that the game was adopted by everyone, as the likes to dislikes ratio is satisfying but not the best.
               </p>
             </>
           )}

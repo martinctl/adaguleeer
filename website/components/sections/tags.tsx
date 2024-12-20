@@ -72,25 +72,21 @@ export function Tags() {
                     (
                         <div className={`h-screen flex justify-around items-center px-10 text-lg ${quizCompleted ? 'animate-fadeOut' : 'animate-fadeIn'}`}>
                             <div className="flex flex-col w-5/12 space-y-5 pl-10">
-                                <h4 className="font-bold text-xl">Tags Overview</h4>
+                                <h4 className="font-bold text-xl border-b-2 pb-4" style={{ borderColor: '#E54D2E' }}>Tags Overview</h4>
                                 <p className="text-justify mb-4">
-                                    Another point to study the evolution of communities and identify emerging patterns is through tags.
-                                    Tags are a double-edged sword.
-                                    They help viewers discover videos on their topics of interest or receive recommendations aligned with their preferences.
-                                    However, some creators tend to overuse them to attract more views, leading to noisy data.
-
+                                    Another important metadata we should care about is tags. They are a double-edged sword, since they can help viewers
+                                    discover interesting videos or receive accurate recommendations aligned with their preferences, but tend to be 
+                                    overused by some creatorfpàcs to attract more views.
                                 </p>
                                 <p className="text-justify">
-                                    Despite this apparent drawback, tags are essential for assigning every video to a specific game.
-                                    If a game name is fully contained in a video title or its associated tags, we can link the video to that game, which is crucial for the core of our analysis.
-                                    Let’s have a look at the most used ones.
+                                    Amongst all tags, which ones bridge the gap between communities? Let's have a look at the most frequently used. 
                                 </p>
                             </div>
                             <div className="pr-10">
                                 <QuizTab
                                     ref={quizRef}
                                     question="What do you think is the most frequenly used tag under gaming videos ?"
-                                    answers={["funny", "reaction", "pc", "gameplay"]}
+                                    answers={["funny", "reaction", "commentary", "gameplay"]}
                                     correctAnswerIndex={3}
                                     onSubmitAction={handleQuizSubmit}
                                 />

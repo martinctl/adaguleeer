@@ -100,9 +100,9 @@ export function TopGames() {
 
     return (
         <div ref={containerRef}>
-            <div className="intro-slide h-screen w-full flex gap-12 px-12 items-center">
-                <div className="flex-1">
-                    <h4 className="font-bold text-xl">Top Games</h4>
+            <div className="intro-slide h-screen w-full flex pl-24 items-center justify-center">
+                <div className="flex-1 justify-center items-center border-l-2 pl-4" style={{ borderColor: '#E54D2E' }}>
+                    <h4 className="font-bold text-xl mb-4">Top Games</h4>
                     <p className="text-justify text-lg mb-4">
                         How to talk about gaming on YouTube without evocating them?
                     </p>
@@ -110,11 +110,11 @@ export function TopGames() {
                         In this section, you are about to discover the most represented games on the platform. 
                         Even if they are not personal favourites, their impact is undeniable, and they are essential to comprehend the dynamics of the YouTube gaming world. 
                         Their influence goes far beyond their own fan bases and can be felt across all genres and communities. 
-                        Indeed,even if you prefer more niche games, chances are the community you are the closest to intersects with those of these top games.
+                        Indeed, even if you prefer more niche games, chances are the community you are the closest to intersects with those of these top games.
                     </p>
                     <p className="text-justify text-lg">
-                        You can first see the weekly evolution of the ten games with the highest cumulative views from 2016 to 2019. 
-                        We will then take a closer look at the three that reign on YouTube gaming.
+                        Here is the weekly evolution of the ten games with the highest cumulative views from 2016 to 2019. 
+                        When you are ready, feel free to dive into the three reigning on YouTube gaming!
                     </p>
                 </div>
                 <div className="flex-[2]">
