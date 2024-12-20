@@ -55,7 +55,7 @@ export function Events() {
 
     return (
         <section ref={containerRef} className="overflow-hidden">
-            <div className="horizontal flex w-[900vw]">
+            <div className="horizontal flex w-[800vw]">
                 <div className="w-screen h-screen flex items-center justify-center space-x-20">
                     <div className="flex flex-col space-y-5 w-1/3">
                         <h1 className="text-3xl">Impact of real-world events on channels activity</h1>
@@ -77,17 +77,31 @@ export function Events() {
                 <div className="h-screen w-[300vw] flex justify-center">
                     <TimeSeries data={fifaTimeSeriesData} />
                 </div>
-                <div className="h-screen w-[50vw] flex justify-center">
-                    <TimeSeries data={mkTimeSeriesData} />
-                </div>
-                <div className="h-screen w-[50vw] flex justify-center">
-                    <TimeSeries data={smashTimeSeriesData} />
+                <div className="h-screen w-[50vw] flex flex-col justify-center items-center mr-20">
+                    <h4 className="font-bold text-xl">Releases</h4>
+                    <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                    when an unknown printer took a galley of type and scrambled it to make a type 
+                    specimen book. It has survived not only five centuries, but also the leap into 
+                    electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </p>
                 </div>
                 <div className="h-screen w-[200vw] flex justify-center">
                     <TimeSeries data={acTimeSeriesData} />
                 </div>
-                <div className="h-screen w-[200vw] flex justify-center">
+                <div className="h-screen w-[150vw] flex justify-center">
                     <TimeSeries data={lolTimeSeriesData} />
+                </div>
+                <div className="h-screen w-[50vw] flex flex-col justify-center items-center">
+                <h4 className="font-bold text-xl">Tournaments</h4>
+                    <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                    when an unknown printer took a galley of type and scrambled it to make a type 
+                    specimen book. It has survived not only five centuries, but also the leap into 
+                    electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </p>
                 </div>
             </div> 
         </section>
