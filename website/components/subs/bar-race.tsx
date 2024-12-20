@@ -230,7 +230,7 @@ export default function BarRace({ data, width = 800, height = 500 }: BarRaceProp
 
         // If last frame, reset
         if (animationRef.current === keyframes.length - 1) {
-          reset()
+          animationRef.current = 0
         } else {
           setCurrentFrame(animationRef.current)
           if (isPlaying) {

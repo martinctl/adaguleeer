@@ -207,7 +207,7 @@ export function Introduction() {
                                 Videos lasting at least 10 min unlock additional monetization features, including mid-roll ads, which allows them to place multiple advertisements throughout the video.
                                 Therefore, videos duration does not seem to indicate viewer preferences, but rather creators convenience.
                             </p>
-                            <p clfyossName="text-justify mb-4 text-gray-500">
+                            <p className="text-justify mb-4 text-gray-500">
                                 Note that this chart only displays videos under one hour, representing 92.6% of videos.
                             </p>
                             <ScrollDown />
