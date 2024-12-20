@@ -128,6 +128,7 @@ export function Introduction() {
                                 </p>
                                 <ScrollDown />
                             </div>
+
                         )
                     }
                 </div>
@@ -234,10 +235,19 @@ export function Introduction() {
                     {
                         showText2 &&
                         (
-                            <div className="absolute top-10 right-16">
-                                <Button onClick={handleReset2} size="3" variant="soft">
-                                    <ReloadIcon />
-                                </Button>
+                            <div>
+                                <div className="absolute top-10 right-16">
+                                    <Button onClick={handleReset2} size="3" variant="soft">
+                                        <ReloadIcon />
+                                    </Button>
+                                </div>
+                                <p className={quizCompleted2 ? 'animate-fadeIn' : 'animate-fadeOut'}>
+                                    Indeed, this peak represents the minimum duration for more monetization control. This shows that gaming creators give
+                                    importance to having more control over the ads displayed and the revenue generated, which seems pretty logical. this
+                                    chart only shows videos under one hour, representing 92.6% of videos, as the tail-skewed distribution shows. Let's go
+                                    further down.
+                                </p>
+                                <ScrollDown />
                             </div>
                         )
                     }
