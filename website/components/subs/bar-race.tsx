@@ -33,15 +33,27 @@ export default function BarRace({
   const [currentFrame, setCurrentFrame] = useState(0);
   const animationRef = useRef<number>(0);
   const animateRef = useRef<() => Promise<void>>();
+  const speeds = [0.5, 1, 2] as const;
+  const [speed, setSpeed] = useState<typeof speeds[number]>(1);
 
   const handlePlayPause = () => {
     setIsPlaying((prev) => !prev);
   };
 
   const reset = () => {
-    animationRef.current = 0;
-    setCurrentFrame(0);
-    animateRef.current?.();
+    if (animateRef.current) {
+      animationRef.current = 0;
+      setCurrentFrame(0);
+      animateRef.current();
+    }
+  };
+
+  const handleSpeedChange = () => {
+    setSpeed(currentSpeed => {
+      const currentIndex = speeds.indexOf(currentSpeed);
+      const nextIndex = (currentIndex + 1) % speeds.length;
+      return speeds[nextIndex];
+    });
   };
 
   useEffect(() => {
@@ -54,7 +66,8 @@ export default function BarRace({
     const marginLeft = 16;
     const barSize = 48;
     const n = 12; // Show top N games
-    const duration = 80;
+    const baseDuration = 80;
+    const duration = baseDuration / speed;
 
     // Transform data into required format
     const games = Object.keys(data).filter((key) => key !== "weeks");
@@ -303,9 +316,9 @@ export default function BarRace({
 
     // Cleanup
     return () => {
-      svg.selectAll("*").remove();
+      d3.select(svgRef.current).selectAll("*").remove();
     };
-  }, [data, width, height, isPlaying]);
+  }, [data, width, height, isPlaying, speed]);
 
   const handleSliderChange = (value: number) => {
     animationRef.current = value;
@@ -334,8 +347,7 @@ export default function BarRace({
         >
           <ResetIcon className="h-5 w-5 text-gray-700" />
         </button>
-
-        <div className="relative flex items-center select-none touch-none w-64 h-5">
+        <div className="relative flex items-center select-none touch-none w-72 h-5">
           <div className="relative flex-grow h-[6px] rounded-full bg-gray-800/20 border border-white/20">
             <div
               className="absolute h-full rounded-full bg-white"
@@ -353,6 +365,13 @@ export default function BarRace({
             className="absolute w-full appearance-none bg-transparent cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:hover:bg-gray-50 [&::-webkit-slider-thumb]:focus:outline-none [&::-webkit-slider-thumb]:focus:ring-4 [&::-webkit-slider-thumb]:focus:ring-gray-800/30 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:hover:bg-gray-50 [&::-moz-range-thumb]:focus:outline-none [&::-moz-range-thumb]:focus:ring-4 [&::-moz-range-thumb]:focus:ring-gray-800/30"
           />
         </div>
+        <button
+          onClick={handleSpeedChange}
+          className="h-9 px-3 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-gray-50 active:bg-gray-100 transition-colors"
+          aria-label="Change Speed"
+        >
+          <span className="text-gray-700 font-semibold text-xs">x{speed}</span>
+        </button>
       </div>
     </div>
   );
